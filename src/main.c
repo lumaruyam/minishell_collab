@@ -6,11 +6,27 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/06/12 20:45:02 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/07/08 21:29:36 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	read_loop(t_shell *content)
+{
+	char	*line;
+
+	(void)content;
+	line = NULL;
+	while (1)
+	{
+		init_signals();
+		line = readline("minishell> ");
+		if (!line)
+			free_all(); // add free_all later
+
+	}
+}
 
 int	main(int ac, char *av, char **env)
 {
