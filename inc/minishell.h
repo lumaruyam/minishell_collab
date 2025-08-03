@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/03 17:26:32 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/08/03 18:00:04 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_shell
 	t_exec	*exec; // linked list of commands to be executed
 	int	ct_pid;// count of currently active pids
 	int	ct_exec;// count of exec blocks (commands)
+	t_env	*env;
 }	t_shell;
 
 typedef struct s_env
