@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/07/08 21:29:36 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/08/03 15:27:54 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,21 @@ int	read_loop(t_shell *content)
 		init_signals();
 		line = readline("minishell> ");
 		if (!line)
-			free_all(); // add free_all later
-
+			break ;
+		else if (chk_empty_line(line) == 0)
+		{
+			add_history(line);
+			if (process_input(content, line) != 0)
+			{
+				ft_putendl_fd("Syntax Error", 2);
+				content->exit_code = 2;
+			}
+			line = NULL;
+		}
+		if (line)
+			free(line);
 	}
+	return (0);
 }
 
 int	main(int ac, char *av, char **env)
@@ -39,6 +51,7 @@ int	main(int ac, char *av, char **env)
 	if (!content)
 		return (EXIT_FAILURE);
 	read_loop(content);
+	free_shell(content);
 	rl_clear_history();
 	ft_putendl_fd("exit", 2);
 	return (EXIT_SUCCESS);
