@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/05 21:42:52 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:06:47 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_env	*set_default_env(void)
 
 	env_id = get_env_id(DEFAULT_ENV);
 	env_value = get_env_value(DEFAULT_ENV);
-	def_content = env_create(env_id, env_value, ft_strdup(DEFAULT_ENV));
+	def_content = env_make(env_id, env_value, ft_strdup(DEFAULT_ENV));
 	return (def_content);
 }
 
