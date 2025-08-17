@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/05 21:42:49 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/08/16 18:07:13 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
+# include <unistd.h>
+# include <sys/types.h>
+
+# define SUCCESS 0;
+# define FAIL 1;
+# define FAIL_VOID 2;
+# define FAIL_BUILD -1;
 
 # define DEFAULT_ENV "MINISHELL=minishell"
 
