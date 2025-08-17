@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/17 17:52:43 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/17 17:57:03 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,4 @@ int	main(int ac, char *av, char **env)
 	rl_clear_history();
 	ft_putendl_fd("exit", 2);
 	return (EXIT_SUCCESS);
-}
-
-void	free_shell(t_shell *content)
-{
-	if (content)
-	{
-		if (context->exec)
-			build_free_all(content->exec);
-		if (content->env)
-			env_free(content->env);
-		if (content->pids)
-			free(content->pids);
-		free(content);
-	}
 }

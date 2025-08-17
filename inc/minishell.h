@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/17 17:08:56 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/17 19:32:09 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef enum e_tokentype
 	STR,// regular string
 	SGL_QUOTE,// single-quoted string
 	DBL_QUOTE,// double-quoted string
-	COMMAND,// command keyword
+	CMD,// command keyword
 	FILENAME, // file name in redirection
 	ARG,// argument to a command
 }	t_tokentype;
@@ -72,7 +72,7 @@ typedef struct s_token
 {
 	char	*value;// token string (e.g., "ls", "|", "file.txt")
 	t_shell	*content;// reference to the shell context
-	t_tokentype	type;// type of token (e.g., COMMAND, ARG, PIPE)
+	t_tokentype	type;// type of token (e.g., CMD, ARG, PIPE)
 	t_token	*next;// pointer to next token in the list
 }	t_token;
 

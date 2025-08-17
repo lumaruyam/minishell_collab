@@ -6,13 +6,13 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 17:27:51 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/17 17:53:02 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/17 17:57:14 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	check_empty_line(char *line)
+int	chk_empty_line(char *line)
 {
 	if (line[0] == '\0')
 		return (1);

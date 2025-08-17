@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/17 17:06:10 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/17 19:37:43 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_env	*dup_env(char *env[])
 	t_env	*tmp;
 	char	*env_id;
 	char	*env_value;
-	int	i;
+	int		i;
 
 	i = 0;
 	res_env = set_default_env();
@@ -89,8 +89,8 @@ int init_exec(t_shell *content, t_token **token)
 
 int	process_input(t_shell *content, char *line)
 {
-	t_token *token;
-	int pars;
+	t_token	*token;
+	int		pars;
 
 	token = lexing(content, line);
 	free(line);

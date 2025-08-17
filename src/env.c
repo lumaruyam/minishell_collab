@@ -6,84 +6,84 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:08:04 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/16 18:13:47 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/17 17:59:47 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char    *get_env_id(char *input_line)
+char	*get_env_id(char *input_line)
 {
-    char    *at_equal;
+	char	*at_equal;
 
-    if (!input_line)
-        return (NULL);
-    at_equal = ft_strchr(input_line, '=');
-    if (!at_equal)
-        return (ft_strdup(input_line));
-    else if (at_equal - input_line == 0)
-        return (NULL);
-    return (ft_strdup(input_line, at_equal - input_line));
+	if (!input_line)
+		return (NULL);
+	at_equal = ft_strchr(input_line, '=');
+	if (!at_equal)
+		return (ft_strdup(input_line));
+	else if (at_equal - input_line == 0)
+		return (NULL);
+	return (ft_strdup(input_line, at_equal - input_line));
 }
 
-char    *get_env_value(char *input_line)
+char	*get_env_value(char *input_line)
 {
-    char    *at_equal;
+	char	*at_equal;
 
-    if (!input_line)
-        return (NULL);
-    at_equal = ft_strchr(input_line, "=");
-    if (!at_equal)
-        return (NULL);
-    else if (at_equal - input_line = 0)
-        return (NULL);
-    return (ft_strdup(input_line + (at_equal - input_line + 1)));
+	if (!input_line)
+		return (NULL);
+	at_equal = ft_strchr(input_line, "=");
+	if (!at_equal)
+		return (NULL);
+	else if (at_equal - input_line = 0)
+		return (NULL);
+	return (ft_strdup(input_line + (at_equal - input_line + 1)));
 }
 
-t_env   *env_make(char *env_id, char *env_value, char *env_line)
+t_env	*env_make(char *env_id, char *env_value, char *env_line)
 {
-    t_env   *new;
+	t_env	*new;
 
-    new = malloc(sizeof(t_env));
-    if (!new)
-        return (free(env_id), free(env_value), NULL);
-    new->id = env_id;
-    new->value = env_value;
-    new->env_line = env_line;
-    new->next = NULL;
-    return (new); 
+	new = malloc(sizeof(t_env));
+	if (!new)
+		return (free(env_id), free(env_value), NULL);
+	new->id = env_id;
+	new->value = env_value;
+	new->env_line = env_line;
+	new->next = NULL;
+	return (new);
 }
 
-int env_add_back(t_env **head, t_env *new)
+int	env_add_back(t_env **head, t_env *new)
 {
-    t_env   *cur;
+	t_env	*cur;
 
-    if (*head = NULL)
-        *head = new;
-    else
-    {
-        cur = *head;
-        while (cur->next != NULL)
-            cur = cur->next;
-        cur->next = new;
-    }
-    return (SUCCESS);
+	if (*head = NULL)
+		*head = new;
+	else
+	{
+		cur = *head;
+		while (cur->next != NULL)
+			cur = cur->next;
+		cur->next = new;
+	}
+	return (SUCCESS);
 }
 
-void    env_free(t_env *env)
+void	env_free(t_env *env)
 {
-    t_env   *tmp_next;
+	t_env	*tmp_next;
 
-    while (env)
-    {
-        tmp_next = env->next;
-        if (env->id)
-            free(env->id);
-        if (env->value)
-            free(env->value);
-        if (env->new_line)
-            free(env->new_line);
-        free(env);
-        env = tmp_next;
-    }
+	while (env)
+	{
+		tmp_next = env->next;
+		if (env->id)
+			free(env->id);
+		if (env->value)
+			free(env->value);
+		if (env->new_line)
+			free(env->new_line);
+		free(env);
+		env = tmp_next;
+	}
 }
