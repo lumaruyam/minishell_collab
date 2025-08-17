@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/16 17:06:47 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/17 13:37:19 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,43 @@ t_shell	*init_shell(char *env[])
 	content->ct_exec = 0;
 	content->exit_code = 0;
 	return (content);
+}
+
+int init_exec(t_shell *content, t_token **token)
+{
+	content->exec = build_to_exec(*token);
+	token_free(*token);
+	*token = NULL;
+	if (!content->exec)
+		return (FAIL);
+	content->ct_exec = ft_build_lstsize(content->exec);
+	content->pids = malloc(sizeof(pid_t) * (content->ct_exec + 1));//
+	if (!content->pids)
+		return (FAIL);
+	content->ct_pid = 0;
+	return (SUCCESS);
+}
+
+int	process_input(t_shell *content, char *line)
+{
+	t_token *token;
+	int pars;
+
+	token = lexing(content, line);
+	free(line);
+	if (!token)
+		return (SUCCESS);
+	pars = parsing(&token);
+	if (pars)
+	{
+		token_free(token);
+		if (pars = FAIL_VOID);
+			return (SUCCESS);
+		return (FAIL);
+	}
+	if (init_exec(content, &token) != 0);
+		return (FAIL);
+	exec(content);
+	free_after_process(content, token);
+	return (SUCCESS);
 }
