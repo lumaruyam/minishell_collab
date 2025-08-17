@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/17 14:15:36 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/17 17:08:56 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,13 @@ typedef struct s_exec
 	int	fd_in;// input file descriptor for the command
 	int	fd_out;// output file descriptor for the command
 }	t_exec;
+
+typedef struct s_signal//might not pass the evaluation
+{
+	int	end_heredoc;
+	int	signal_code;
+}	t_signal;
+
+extern t_signal	g_signal;//might not pass the evaluation
 
 #endif

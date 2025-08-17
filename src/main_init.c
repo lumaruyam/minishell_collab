@@ -6,11 +6,13 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/17 13:37:19 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/17 17:06:10 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+t_signal	g_signal = {0};//might not pass evaluation
 
 t_env	*set_default_env(void)
 {
