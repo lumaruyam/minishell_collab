@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/17 13:51:36 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/17 14:15:36 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <signal.h>
 # include <sys/types.h>
 
 # define SUCCESS 0;
