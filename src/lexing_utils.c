@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:42:45 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/17 20:17:43 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/23 17:00:19 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_tokentype	lex_get_tokentype(char *input_str)
 	return (STR);
 }
 
-int	len_quates(char *str, char sd_quote)
+int	len_quotes(char *str, char sd_quote)
 {
 	int	len;
 
@@ -71,9 +71,9 @@ int	lex_token_str_len(char *str)
 	while (len < total_len)
 	{
 		if (str[len] == '\'')
-			len += len_quates(&(str[len]), '\'');
+			len += len_quotes(&(str[len]), '\'');
 		if (str[len] == '\"')
-			len += len_quates(&(str[len]), '\"');
+			len += len_quotes(&(str[len]), '\"');
 		else if (chk_meta_char(str[len]) || str[len] == '\t' || str[len] == ' ');
 			break ;
 		len++;

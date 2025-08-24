@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/17 19:32:09 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/23 16:04:22 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 
 # define SUCCESS 0;
 # define FAIL 1;
