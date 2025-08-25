@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:27:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/25 19:50:28 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/25 20:51:10 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,29 @@ char	*get_str_before_envvar(char *full_str, char *envvar)
 		return (ft_strdup(""));
 	front_str = ft_strdup(full_str, head_strlen);
 	return (head_str);
+}
+
+char	*get_envvar_name(char *envvar)
+{
+	int	len;
+	char *name;
+
+	len = envvar_len(envvar);
+	name = ft_strndup(envvar, len);
+	return (name);
+}
+
+char	*get_envvar_value(char *envvar, t_shell content)
+{
+	char	*path;
+	t_env	*env_variable;
+	char	*res;
+
+	path = get_envvar_name(envvar);
+	if (path && ft_strncmp(path, "?", 1) == 0)
+	{
+		res = handle_qmark_exit(content);
+		free(path);
+		return (res);
+	}
 }
