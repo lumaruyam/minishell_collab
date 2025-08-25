@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:27:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/25 20:51:10 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/25 20:58:07 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	*get_envvar_name(char *envvar)
 	name = ft_strndup(envvar, len);
 	return (name);
 }
+
+
 
 char	*get_envvar_value(char *envvar, t_shell content)
 {
