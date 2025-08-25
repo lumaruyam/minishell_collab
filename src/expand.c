@@ -6,7 +6,7 @@
 /*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:42:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/24 18:46:37 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/25 19:51:59 by lulimaruyam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,45 @@ int	prs_ct_dollars(char *input_str)
 	return (ct);
 }
 
+char	*prs_expand_1envver(char *str, char *envvar_found, t_shell *content)
+{
+	char	*before_envvar;
+	char	*envvar_value;
+	char	*after_envvar;
+	char	*new;
+
+	*before_envvar = get_str_before_envvar(str, envvar_found);
+	if (!before_envvar)
+		return (NULL);
+	envvar_value = get_envvar_value((envvar_found + 1), content);
+
+}
+
 int	prs_envvar_expand(t_token *token)
 {
 	int		n_dollar;
 	char	*current;
-	char	*envar_found;
+	char	*envvar_found;
 	char	*new;
 
 	n_dollar = prs_ct_dollars(token->value);
+	while (token->value != NULL)
+	{
+		envvar_found = ft_strchr(token->value, '$');
+		if (envvar_found == NULL || n_dollar == 0)
+			break ;
+		if (ft_strcmp(envvar_found, "$") == 0)
+			break ;
+		current = token->value;
+		new = prs_expand_1envvar(token->value, envvar_found, token->content);
+		if (new && new[0] == '\0')
+		{
+			free(new);
+			new = NULL;
+		}
+		token->value = new;
+		free(current);
+		n_dollar--;
+	}
+	return (SUCCESS);
 }
