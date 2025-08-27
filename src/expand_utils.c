@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:27:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/25 20:58:07 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/27 20:24:00 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_str_before_envvar(char *full_str, char *envvar)
 	head_strlen = envvar - full_str;
 	if (head_strlen == 0)
 		return (ft_strdup(""));
-	front_str = ft_strdup(full_str, head_strlen);
+	head_str = ft_strdup(full_str, head_strlen);
 	return (head_str);
 }
 
@@ -45,9 +45,41 @@ char	*get_envvar_name(char *envvar)
 	return (name);
 }
 
+char	*handle_qmark_exit(t_shell *content)//signal used, check later
+{
+	int	status_code;
 
+	if (g_signal.signal_code != 0)
+	{
+		status_code = g_signal.signal_code;
+		g_signal.signal_code = 0;
+		return (ft_itoa(status_code));
+	}
+	return (ft_itoa(content->exit_code));
+}
 
-char	*get_envvar_value(char *envvar, t_shell content)
+char	handle_dollar_pid(void)
+{
+	int	pid;
+
+	pid = getpid();
+	return (ft_itoa(pid));
+}
+
+t_env	*get_env(char *env_id, t_env *env)
+{
+	if (env_id == NULL || env == NULL)
+		return (NULL);
+	while (env != NULL)
+	{
+		if (ft_strcmp(env_id, env->id) == 0)
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+char	*get_envvar_value(char *envvar, t_shell *content)
 {
 	char	*path;
 	t_env	*env_variable;
@@ -60,4 +92,12 @@ char	*get_envvar_value(char *envvar, t_shell content)
 		free(path);
 		return (res);
 	}
+	else if (path && ft_strcmp(path, "$") == 0)
+		return (free(path), handle_dollar_pid());
+	env_variable = get_env(path, content->env);
+	if (path)
+		free(path);
+	if (!env_variable || !env_variable->value)
+		return (NULL);
+	return (ft_strdup(env_variable->value));
 }
