@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/23 16:04:22 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/27 19:37:32 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-# define SUCCESS 0;
-# define FAIL 1;
-# define FAIL_VOID 2;
-# define FAIL_BUILD -1;
+# define SUCCESS 0
+# define FAIL 1
+# define FAIL_VOID 2
+# define FAIL_BUILD -1
 
 # define DEFAULT_ENV "MINISHELL=minishell"
 
@@ -42,7 +42,7 @@ typedef struct s_shell
 
 typedef struct s_env
 {
-	char	*env; //name or key of the environment variable (e.g., "PATH")
+	char	*id; //name or key of the environment variable (e.g., "PATH")
 	char	*value; //value of the environment variable
 	char	*env_line; //The full string representation "NAME=value"
 	t_env	*next; //pointer to the next environment variable in the list

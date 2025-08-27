@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:08:04 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/17 17:59:47 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/27 19:40:30 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_env_value(char *input_line)
 	at_equal = ft_strchr(input_line, "=");
 	if (!at_equal)
 		return (NULL);
-	else if (at_equal - input_line = 0)
+	else if (at_equal - input_line == 0)
 		return (NULL);
 	return (ft_strdup(input_line + (at_equal - input_line + 1)));
 }
@@ -81,8 +81,8 @@ void	env_free(t_env *env)
 			free(env->id);
 		if (env->value)
 			free(env->value);
-		if (env->new_line)
-			free(env->new_line);
+		if (env->env_line)
+			free(env->env_line);
 		free(env);
 		env = tmp_next;
 	}
