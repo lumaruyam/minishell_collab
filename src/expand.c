@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:42:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/25 20:22:24 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/28 20:21:39 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ char	*prs_expand_1envver(char *str, char *envvar_found, t_shell *content)
 		return (NULL);
 	envvar_value = get_envvar_value((envvar_found + 1), content);
 	after_envvar = get_str_after_envvar(envvar_found);
+	if (!after_envvar)
+		return (free(before_envvar), free(envvar_value), NULL);
+	new = chk_null_strjoin(before_envvar, envvar_value);
+	if (!new)
+		return (free(before_envvar), NULL);
+	new = chk_null_strjoin(new, after_envvar);
+	if (envvar_value)
+		free(envvar_value);
+	return (free(after_envvar), new);
 }
 
 int	prs_envvar_expand(t_token *token)

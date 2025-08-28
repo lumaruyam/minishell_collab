@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:27:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/27 20:24:00 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:10:08 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ int	prs_expand_env(t_token *token)
 	return (SUCCESS);
 }
 
+int	ft_envvar_len(char *envvar)
+{
+	int	i;
+
+	i = 0;
+	if (envvar[i] == '$')
+		i++;
+	if (ft_isdigit(envvar[i] == 1 || envvar[i] == '?' || envvar[i] == '$'))
+		return (2);
+	while (envvar[i])
+	{
+		if (envvar[i] != '_' && ft_isslnum(envvar[i]) == 0)
+			break ;
+		i++;
+	}
+	return (i);
+}
+
 char	*get_str_before_envvar(char *full_str, char *envvar)
 {
 	int		head_strlen;
@@ -33,6 +51,16 @@ char	*get_str_before_envvar(char *full_str, char *envvar)
 		return (ft_strdup(""));
 	head_str = ft_strdup(full_str, head_strlen);
 	return (head_str);
+}
+
+char	*get_str_after_envvar(char *envvar)
+{
+	int		len;
+	char	*new;
+
+	len = envvar_len(envvar);
+	new = ft_strdup(envvar + len);
+	return (new);
 }
 
 char	*get_envvar_name(char *envvar)
@@ -64,6 +92,21 @@ char	handle_dollar_pid(void)
 
 	pid = getpid();
 	return (ft_itoa(pid));
+}
+
+char	*chk_null_strjoin(char *s1, char *s2)
+{
+	char	*res;
+
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
+	else if (s2 == NULL)
+		return (s1);
+	else if (s1 == NULL)
+		return (ft_strdup(s2));
+	res = ft_strjoin(s1, s2);
+	free(s1);
+	return (res);
 }
 
 t_env	*get_env(char *env_id, t_env *env)

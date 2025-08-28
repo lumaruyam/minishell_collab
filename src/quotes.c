@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:46:21 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/24 18:05:43 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/28 20:29:11 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_token	*prs_quotes_to_tokens(char *input_str, t_shell *content)
 	token = NULL;
 	while (input_str[i])
 	{
-		new_token = process_single_token(&(input_str[i]), content, &i)
+		new_token = process_single_token(&(input_str[i]), content, &i);
 		if (!new_token)
 			return (NULL);
 		token_add_back(&token, new_token);
@@ -89,6 +89,9 @@ int	prs_quotes_n_expand_env(t_token(*token))
 		{
 			input_str = prs_quotes_to_tokens(token->value, token->content);
 			prs_expand_env(input_str);
+			if (token->value)
+				free(token->value);
+			token->value = prs_tokens_join(input_str);
 		}
 	}
 }
