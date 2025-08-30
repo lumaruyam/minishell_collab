@@ -2,7 +2,7 @@
 NAME = minishell
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -I ./inc/
+FLAGS = -Wall -Wextra -Werror -I inc
 
 SRC_PATH = ./src/
 
