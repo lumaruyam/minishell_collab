@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:32:23 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/30 15:18:25 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:56:42 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,16 @@ int	prs_handle_cmd(t_token *token)
 	return (SUCCESS);
 }
 
+void	prs_unlink_error(t_token *token)
+{
+	while (token)
+	{
+		if (token->type == NON_HEREDOC)
+			unlink(token->next->value);
+		token = token->next;
+	}
+}
+
 int	parsing(t_token **token)
 {
 	int return_code;
@@ -89,7 +99,8 @@ int	parsing(t_token **token)
 		return_code = FAIL;
 	else if (prs_handle_heredoc(*token) != 0)
 	{
-
+		prs_unlink_error(*token);
+		return_code = FAIL_VOID;
 	}
 	return (return_code);
 }

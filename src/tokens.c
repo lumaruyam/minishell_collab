@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:15:18 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/24 18:03:06 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/31 18:00:55 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_token	*create_token(char *token_value, int n, t_tokentype, t_shell *content)
+t_token	*create_token(char *token_value, int n,t_tokentype type, t_shell *content)
 {
 	t_token	*new_token;
 	char	*dup_token_value;
@@ -49,4 +49,20 @@ int	token_add_back(t_token **head, t_token *new_token)
 		current->next = new_token;
 	}
 	return (SUCCESS);
+}
+
+void	token_free(t_token *head)
+{
+	t_token	*current;
+	t_token	*tmp_next;
+
+	current = head;
+	while (current != NULL)
+	{
+		tmp_next = current->next;
+		if (current->value)
+			free(current->value);
+		free(current);
+		current = tmp_next;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 17:27:51 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/17 17:57:14 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/08/31 18:01:06 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	free_shell(t_shell *content)
 {
 	if (content)
 	{
-		if (context->exec)
+		if (content->exec)
 			build_free_all(content->exec);
 		if (content->env)
 			env_free(content->env);

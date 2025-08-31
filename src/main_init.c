@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/30 14:50:06 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:09:04 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int init_exec(t_shell *content, t_token **token)
 	if (!content->exec)
 		return (FAIL);
 	content->ct_exec = ft_build_lstsize(content->exec);
-	content->pids = malloc(sizeof(pid_t) * (content->ct_exec + 1));//
+	content->pids = malloc(sizeof(pid_t) * (content->ct_exec + 1));//signal
 	if (!content->pids)
 		return (FAIL);
 	content->ct_pid = 0;

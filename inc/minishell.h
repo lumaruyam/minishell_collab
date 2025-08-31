@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/30 15:05:25 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:53:41 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
+# include <fcntl.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 
@@ -25,6 +27,8 @@
 # define FAIL 1
 # define FAIL_VOID 2
 # define FAIL_BUILD -1
+
+# define SIG_OFFSET 128
 
 # define DEFAULT_ENV "MINISHELL=minishell"
 
@@ -102,5 +106,8 @@ typedef struct s_signal//might not pass the evaluation
 }	t_signal;
 
 extern t_signal	g_signal;//might not pass the evaluation
+
+
+void	signals_heredoc(int status);
 
 #endif
