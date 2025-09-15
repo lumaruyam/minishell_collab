@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/31 18:09:04 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:48:55 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_shell	*init_shell(char *env[])
 	return (content);
 }
 
-int init_exec(t_shell *content, t_token **token)
+int	init_exec(t_shell *content, t_token **token)
 {
 	content->exec = build_to_exec(*token);
 	token_free(*token);
@@ -92,7 +92,7 @@ int	process_input(t_shell *content, char *line)
 	t_token	*token;
 	int		pars;
 
-	token = lexing(content, line);
+	token = lexing(content, line);//check this error later
 	free(line);
 	if (!token)
 		return (SUCCESS);

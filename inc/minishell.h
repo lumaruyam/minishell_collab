@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/14 21:29:13 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/09/15 20:46:23 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,53 @@ typedef struct s_signal//might not pass the evaluation
 
 extern t_signal	g_signal;//might not pass the evaluation
 
-/* ----------------------------- Initialization ----------------------------- */
+/* ------------------------------Main----------------------------------- */
 
-void	signals_heredoc(int status);
+/*main (shell)*/
+int			read_loop(t_shell *content);
+t_shell		*init_shell(char *env[]);
+int			process_input(t_shell *content, char *line);
+int			init_exec(t_shell *content, t_token **token)
+t_env		*dup_env(char *env[]);
+int			chk_empty_line(char *line);
+
+/*env*/
+t_env		*env_make(char *env_id, char *env_value, char *env_line);
+
+void		signals_heredoc(int status);
+t_env		*set_default_env(void);
+char		*get_env_id(char *input_line);
+char		*get_env_value(char *input_line);
+int			env_add_back(t_env **head, t_env *new);
+void		env_free(t_env *env);
+void		env_delete_1node(t_env *env); //added later
+
+/*main free*/
+void	free_shell(t_shell *content);
+void	free_after_process(t_shell *content, t_token *token);
+
+/* -----------------------------Lexing---------------------------------- */
+
+/*lexing*/
+t_token		*lex_tokenize_wd(char *str, t_shell *content);
+t_token		*lexing(t_shell content, char *input_line);
+
+/*lexing helper*/
+t_tokentype	lex_get_tokentype(char *input_str);
+int			lex_token_len(char *str, t_tokentype type);
+int			lex_token_str_len(char *str);
+int			chk_meta_char(char c);
+
+/*token*/
+t_token		*create_token(char *token_value, int n,t_tokentype type,
+				t_shell *content);
+int			token_add_back(t_token **head, t_token *new_token);
+void		token_free(t_token *head);
+
+/* -----------------------------Signals--------------------------------- */
+void		signals_heredoc(int status); //might delete later
+void		init_signals(void); //might delete later
+void		sigint_exec(int status); //might delete later
+int			sig_event(void); //might delete later
 
 #endif
