@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   builtins_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/14 20:58:33 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/17 18:31:50 by lulmaruy         ###   ########.fr       */
+/*   Created: 2025/09/17 18:59:02 by lulmaruy          #+#    #+#             */
+/*   Updated: 2025/09/17 19:04:16 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "../inc/builtins.h"
 
-#include "../inc/minishell.h"
-#include <errno.h>
-#include <string.h>
+int	add_envvar(char *input_line, t_env **env_head)
+{
+	char	*env_id;
+	char	*dup_inputline;
+	t_env	*env;
 
-# define P_NAME "minishell"
-
-#endif
+	env_id = get_env_id(input_line);
+	env = get_env(env_id, *env_head);
+}
