@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 21:17:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/17 18:54:01 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/19 21:02:28 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	update_pwd(t_shell *content, char *oldpwd_value)
 		pwd_path = ft_strjoin("PWD=", current_cwd);
 		if (!pwd_path || add_envvar(pwd_path, &content->env) != 0)
 			return (free(current_cwd), FAIL);
-	}
+		free(pwd_path);
+	}// start from here 0919
 }
 
 int	ft_cd(t_shell *content, t_arg *args)

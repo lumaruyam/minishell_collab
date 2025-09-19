@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 16:52:31 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/17 18:27:43 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/19 20:42:31 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,12 @@ void	error_cd(int err_n, char *pathname)
 		ft_putstr_fd(err_msg, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
+}
+
+void	error_export(char *input_line)
+{
+	ft_putstr_fd(P_NAME, STDERR_FILENO);
+	ft_putstr_fd(": export ", STDERR_FILENO);
+	ft_putstr_fd(input_line, STDERR_FILENO);
+	ft_putstr_fd(" : Not a valid identifier\n", STDERR_FILENO);
 }
