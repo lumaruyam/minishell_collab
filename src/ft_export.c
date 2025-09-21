@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:19:57 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/21 18:24:57 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:36:21 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,27 @@ int	export_print_sorted_env(t_env *env)
 	if (!sorted)
 		return (arrs_free(env_arrs), FAIL);
 	print_export_all(sorted);
+	arrs_free(sorted);
+	arrs_free(env_arrs);
+	return (SUCCESS);
 }
 
 int	ft_export(t_shell *content, t_arg *args)
 {
-	if (export_print_sorted_env(content->env) != 0)
+	if (!args)
+	{
+	 if (export_print_sorted_env(content->env) != 0)
 		return (SUCCESS);
+	}
+	else
+	{
+		while(args)
+		{
+			if (add_envvar(args->value, &(content->env)) != 0)
+				return (FAIL);
+			args = args->next;
+		}
+	}
+	return (SUCCESS);
 }
+
