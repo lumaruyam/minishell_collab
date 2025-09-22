@@ -1,16 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_env_pwd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:01:47 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/21 15:11:37 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/22 19:53:27 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/builtins.h"
+
+int	ft_env(t_shell *content, t_arg *args)
+{
+	t_env	*env;
+
+	env = content->env;
+	if (args)
+	{
+		error_env(args->value);
+		content->exit_code = CMD_NOT_FOUND;
+	}
+	if (!env)
+		return (SUCCESS);
+	while (env)
+	{
+		if (env->value)
+			printf("%s\n", env->env_line);
+		env = env->next;
+	}
+	return (SUCCESS);
+}
 
 int	ft_pwd(t_arg *args)
 {

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/15 20:46:23 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/22 19:51:00 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define FAIL_VOID 2
 # define FAIL_BUILD -1
 
+# define PROMPT_NAME "minishell"
+
+# define CMD_NOT_FOUND 127
 # define SIG_OFFSET 128
 
 # define DEFAULT_ENV "MINISHELL=minishell"
