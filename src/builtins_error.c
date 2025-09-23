@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 16:52:31 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/22 19:47:39 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/23 20:15:07 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,17 @@ void	error_pwd(char *option)
 	ft_putstr_fd(": Invalid option\n", STDERR_FILENO);
 }
 
-void	error_pwd(char *option)
+void	error_env(char *option)
 {
 	ft_putstr_fd("env: ", STDERR_FILENO);
 	ft_putstr_fd(input_line, STDERR_FILENO);
 	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+}
+
+void	error_exit(char *input_line)
+{
+	ft_putstr_fd(P_NAME, STDERR_FILENO);
+	ft_putstr_fd(": exit: ", STDERR_FILENO);
+	ft_putstr_fd(input_line, STDERR_FILENO);
+	ft_putstr_fd(": Numeric argument required\n", STDERR_FILENO);
 }

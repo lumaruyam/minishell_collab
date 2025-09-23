@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:00:59 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/21 17:07:35 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/23 20:32:30 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,12 @@ int	ft_env_lstsize(t_env *env)
 		env = env->next;
 	}
 	return (ct);
+}
+
+void	set_std(t_shell *stx, int mode)
+{
+	if (!mode)
+	{
+		ctx->default_in = dup(STDIN_FILENO);
+	}
 }
