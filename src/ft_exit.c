@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 19:59:14 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/23 20:28:39 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/24 20:17:01 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ int	ft_exit(t_shell *content, t_arg *args)
 			exit_code =  128 + (g_signal.signal_code - SIG_OFFSET);//signal
 	}
 	set_std(content, 1);
-
+	free_shell(content);
+	exit(exit_code);
 }

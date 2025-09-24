@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:59:02 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/19 20:58:26 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/24 20:56:01 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,26 @@ void	update_envvar(t_env *update_env, char *env_line)
 		free(update_env->env_line);
 	update_env->value = env_value;
 	update_env->env_line = env_line;
+}
+
+static int make_add_env(char *env_id, char *input_line,
+			char *dup_inputline, t_env **env_head)
+{
+	char	*env_value;
+	t_env	*env;
+
+	env_value = get_env_value(input_line);
+	env = env_make(env_id, env_value, dup_inputline);
+	if (!env)
+	{
+		free(input_line);
+		if (env_value)
+			free(env_value);
+		free(env_id);
+		return (FAIL);
+	}
+	env_add_back(env_head, env);
+	return (SUCCESS);
 }
 
 int	add_envvar(char *input_line, t_env **env_head)
