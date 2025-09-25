@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:32:23 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/31 17:56:42 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:12:34 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	prs_chk_allnodes_null(t_token *token)
 
 int	prs_remove_node_null(t_token **head)
 {
-	t_token *current;
+	t_token	*current;
 	t_token	*token;
 
 	token = (*head);

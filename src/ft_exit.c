@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 19:59:14 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/24 20:17:01 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/25 19:14:15 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	ft_atol_overflow(const char *str, long *result)
 	{
 		if (*str == '-')
 			sign = -1;
-		str++; //check if we need to add else sign = 1;
+		str++;
 	}
 	while (*str >= '0' && *str <= '9')
 	{

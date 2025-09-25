@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:46:21 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/28 20:31:05 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:09:30 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ int	prs_quotes_n_expand_env(t_token(*token))
 			if (token->value)
 				free(token->value);
 			token->value = prs_tokens_join(input_str);
+			token_free(input_str);
 		}
+		token = token->next;
 	}
+	return (SUCCESS);
 }

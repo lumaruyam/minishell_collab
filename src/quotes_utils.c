@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:06:59 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/24 17:43:28 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/09/25 19:54:16 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,37 @@ int	rogue_len(char *str)
 		len++;
 	}
 	return (len);
+}
+
+char	*chk_null_strjoin(char *s1, char *s2)
+{
+	char	*res;
+
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
+	else if (s2 == NULL)
+		return (s1);
+	else if (s1 == NULL)
+		return (ft_strdup(s2));
+	res = ft_strjoin(s1, s2);
+	free(s1);
+	return (res);
+}
+
+char	*prs_tokens_join(t_token *token)
+{
+	char	*res;
+
+	res = ft_strdup("");
+	while (token != NULL)
+	{
+		if (token->value != NULL)
+		{
+			res = chk_null_strjoin(res, token->value);
+			if (!res)
+				break ;
+		}
+		token = token->next;
+	}
+	return (res);
 }

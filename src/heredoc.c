@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:41:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/08/31 17:53:44 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/25 19:28:38 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	prs_init_heredoc(int fd, char *eof_delimiter)
 			ft_putstr_fd("here_doc: called end-of-line (ctrl-d)\n", 2);
 			break ;
 		}
-		if (ft_strcmp(line, eof_delimiter) == 0 || g_signal.end_heredoc == 1)
+		if (ft_strcmp(line, eof_delimiter) == 0 || g_signal.end_heredoc == 1)//signal
 		{
 			free(line);
 			break ;
