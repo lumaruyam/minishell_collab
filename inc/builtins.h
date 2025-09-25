@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 20:58:33 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/24 21:07:51 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/25 17:54:52 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ void	error_pwd(char *option);
 void	error_exit(char *input_line);
 void	error_cd(int err_n, char *pathname);
 void	error_export(char *input_line);
-
 
 #endif
