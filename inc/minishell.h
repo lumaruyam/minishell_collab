@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/22 19:51:00 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/26 21:29:41 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,15 @@ typedef struct s_exec
 	int	fd_out;// output file descriptor for the command
 }	t_exec;
 
-typedef struct s_signal//might not pass the evaluation
+extern volatile sig_atomic_t	g_signal_received;
+
+/*typedef struct s_signal//might not pass the evaluation
 {
 	int	end_heredoc;
 	int	signal_code;
 }	t_signal;
 
-extern t_signal	g_signal;//might not pass the evaluation
+extern t_signal	g_signal;//might not pass the evaluation*/
 
 /* ------------------------------Main----------------------------------- */
 
