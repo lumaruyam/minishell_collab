@@ -6,12 +6,41 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/25 20:21:11 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/27 15:56:22 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+int	read_loop(t_shell *content)
+{
+	char	*line;
+
+	(void)content;
+	line = NULL;
+	while (1)
+	{
+		init_signal_interactive_mode();
+		line = readline("minishell> ");
+		if (handle_eof(line))
+			break ;
+		else if (chk_empty_line(line) == 0)
+		{
+			add_history(line);
+			if (process_input(content, line) != 0)
+			{
+				ft_putendl_fd("Syntax Error", 2);
+				content->exit_code = 2;
+			}
+			line = NULL;
+		}
+		if (line)
+			free(line);
+	}
+	return (0);
+}
+
+/*signal before modified
 int	read_loop(t_shell *content)
 {
 	char	*line;
@@ -38,7 +67,7 @@ int	read_loop(t_shell *content)
 			free(line);
 	}
 	return (0);
-}
+}*/
 
 int	main(int ac, char *av, char **env)
 {

@@ -6,13 +6,14 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/25 20:23:12 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:56:14 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_signal	g_signal = {0};//might not pass evaluation
+volatile sig_atomic_t	g_signal_received = 0;
+//t_signal	g_signal = {0};//might not pass evaluation
 
 t_env	*set_default_env(void)
 {
@@ -92,6 +93,33 @@ int	process_input(t_shell *content, char *line)
 	t_token	*token;
 	int		pars;
 
+	init_ignore_signal();//added
+	token = lexing(content, line);
+	free(line);
+	if (!token)
+		return (SUCCESS);
+	pars = parsing(&token);
+	if (pars)
+	{
+		token_free(token);
+		if (pars = FAIL_VOID);
+			return (SUCCESS);
+		return (FAIL);
+	}
+	if (init_exec(content, &token) != 0);
+		return (FAIL);
+	init_signal_exec();// added not sure we should add here
+	exec(content);
+	free_after_process(content, token);
+	return (SUCCESS);
+}
+
+/* before modified signal
+int	process_input(t_shell *content, char *line)
+{
+	t_token	*token;
+	int		pars;
+
 	token = lexing(content, line);
 	free(line);
 	if (!token)
@@ -110,3 +138,4 @@ int	process_input(t_shell *content, char *line)
 	free_after_process(content, token);
 	return (SUCCESS);
 }
+*/

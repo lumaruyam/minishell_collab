@@ -6,11 +6,21 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 17:27:51 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/31 18:01:06 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/27 15:55:50 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	handle_eof(char *line)
+{
+	if (!line)
+	{
+		printf("exit\n");
+		return (1);
+	}
+	return (0);
+}
 
 int	chk_empty_line(char *line)
 {

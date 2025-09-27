@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/26 21:29:41 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:55:37 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,17 @@
 
 typedef struct s_shell
 {
-	int	std_in; //Stores the default input file descriptor (usually STDIN_FILENO)
-	int	std_out; //Stores the default output file descriptor (usually STDOUT_FILENO)
+	int				std_in; //Stores the default input file descriptor (usually STDIN_FILENO)
+	int				std_out; //Stores the default output file descriptor (usually STDOUT_FILENO)
 	unsigned char	exit_code; // stores the shell’s last exit status
-	pid_t	*pids;// array of process IDs for child processes
-	t_exec	*exec; // linked list of commands to be executed
-	int	ct_pid;// count of currently active pids
-	int	ct_exec;// count of exec blocks (commands)
-	t_env	*env;
+	pid_t			*pids;// array of process IDs for child processes
+	t_exec			*exec; // linked list of commands to be executed
+	int				ct_pid;// count of currently active pids
+	int				ct_exec;// count of exec blocks (commands)
+	t_env			*env;
+	int				last_exit_status;
+	bool			is_child_process;
+	bool			child_end_with_signal;
 }	t_shell;
 
 typedef struct s_env
@@ -102,7 +105,7 @@ typedef struct s_exec
 	int	fd_out;// output file descriptor for the command
 }	t_exec;
 
-extern volatile sig_atomic_t	g_signal_received;
+extern volatile sig_atomic_t	g_signal;
 
 /*typedef struct s_signal//might not pass the evaluation
 {

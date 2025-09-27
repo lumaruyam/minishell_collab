@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:41:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/25 19:28:38 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/27 18:15:56 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,32 @@ int	prs_init_heredoc(int fd, char *eof_delimiter)
 {
 	char	*line;
 
+	init_signal_heredoc();
+	while (1)
+	{
+		line = readline("heredoc>");
+		if (!line)
+		{
+			ft_putstr_fd("here_doc: called end-of-line (ctrl-d)\n", 2);
+			break ;
+		}
+		if (ft_strcmp(line, eof_delimiter) == 0 || rl_done)
+		{
+			free(line);
+			break ;
+		}
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+		free(line);
+	}
+	return (init_signal_heredoc());
+}
+
+/* signals not modified
+int	prs_init_heredoc(int fd, char *eof_delimiter)
+{
+	char	*line;
+
 	signal(SIGINT, signals_heredoc);//signals to review
 	while (1)
 	{
@@ -94,7 +120,7 @@ static int init_heredoc_signal(void)
 		return (FAIL);
 	}
 	return (SUCCESS);
-}
+}*/
 
 int	prs_handle_heredoc(t_token *token)
 {
