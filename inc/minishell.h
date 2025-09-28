@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/28 17:28:05 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/28 19:20:41 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,27 +83,27 @@ typedef enum e_tokentype
 
 typedef struct s_token
 {
-	char	*value;// token string (e.g., "ls", "|", "file.txt")
-	t_shell	*content;// reference to the shell context
+	char		*value;// token string (e.g., "ls", "|", "file.txt")
+	t_shell		*content;// reference to the shell context
 	t_tokentype	type;// type of token (e.g., CMD, ARG, PIPE)
-	t_token	*next;// pointer to next token in the list
+	t_token		*next;// pointer to next token in the list
 }	t_token;
 
 typedef struct s_filename
 {
-	char	*path;// file path or name (e.g., "output.txt")
+	char		*path;// file path or name (e.g., "output.txt")
 	t_tokentype	type;// type of redirection (INFILE, OUTFILE, etc.)
 	t_filename	*next;// pointer to next file in the redirection list
 }	t_filename;
 
 typedef struct s_exec
 {
-	char	*cmd;// command name (e.g., "ls")
-	t_arg	*args;// linked list of arguments for the command
-	t_filename	*redirs;// linked list of redirection files
+	char			*cmd;// command name (e.g., "ls")
+	t_arg			*args;// linked list of arguments for the command
+	t_filename		*redirs;// linked list of redirection files
 	struct s_exec	*next;// pointer to next command in pipeline
-	int	fd_in;// input file descriptor for the command
-	int	fd_out;// output file descriptor for the command
+	int				fd_in;// input file descriptor for the command
+	int				fd_out;// output file descriptor for the command
 }	t_exec;
 
 extern volatile sig_atomic_t	g_signal;
@@ -138,8 +138,8 @@ void		env_free(t_env *env);
 void		env_delete_1node(t_env *env); //added later
 
 /*main free*/
-void	free_shell(t_shell *content);
-void	free_after_process(t_shell *content, t_token *token);
+void		free_shell(t_shell *content);
+void		free_after_process(t_shell *content, t_token *token);
 
 /* -----------------------------Lexing---------------------------------- */
 
@@ -160,9 +160,13 @@ int			token_add_back(t_token **head, t_token *new_token);
 void		token_free(t_token *head);
 
 /* -----------------------------Signals--------------------------------- */
-void		signals_heredoc(int status); //might delete later
-void		init_signals(void); //might delete later
-void		sigint_exec(int status); //might delete later
-int			sig_event(void); //might delete later
+void		signal_child_process(void);
+void		init_signal_heredoc(void);
+void		init_ignore_signal(void);
+void		signal_to_action(t_shell *data)
+int			sig_exit(void);
+void		init_signal_exec(void);
+void		init_signal_exec(void);
+void		init_signal_interactive_mode(void);
 
 #endif

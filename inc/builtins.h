@@ -6,14 +6,14 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 20:58:33 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/25 17:54:52 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/28 19:19:13 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-#include "../inc/minishell.h"
+#include "minishell.h"
 #include <errno.h>
 #include <string.h>
 #include <limits.h>
@@ -34,7 +34,7 @@ int		ft_env(t_shell *content, t_arg *args);
 int		ft_pwd(t_arg *args);
 
 /* ft_echo*/
-int	ft_echo(t_arg *args);
+int		ft_echo(t_arg *args);
 
 /* ft_exit*/
 int		ft_exit(t_shell *content, t_arg *args);
