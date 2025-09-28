@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:27:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/09/25 19:20:41 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/28 17:00:09 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ int	prs_expand_env(t_token *token)
 	return (SUCCESS);
 }
 
+char	*handle_qmark_exit(t_shell *content)
+{
+	int	status_code;
+
+	if (g_signal != 0)
+	{
+		status_code = g_signal;
+		g_signal = 0;
+		return (ft_itoa(status_code));
+	}
+	return (ft_itoa(content->exit_code));
+}
+
+/* Old signal
 char	*handle_qmark_exit(t_shell *content)//signal used, check later
 {
 	int	status_code;
@@ -34,7 +48,7 @@ char	*handle_qmark_exit(t_shell *content)//signal used, check later
 		return (ft_itoa(status_code));
 	}
 	return (ft_itoa(content->exit_code));
-}
+}*/
 
 char	handle_dollar_pid(void)
 {

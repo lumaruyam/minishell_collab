@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/27 20:55:37 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/28 17:28:05 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 

@@ -6,13 +6,13 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:29:27 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/27 20:55:16 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/28 17:37:33 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	signal_child_process(void)
+void	signal_child_process(void)//implemet this before exective
 {
 	rl_event_hook = sig_exit;
 	signal(SIGINT, SIG_DFL);

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 19:59:14 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/25 19:14:15 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/28 16:56:00 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,35 @@ int	ft_exit(t_shell *content, t_arg *args)
 	}
 	else
 	{
+		if (g_signal > 0)
+			exit_code =  g_signal;
+	}
+	set_std(content, 1);
+	free_shell(content);
+	exit(exit_code);
+}
+
+/* before modifiying signal
+int	ft_exit(t_shell *content, t_arg *args)
+{
+	long	exit_code;
+
+	exit_code = content->exit_code;
+	if (args)
+	{
+		if (chk_exitcode(args->value) || ft_atol_overflow(args->value,
+				&exit_code))
+		{
+			error_exit(args->value);
+			exit_code = 2;
+		}
+		else if (args->next)
+			return (too_many(content));
+		else
+			exit_code = (unsigned char)(exit_code % 256);
+	}
+	else
+	{
 		if (g_signal.signal_code > 0)
 			exit_code =  128 + (g_signal.signal_code - SIG_OFFSET);//signal
 	}
@@ -115,3 +144,4 @@ int	ft_exit(t_shell *content, t_arg *args)
 	free_shell(content);
 	exit(exit_code);
 }
+*/

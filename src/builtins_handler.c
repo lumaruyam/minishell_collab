@@ -6,13 +6,13 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 20:41:26 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/24 20:33:25 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/28 18:01:06 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/builtins.h"
 
-int	check_is_builtin(char *input_cmd)
+int	chk_is_builtin(char *input_cmd)
 {
 	if (!input_cmd)
 		return (0);

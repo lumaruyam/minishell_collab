@@ -1,0 +1,50 @@
+
+#include "../inc/minishell.h"
+
+void	child_process(t_shell *content, int (*fd)[2], int i, t_exec *tmp)
+{
+	int	exit_code;
+
+	exit_code = 0;
+	signal_child_process();//added to implement signal
+	setup_redir(content, fd, i);//create this function
+	if (handle_redir_and_builtins(content, tmp, &exit_code))
+		exit(exit_code);
+	exit_code = ft_execution(content, tmp);//create this function
+	free_shell(content);
+	if (exit_code == 127)
+		exit(127);
+	else if (exit_code == 126)
+		exit(126);
+	else if (exit_code != 0)
+		exit(1);
+	exit(0);
+}
+
+int	exec_parent(t_shell *ctx)
+{
+	t_exec	*tmp;
+	int		fd[MAX_FDS][2];
+	pid_t	pid;
+
+	tmp = ctx->exec;
+	if (open_pipes(ctx->exec_count - 1, fd) == -1)//create this func
+		return (err_pipe(errno, ctx));//create err_pipe
+	while (tmp)
+	{
+		signal(SIGINT, sigint_exec);
+		pid = fork();
+		if (pid == -1)
+			return (err_fork(errno, ctx, fd));//create this func
+		else if (pid == 0)
+			child_process(ctx, fd, ctx->ct_pid, tmp);
+		ctx->pids[ctx->ct_pid] = pid;
+		ctx->ct_pid++;
+		tmp = tmp->next;
+	}
+	close_all(ctx->ct_exec - 1, fd);//create this func
+	set_std(ctx, 1);//create this func
+	wait_children(ctx->ct_pid, ctx);//added for signal
+	signal_to_action(ctx);//create this func
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/27 20:56:14 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/28 17:36:14 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	init_exec(t_shell *content, t_token **token)
 	if (!content->exec)
 		return (FAIL);
 	content->ct_exec = ft_build_lstsize(content->exec);
-	content->pids = malloc(sizeof(pid_t) * (content->ct_exec + 1));//signal
+	content->pids = malloc(sizeof(pid_t) * (content->ct_exec + 1));
 	if (!content->pids)
 		return (FAIL);
 	content->ct_pid = 0;
@@ -108,7 +108,6 @@ int	process_input(t_shell *content, char *line)
 	}
 	if (init_exec(content, &token) != 0);
 		return (FAIL);
-	init_signal_exec();// added not sure we should add here
 	exec(content);
 	free_after_process(content, token);
 	return (SUCCESS);
