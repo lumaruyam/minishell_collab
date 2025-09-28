@@ -21,30 +21,30 @@ void	child_process(t_shell *content, int (*fd)[2], int i, t_exec *tmp)
 	exit(0);
 }
 
-int	exec_parent(t_shell *ctx)
+int	exec_parent(t_shell *content)
 {
 	t_exec	*tmp;
 	int		fd[MAX_FDS][2];
 	pid_t	pid;
 
-	tmp = ctx->exec;
-	if (open_pipes(ctx->exec_count - 1, fd) == -1)//create this func
-		return (err_pipe(errno, ctx));//create err_pipe
+	tmp = content->exec;
+	if (open_pipes(content->exec_count - 1, fd) == -1)//create this func
+		return (err_pipe(errno, content));//create err_pipe
 	while (tmp)
 	{
 		signal(SIGINT, sigint_exec);
 		pid = fork();
 		if (pid == -1)
-			return (err_fork(errno, ctx, fd));//create this func
+			return (err_fork(errno, content, fd));//create this func
 		else if (pid == 0)
-			child_process(ctx, fd, ctx->ct_pid, tmp);
-		ctx->pids[ctx->ct_pid] = pid;
-		ctx->ct_pid++;
+			child_process(content, fd, content->ct_pid, tmp);
+		content->pids[content->ct_pid] = pid;
+		content->ct_pid++;
 		tmp = tmp->next;
 	}
-	close_all(ctx->ct_exec - 1, fd);//create this func
-	set_std(ctx, 1);//create this func
-	wait_children(ctx->ct_pid, ctx);//added for signal
-	signal_to_action(ctx);//create this func
+	close_all(content->ct_exec - 1, fd);//create this func
+	set_std(content, 1);//create this func
+	wait_children(content->ct_pid, content);//added for signal
+	signal_to_action(content);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/27 15:56:22 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/09/28 18:23:33 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	read_loop(t_shell *content)
 			}
 			line = NULL;
 		}
+		signal_to_action(content);//added
 		if (line)
 			free(line);
 	}
