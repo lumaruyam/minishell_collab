@@ -52,8 +52,7 @@ t_exec	*build_to_exec(t_token *token)
 		if (bd_handle_cmd(exec, token) == FAIL)
 			return (NULL);
 		bd_handle_redirs(exec, token);
-		bd_handle_redirs(exec, token); // have not created this function yet
-		bd_handle_args(exec, token);//have not created this function yet Luli
+		bd_handle_args(exec, token);
 		token = token->next;
 	}
 	return (exec);

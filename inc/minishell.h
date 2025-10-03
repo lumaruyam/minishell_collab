@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/28 19:20:41 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/03 20:49:14 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define SUCCESS 0
 # define FAIL 1
-# define FAIL_VOID 2
+# define FAIL_VOID 2 //put in enum
 # define FAIL_BUILD -1
 
 # define PROMPT_NAME "minishell"

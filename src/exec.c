@@ -1,6 +1,11 @@
 
 #include "../inc/minishell.h"
 
+static int	handle_single_builtin(t_shell *content, t_exec *tmp)
+{
+	if (err_redirs(tmp, content))//start from here for 1004
+}
+
 int	exec(t_shell *content)
 {
 	t_exec	*tmp;
@@ -14,7 +19,7 @@ int	exec(t_shell *content)
 		if (tmp->cmd == NULL && tmp->redirs != NULL)
 			return (handle_single_redir(content, tmp));//create the function
 		if (chk_is_builtin(tmp->cmd))
-			return (habdle_sigle_builtin(content, tmp));//create this func
+			return (handle_sigle_builtin(content, tmp));
 	}
 	init_signal_exec();//added for signal
 	exec_parent(content);
