@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:00:59 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/24 20:10:37 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/04 14:17:29 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_std(t_shell *content, int mode)
 	}
 	else
 	{
-		dup2(content->default_in, STDIN_FILEMO);
+		dup2(content->default_in, STDIN_FILENO);
 		exe_close(&(content->default_in));
 		dup2(content->default_out, STDOUT_FILENO);
 		exec_close(&(content->default_out));
