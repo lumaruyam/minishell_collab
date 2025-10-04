@@ -3,7 +3,17 @@
 
 static int	handle_single_builtin(t_shell *content, t_exec *tmp)
 {
-	if (err_redirs(tmp, content))//start from here for 1004
+	if (err_redirs(tmp, content))
+	{
+		content->exit_code = 1;
+		return (content->exit_code);
+	}
+	if (chk_is_builtin(tmp->cmd) == 2)
+		ft_putstr_fd("exit\n, STDERR_FILENO");
+	unlink_all(content);
+	content->exit_code = exec_builtin(content, tmp->cmd, tmp->args);
+	set_std(content, 1);
+	return (content->exit_code);
 }
 
 int	exec(t_shell *content)
@@ -12,7 +22,7 @@ int	exec(t_shell *content)
 
 	if (content->ct_exec == 0)
 		return (0);
-	set_std(content, 0);//create the function in exec_utils.c
+	set_std(content, 0);
 	tmp = ctx->exec;
 	if (ctx->ct_exec == 1)
 	{
@@ -22,6 +32,6 @@ int	exec(t_shell *content)
 			return (handle_sigle_builtin(content, tmp));
 	}
 	init_signal_exec();//added for signal
-	exec_parent(content);
+	exec_parent(content);// create this func
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:00:59 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/04 14:17:29 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/04 19:36:09 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ void	exe_close(int *fd)
 	{
 		close(*fd);
 		*fd = -1;
+	}
+}
+
+void	ft_close(t_shell *content)
+{
+	if (content)
+	{
+		exe_close(&(content->default_in));
+		exe_close(&(content->default_out));
 	}
 }
 
