@@ -81,7 +81,7 @@ void	wait_children(int ct_pid, t_shell *content)
 	i = 0;
 	while (i < ct_pid)
 	{
-		if (waitpid(contents->pids[i], &(status), 0))
+		if (waitpid(content->pids[i], &(status), 0))
 		{
 			if (WIFEXITED(status))
 			{
