@@ -10,7 +10,7 @@ void	child_process(t_shell *content, int (*fd)[2], int i, t_exec *tmp)
 	setup_redir(content, fd, i);//create this function
 	if (handle_redir_and_builtins(content, tmp, &exit_code))//do we need?
 		exit(exit_code);
-	exit_code = ft_execution(content, tmp);//create this function
+	exit_code = ft_execution(content, tmp);//create this function Samira
 	free_shell(content);
 	if (exit_code == 127)
 		exit(127);
