@@ -8,7 +8,7 @@ void	child_process(t_shell *content, int (*fd)[2], int i, t_exec *tmp)
 	exit_code = 0;
 	signal_child_process();//added to implement signal
 	setup_redir(content, fd, i);//create this function
-	if (handle_redir_and_builtins(content, tmp, &exit_code))
+	if (handle_redir_and_builtins(content, tmp, &exit_code))//do we need?
 		exit(exit_code);
 	exit_code = ft_execution(content, tmp);//create this function
 	free_shell(content);
@@ -28,8 +28,8 @@ int	exec_parent(t_shell *content)
 	pid_t	pid;
 
 	tmp = content->exec;
-	if (open_pipes(content->exec_count - 1, fd) == -1)//create this func
-		return (err_pipe(errno, content));//create err_pipe
+	if (open_pipes(content->exec_count - 1, fd) == -1)
+		return (err_pipe(errno, content));
 	while (tmp)
 	{
 		signal(SIGINT, sigint_exec);
@@ -37,13 +37,13 @@ int	exec_parent(t_shell *content)
 		if (pid == -1)
 			return (err_fork(errno, content, fd));//create this func
 		else if (pid == 0)
-			child_process(content, fd, content->ct_pid, tmp);
+			child_process(content, fd, content->ct_pid, tmp);//create this
 		content->pids[content->ct_pid] = pid;
 		content->ct_pid++;
 		tmp = tmp->next;
 	}
-	close_all(content->ct_exec - 1, fd);//create this func
-	set_std(content, 1);//create this func
+	close_all(content->ct_exec - 1, fd);
+	set_std(content, 1);
 	wait_children(content->ct_pid, content);//added for signal
 	signal_to_action(content);
 	return (0);

@@ -1,6 +1,18 @@
 
 #include "../inc/minishell.h"
 
+static int	handle_single_redir(t_shell *content, t_exec *tmp)
+{
+	if (err_redirs(tmp, content))
+	{
+		content->exit_code = 1;
+		return (content->exit_code);
+	}
+	unlink_all(content);
+	set_std(content, 1);
+	return (0);
+}
+
 static int	handle_single_builtin(t_shell *content, t_exec *tmp)
 {
 	if (err_redirs(tmp, content))
@@ -27,9 +39,9 @@ int	exec(t_shell *content)
 	if (ctx->ct_exec == 1)
 	{
 		if (tmp->cmd == NULL && tmp->redirs != NULL)
-			return (handle_single_redir(content, tmp));//create the function
+			return (handle_single_redir(content, tmp));
 		if (chk_is_builtin(tmp->cmd))
-			return (handle_sigle_builtin(content, tmp));
+			return (handle_single_builtin(content, tmp));
 	}
 	init_signal_exec();//added for signal
 	exec_parent(content);// create this func

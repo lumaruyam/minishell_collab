@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/03 21:22:45 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:12:06 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	process_input(t_shell *content, char *line)
 	}
 	if (init_exec(content, &token) != 0);
 		return (FAIL);
-	exec(content);//Samira pls start to create this
+	exec(content);//Start exec
 	free_after_process(content, token);
 	return (SUCCESS);
 }
