@@ -1,13 +1,13 @@
 
 #include "../inc/minishell.h"
 
-int	open_pipes(int pipes_nb, int (*fd)[2])
+int	open_pipes(int pipe_nb, int (*fd)[2])
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < pipes_nb)
+	while (i < pipe_nb)
 	{
 		if (pipe(fde[i] == -1))
 		{

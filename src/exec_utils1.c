@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:00:59 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/04 20:55:05 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/07 19:56:47 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,29 @@ void	exe_close(int *fd)
 	{
 		close(*fd);
 		*fd = -1;
+	}
+}
+
+void	close_fds(int pipe_nb, int (*fd)[2], int cur_cmd, bool is_final_close)
+{
+	int	j;
+
+	j = 0;
+	while (j < pipe_nb)
+	{
+		if (!is_final_close)
+		{
+			if (j != cur_cmd - 1)
+				exe_close(&fd[j][0]);
+			if (j != cur_cmd)
+				exe_close(&fd[j][1]);
+		}
+		else
+		{
+			exe_close(&fd[j][0]);
+			exe_close(&fd[j][1]);
+		}
+		j++;
 	}
 }
 
