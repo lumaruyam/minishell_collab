@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:46:11 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/03 20:59:44 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:54:34 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,18 @@ int	bd_handle_redirs(t_exec *exec, t_token *token)
 		return (FAIL);
 	}
 	return (SUCCESS);
+}
+
+void	filename_free(t_filename *filename)
+{
+	t_filename	*tmp;
+
+	while (filename != NULL)
+	{
+		tmp = filename;
+		if (filename->path)
+			free(filename->path);
+		filename = filename->next;
+		free(tmp);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:42:45 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/23 17:00:19 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/10/09 16:21:27 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ t_tokentype	lex_get_tokentype(char *input_str)
 	else if (input_str[0] == '|')
 		return (PIPE);
 	return (STR);
-}
-
-int	len_quotes(char *str, char sd_quote)
-{
-	int	len;
-
-	len = 1;
-	while (str[len] && str[len] != sd_quote)
-		len++;
-	return (len);
 }
 
 int	chk_meta_char(char c)

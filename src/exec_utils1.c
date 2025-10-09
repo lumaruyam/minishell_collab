@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:00:59 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/07 19:56:47 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/09 17:14:00 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 // original document name: exec_toolbox1
 
-int	ft_env_lstsize(t_env *env)
-{
-	int	ct;
-
-	ct = 0;
-	while (env)
-	{
-		ct++;
-		env = env->next;
-	}
-	return (ct);
-}
-
 void	exe_close(int *fd)
 {
 	if (fd && *fd != -1)
 	{
 		close(*fd);
 		*fd = -1;
+	}
+}
+
+void	ft_close(t_shell *content)
+{
+	if (content)
+	{
+		exe_close(&(content->default_in));
+		exe_close(&(content->default_out));
 	}
 }
 
@@ -59,11 +55,15 @@ void	close_fds(int pipe_nb, int (*fd)[2], int cur_cmd, bool is_final_close)
 	}
 }
 
-void	ft_close(t_shell *content)
+int	ft_env_lstsize(t_env *env)
 {
-	if (content)
+	int	ct;
+
+	ct = 0;
+	while (env)
 	{
-		exe_close(&(content->default_in));
-		exe_close(&(content->default_out));
+		ct++;
+		env = env->next;
 	}
+	return (ct);
 }

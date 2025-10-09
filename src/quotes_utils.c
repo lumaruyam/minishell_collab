@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:06:59 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/09/25 19:54:16 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:15:00 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ int	rogue_len(char *str)
 			break ;
 		len++;
 	}
+	return (len);
+}
+
+int	len_quotes(char *str, char sd_quote)
+{
+	int	len;
+
+	len = 1;
+	while (str[len] && str[len] != sd_quote)
+		len++;
 	return (len);
 }
 

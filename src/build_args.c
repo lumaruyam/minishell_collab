@@ -6,13 +6,13 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 21:09:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/03 21:18:51 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:49:00 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_arg	*bd_args_create(char *arg_value)
+t_arg	*bd_make_args(char *arg_value)
 {
 	t_arg	*args;
 	char	*dup_arg;
@@ -62,4 +62,21 @@ int	bd_handle_args(t_exec *exec, t_token *token)
 		arg_add_back(&(exec->args), new);
 	}
 	return (SUCCESS);
+}
+
+void	arg_free(t_arg *args)
+{
+	t_arg	*tmp;
+
+	while (args != NULL)
+	{
+		tmp = args;
+		if (args->value)
+		{
+			free(args->value);
+			args->value = NULL;
+		}
+		args = args->next;
+		free(tmp);
+	}
 }
