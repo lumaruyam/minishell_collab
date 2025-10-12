@@ -14,30 +14,50 @@ LIBFT_DIR = libft
 
 SRC = build_args.c build_filename.c build_to_exec.c build_utils.c builtins_env.c \
 		builtins_err.c builtins_handler.c env.c exec_err.c exec_execution.c \
-		exec_family.c exec_redirs.c
+		exec_family.c exec_redirs.c exec_utils1.c exec_utils2.c exec.c \
+		expand_env.c expand_utils.c expand.c ft_arrys_utils.c ft_cd.c ft_echo.c \
+		ft_env_pwd.c ft_exit.c ft_export.c ft_unset.c heredoc.c lexing_utils.c \
+		lexing.c main_free.c main.c parsing.c quotes_utils.c quotes.c \
+		signal_to_delete.c signal_utils.c signal.c tokens.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 OBJS = $(SRCS:.c=.o)
+LIBFT_A = $(LIBFT_DIR)/libft.a
+
+# **************************************************************************** #
+#                            COMPILER & FLAGS                                  #
+# **************************************************************************** #
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -I inc
+FLAGS = -Wall -Wextra -Werror -I$(INCL_DIR) -I$(LIBFT_DIR)/inc
+LFLAGS = -L$(LIBFT_DIR) -lft
+LDFLAGS = -lreadline
+RM = rm -rf
 
-
-
-
-
-
+# **************************************************************************** #
+#                               BUILD COMMANDS                                 #
+# **************************************************************************** #
 
 all: $(NAME)
+	$(print_flag)
 
-$(NAME): $(OBJS)
-	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT_A)
+	@$(CC) $(FLAGS) $(OBJS) $(LFLAGS) -o $(NAME) $(LDFLAGS)
+
+$(OBJS)%.o: $(SRC_DIR%.c)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(GREENB)--- ⛑️ Compiling $< to $@ ⛑️---$(COLOR_RESET)"
+
+$(LIBFT_A):
+	@make -C $(LIBFT_DIR)
 
 clean:
 	@$(RM) $(OBJS)
+	@make clean -C $(LIBFT_DIR)
 
 fclean: clean
 	@$(RM) $(NAME)
+	@make fclean -C $(LIBFT_DIR)
 
 re: fclean all
 
