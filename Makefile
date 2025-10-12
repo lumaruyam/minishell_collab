@@ -1,14 +1,51 @@
+# **************************************************************************** #
+#                                 NAME / MAIN                                  #
+# **************************************************************************** #
 
 NAME = minishell
+
+# **************************************************************************** #
+#                                 DIRECTORIES                                  #
+# **************************************************************************** #
+
+INC_DIR = inc
+SRC_DIR = ./src/
+LIBFT_DIR = libft
+
+SRC = build_args.c build_filename.c build_to_exec.c build_utils.c builtins_env.c \
+		builtins_err.c builtins_handler.c env.c exec_err.c exec_execution.c \
+		exec_family.c exec_redirs.c
+
+SRCS = $(addprefix $(SRC_PATH), $(SRC))
+OBJS = $(SRCS:.c=.o)
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror -I inc
 
-SRC_PATH = ./src/
 
-SRC = add file name here
-SRCS = $(addprefix $(SRC_PATH), $(SRC))
-OBJS = $(SRCS:.c=.o)
+
+
+
+
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+
+clean:
+	@$(RM) $(OBJS)
+
+fclean: clean
+	@$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re libft
+
+# **************************************************************************** #
+#                              COLOR SETTING                                   #
+# **************************************************************************** #
 
 COLOR_RESET = \033[0m
 PINKB = \033[1;95m
@@ -26,18 +63,3 @@ GREEN_BBG = \033[1;42m
 BLUE_BBG = \033[1;44m
 YELLOW_BBG = \033[1;43m
 ORANGE_BBG = \033[1;48;5;214m
-
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
-
-clean:
-	@$(RM) $(OBJS)
-
-fclean: clean
-	@$(RM) $(NAME)
-
-re: fclean all
-
-.PHONY: all clean fclean re
