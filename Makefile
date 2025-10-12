@@ -20,7 +20,7 @@ SRC = build_args.c build_filename.c build_to_exec.c build_utils.c builtins_env.c
 		lexing.c main_free.c main.c parsing.c quotes_utils.c quotes.c \
 		signal_to_delete.c signal_utils.c signal.c tokens.c
 
-SRCS = $(addprefix $(SRC_PATH), $(SRC))
+SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(SRCS:.c=.o)
 LIBFT_A = $(LIBFT_DIR)/libft.a
 
@@ -29,7 +29,7 @@ LIBFT_A = $(LIBFT_DIR)/libft.a
 # **************************************************************************** #
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -I$(INCL_DIR) -I$(LIBFT_DIR)/inc
+FLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIBFT_DIR)/inc
 LFLAGS = -L$(LIBFT_DIR) -lft
 LDFLAGS = -lreadline
 RM = rm -rf
@@ -44,8 +44,8 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT_A)
 	@$(CC) $(FLAGS) $(OBJS) $(LFLAGS) -o $(NAME) $(LDFLAGS)
 
-$(OBJS)%.o: $(SRC_DIR%.c)
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(SRC_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) $(FLAGS) -c $< -o $@
 	@echo "$(GREENB)--- ⛑️ Compiling $< to $@ ⛑️---$(COLOR_RESET)"
 
 $(LIBFT_A):
