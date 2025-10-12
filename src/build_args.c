@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 21:09:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/09 16:49:00 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 21:26:39 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_arg	*bd_make_args(char *arg_value)
 	t_arg	*args;
 	char	*dup_arg;
 
-	args = malloc(sizeof(t_args));
+	args = malloc(sizeof(t_arg));
 	if (!args)
 		return (NULL);
 	dup_arg = ft_strdup(arg_value);

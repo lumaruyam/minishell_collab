@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:59:02 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 15:44:42 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 21:28:55 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	add_envvar(char *input_line, t_env **env_head)
 
 	env_id = get_env_id(input_line);
 	env = get_env(env_id, *env_head);
-	if (!env_id || !chk_envid_valid(env_id));
+	if (!env_id || !chk_envid_valid(env_id))
 		return (free(env_id), error_export(input_line), FAIL);
 	dup_inputline = ft_strdup(input_line);
 	if (!dup_inputline)

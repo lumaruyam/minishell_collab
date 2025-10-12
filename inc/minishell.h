@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 20:16:47 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/12 21:32:02 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@
 # define MAX_FDS 1024
 
 # define DEFAULT_ENV "MINISHELL=minishell"
+
+typedef struct s_exec	t_exec;
+typedef struct s_env	t_env;
+typedef struct s_token	t_token;
+typedef struct s_arg	t_arg;
+typedef struct s_filename	t_filename;
+typedef enum   e_tokentype	t_tokentype;
 
 typedef struct s_shell
 {
@@ -128,7 +135,7 @@ extern t_signal	g_signal;//might not pass the evaluation*/
 int			read_loop(t_shell *content);
 t_shell		*init_shell(char *env[]);
 int			process_input(t_shell *content, char *line);
-int			init_exec(t_shell *content, t_token **token)
+int			init_exec(t_shell *content, t_token **token);
 t_env		*dup_env(char *env[]);
 int			chk_empty_line(char *line);
 
@@ -169,7 +176,7 @@ void		token_free(t_token *head);
 void		signal_child_process(void);
 void		init_signal_heredoc(void);
 void		init_ignore_signal(void);
-void		signal_to_action(t_shell *data)
+void		signal_to_action(t_shell *data);
 int			sig_exit(void);
 void		init_signal_exec(void);
 void		init_signal_exec(void);
@@ -200,6 +207,7 @@ int			ft_envvar_len(char *envvar);
 char		*get_envvar_name(char *envvar);
 char		*get_str_before_envvar(char *full_str, char *envvar);
 char		*get_str_after_envvar(char *envvar);
+t_env		*get_env(char *env_id, t_env *env);
 
 /*expand utils*/
 char		*handle_qmark_exit(t_shell *content);
@@ -245,7 +253,7 @@ void		arg_free(t_arg *args);
 
 /*build filenames*/
 int			bd_handle_redirs(t_exec *exec, t_token *token);
-t_filename	*bd_make_filenames(char *pathname, t_token_type type);
+t_filename	*bd_make_filenames(char *pathname, t_tokentype type);
 int			filename_add_back(t_filename **head, t_filename *new);
 void		filename_free(t_filename *filename);
 

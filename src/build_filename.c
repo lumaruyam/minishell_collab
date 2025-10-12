@@ -6,13 +6,13 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:46:11 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/09 16:54:34 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 21:27:57 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_filename	*bd_make_filenames(char *pathname, t_token_type type)
+t_filename	*bd_make_filenames(char *pathname, t_tokentype type)
 {
 	t_filename	*filename;
 	char		*dup_path;
@@ -55,7 +55,7 @@ int	bd_handle_redirs(t_exec *exec, t_token *token)
 	{
 		tmp = bd_make_filenames(token->next->value, token->type);
 		if (!tmp)
-			return (FAIL_BUILD)
+			return (FAIL_BUILD);
 		filename_add_back(&(exec->redirs), tmp);
 		return (FAIL);
 	}

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 20:41:26 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 15:44:42 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 21:32:29 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	chk_is_builtin(char *input_cmd)
 		return (1);
 	else if (ft_strcmp(input_cmd, "export") == 0)
 		return (1);
-	else if (ft_strcmp(inpput_cmd, "unset") == 0)
+	else if (ft_strcmp(input_cmd, "unset") == 0)
 		return (1);
 	else if (ft_strcmp(input_cmd, "env") == 0)
 		return (1);

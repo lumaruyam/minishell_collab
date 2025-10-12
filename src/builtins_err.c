@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 16:52:31 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 15:44:42 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 21:32:18 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	error_pwd(char *option)
 	ft_putstr_fd(": Invalid option\n", STDERR_FILENO);
 }
 
-void	error_env(char *option)
+void	error_env(char *input_line)
 {
 	ft_putstr_fd("env: ", STDERR_FILENO);
 	ft_putstr_fd(input_line, STDERR_FILENO);
