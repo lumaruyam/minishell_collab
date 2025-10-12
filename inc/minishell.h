@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/09 17:18:33 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 20:16:47 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <string.h>
 # include <limits.h>
 # include <stdbool.h>
+# include "libft.h"
 
 # define SUCCESS 0
 # define FAIL 1
@@ -308,15 +309,16 @@ int			err_redirs(t_exec *exec, t_shell *content);
 
 /* execs execution */
 char		**env_format(t_env *env);
-char		*find_path(char *cmd, t_env *env);//add this
-int			ft_execution(t_shell *content, t_exec *tmp);//add this
-
+int			check_is_alr_path(char *cmd);
+char		*find_path(char *cmd, t_env *env);
+int			ft_execution(t_shell *content, t_exec *tmp);
 /* execs err */
 void		err_open(int err_no, char *file);
 int			err_pipe(int err_no, t_shell content);
 void		exe_err_coredump(int pid);
 int			err_fork(int err_no, t_shell *ctx, int fd[][2]);//add this
 void		err_execve(char *path, int err_no);//add this
+void		ft_free_all(char **arr);
 
 /* execs utils1,2 */
 void		exe_close(int *fd);

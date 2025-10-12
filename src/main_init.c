@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/05 18:12:06 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 17:35:07 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	process_input(t_shell *content, char *line)
 	int		pars;
 
 	init_ignore_signal();//added
-	token = lexing(content, line);
+	token = lexing(content, line);//check later
 	free(line);
 	if (!token)
 		return (SUCCESS);
