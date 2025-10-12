@@ -6,11 +6,11 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 19:59:14 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/28 16:56:00 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:44:35 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/builtins.h"
+#include "../inc/minishell.h"
 
 int	chk_exitcode(char *input_line)
 {

@@ -6,12 +6,11 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:19:30 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/21 17:33:24 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:43:41 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/builtins.h"
-#include "../inc/minishell.h" //might move to libft.h
+#include "../inc/minishell.h"
 
 void	arrs_free(char **arrs)
 {

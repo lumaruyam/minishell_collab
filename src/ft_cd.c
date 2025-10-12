@@ -6,11 +6,11 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 21:17:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/21 14:53:15 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:44:42 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/builtins.h"
+#include "../inc/minishell.h"
 
 int	ft_arg_lstsize(t_arg *args)
 {

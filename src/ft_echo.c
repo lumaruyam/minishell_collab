@@ -6,11 +6,11 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 20:57:43 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/14 21:16:32 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:44:38 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/builtins.h"
+#include "../inc/minishell.h"
 
 static int	chk_n_option(char *str)
 {

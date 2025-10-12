@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_error.c                                   :+:      :+:    :+:   */
+/*   builtins_err.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 16:52:31 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/09 16:57:17 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:44:42 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/builtins.h"
+#include "../inc/minishell.h"
 
 void	error_cd(int err_n, char *pathname)
 {

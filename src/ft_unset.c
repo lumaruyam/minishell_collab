@@ -6,11 +6,11 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 19:52:38 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/21 20:28:48 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:44:31 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/builtins.h"
+#include "../inc/minishell.h"
 
 void	env_delete_1node(t_env *env)
 {

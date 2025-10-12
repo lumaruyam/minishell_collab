@@ -6,11 +6,11 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 20:41:26 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/28 18:01:06 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:44:42 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/builtins.h"
+#include "../inc/minishell.h"
 
 int	chk_is_builtin(char *input_cmd)
 {

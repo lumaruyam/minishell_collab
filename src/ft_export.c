@@ -6,11 +6,11 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:19:57 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/21 19:36:21 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:44:33 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/builtins.h"
+#include "../inc/minishell.h"
 
 static	void ft_swap_ptr(char **a, char **b)
 {
