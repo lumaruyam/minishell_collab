@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 17:03:43 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 19:23:39 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@
 
 # define DEFAULT_ENV "MINISHELL=minishell"
 
-typedef struct s_exec	t_exec;
-typedef struct s_env	t_env;
-typedef struct s_token	t_token;
-typedef struct s_arg	t_arg;
+typedef struct s_exec		t_exec;
+typedef struct s_env		t_env;
+typedef struct s_token		t_token;
+typedef struct s_arg		t_arg;
 typedef struct s_filename	t_filename;
-typedef enum   e_tokentype	t_tokentype;
+typedef enum e_tokentype	t_tokentype;
 
 typedef struct s_shell
 {
-	int				std_in; //Stores the default input file descriptor (usually STDIN_FILENO)
-	int				std_out; //Stores the default output file descriptor (usually STDOUT_FILENO)
+	int				std_in; //Stores the default input file descriptor
+	int				std_out; //Stores the default output file descriptor
 	unsigned char	exit_code; // stores the shell’s last exit status
 	pid_t			*pids;// array of process IDs for child processes
 	t_exec			*exec; // linked list of commands to be executed
@@ -123,9 +123,9 @@ typedef struct s_signal
 {
 	int	end_heredoc;
 	int	signal_code;
-}	 t_signal;
+}	t_signal;
 
-extern t_signal	g_signal;
+extern t_signal		g_signal;
 
 /* ------------------------------Main----------------------------------- */
 
@@ -136,7 +136,7 @@ int			process_input(t_shell *content, char *line);
 int			init_exec(t_shell *content, t_token **token);
 t_env		*dup_env(char *env[]);
 int			chk_empty_line(char *line);
-int		handle_eof(char *line);
+int			handle_eof(char *line);
 
 /*env*/
 t_env		*env_make(char *env_id, char *env_value, char *env_line);
@@ -157,7 +157,7 @@ void		free_after_process(t_shell *content, t_token *token);
 
 /*lexing*/
 t_token		*lex_tokenize_wd(char *str, t_shell *content);
-t_token	*lexing(t_shell *content, char *input_line);
+t_token		*lexing(t_shell *content, char *input_line);
 
 /*lexing helper*/
 t_tokentype	lex_get_tokentype(char *input_str);
@@ -166,7 +166,7 @@ int			lex_token_str_len(char *str);
 int			chk_meta_char(char c);
 
 /*token*/
-t_token		*create_token(char *token_value, int n,t_tokentype type,
+t_token		*create_token(char *token_value, int n, t_tokentype type,
 				t_shell *content);
 int			token_add_back(t_token **head, t_token *new_token);
 void		token_free(t_token *head);
@@ -205,10 +205,10 @@ int			prs_envvar_expand(t_token *token);
 /*expand env*/
 int			ft_envvar_len(char *envvar);
 char		*get_envvar_name(char *envvar);
-char	*get_str_before_envvar(char *full_str, char *envvar);
-char	*get_str_after_envvar(char *envvar);
-char	*get_envvar_value(char *envvar, t_shell *content);
-t_env	*get_env(char *env_id, t_env *env);
+char		*get_str_before_envvar(char *full_str, char *envvar);
+char		*get_str_after_envvar(char *envvar);
+char		*get_envvar_value(char *envvar, t_shell *content);
+t_env		*get_env(char *env_id, t_env *env);
 
 /*expand utils*/
 char		*handle_qmark_exit(t_shell *content);
