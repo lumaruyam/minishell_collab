@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:17:08 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 19:35:18 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	ft_envvar_len(char *envvar)
 
 char	*get_envvar_name(char *envvar)
 {
-	int	len;
-	char *name;
+	int		len;
+	char	*name;
 
 	len = ft_envvar_len(envvar);
 	name = ft_substr(envvar, 0, len);

@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 18:12:40 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 19:31:31 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_token	*lex_tokenize_wd(char *str, t_shell *content)
 t_token	*lexing(t_shell *content, char *input_line)
 {
 	t_token	*token;
-	t_token *cur;
+	t_token	*cur;
 	int		i;
 
 	i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:32:23 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/09/25 20:12:34 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 19:25:51 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	prs_unlink_error(t_token *token)
 
 int	parsing(t_token **token)
 {
-	int return_code;
+	int	return_code;
 
 	return_code = 0;
 	if (prs_chk_quotes(*token) != 0)

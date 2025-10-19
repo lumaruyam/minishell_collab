@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_filename.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:46:11 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 21:27:57 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 19:28:50 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	bd_handle_redirs(t_exec *exec, t_token *token)
 	t_filename	*tmp;
 
 	if (token->next && token->next->value != NULL && (token->type == APPEND
-		|| token->type == NON_HEREDOC || token->type == INFILE
-		|| token->type == OUTFILE))
+			|| token->type == NON_HEREDOC || token->type == INFILE
+			|| token->type == OUTFILE))
 	{
 		tmp = bd_make_filenames(token->next->value, token->type);
 		if (!tmp)

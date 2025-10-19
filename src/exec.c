@@ -6,10 +6,9 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:08:00 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 19:30:38 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/minishell.h"
 
@@ -52,7 +51,7 @@ int	exec(t_shell *content)
 	{
 		if (tmp->cmd == NULL && tmp->redirs != NULL)
 			return (handle_single_redir(content, tmp));
-	if (check_is_builtin(tmp->cmd))
+		if (check_is_builtin(tmp->cmd))
 			return (handle_single_builtin(content, tmp));
 	}
 	init_signal_exec();//added for signal

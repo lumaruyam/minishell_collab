@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:42:20 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 19:36:04 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	init_sigint(int status)
 	(void)status;
 	if (g_signal.signal_code != 1)
 	{
-	g_signal.signal_code = SIGINT + SIG_OFFSET;
-	write(STDIN_FILENO, "\n", 1);
+		g_signal.signal_code = SIGINT + SIG_OFFSET;
+		write(STDIN_FILENO, "\n", 1);
 	}
 }
 
