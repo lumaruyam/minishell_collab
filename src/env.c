@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:08:04 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/19 15:57:41 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 19:40:59 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_env_id(char *input_line)
 		return (ft_strdup(input_line));
 	else if (at_equal - input_line == 0)
 		return (NULL);
-	return (ft_strdup(input_line + (at_equal - input_line))); // + instead of  + what i changed
+	return (ft_strdup(input_line + (at_equal - input_line)));
 }
 
 char	*get_env_value(char *input_line)

@@ -6,15 +6,15 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:19:57 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 19:44:49 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static char **ft_arrsdup(char **arr);
+static char	**ft_arrsdup(char **arr);
 
-static	void ft_swap_ptr(char **a, char **b)
+static void	ft_swap_ptr(char **a, char **b)
 {
 	char	*tmp;
 
@@ -47,7 +47,7 @@ char	**sort_env_arrs(char **env_arrs)
 	return (res);
 }
 
-static void print_export_all(char **sorted)
+static void	print_export_all(char **sorted)
 {
 	int		i;
 	char	*tmp_value;
@@ -97,7 +97,7 @@ int	ft_export(t_shell *content, t_arg *args)
 	}
 	else
 	{
-		while(args)
+		while (args)
 		{
 			if (add_envvar(args->value, &(content->env)) != 0)
 				return (FAIL);
@@ -107,10 +107,10 @@ int	ft_export(t_shell *content, t_arg *args)
 	return (SUCCESS);
 }
 
-static char **ft_arrsdup(char **arr)
+static char	**ft_arrsdup(char **arr)
 {
-	int i;
-	char **res;
+	int		i;
+	char	**res;
 
 	if (!arr)
 		return (NULL);
@@ -134,6 +134,3 @@ static char **ft_arrsdup(char **arr)
 	res[i] = NULL;
 	return (res);
 }
-
-
-

@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:29:27 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 19:34:19 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 19:38:39 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	signal_to_action(t_shell *data)
 {
 	if (g_signal.signal_code == 128 + SIGINT && data->child_end_with_signal)
 		ft_putchar_fd('\n', STDERR_FILENO);
-	else if (g_signal.signal_code == 128 +
-		SIGQUIT && data->child_end_with_signal)
+	else if (g_signal.signal_code == 128
+		+ SIGQUIT && data->child_end_with_signal)
 		ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
 	data->child_end_with_signal = false;
 	if (g_signal.signal_code)
