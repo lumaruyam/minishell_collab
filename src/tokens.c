@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:15:18 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/12 15:44:27 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_token	*create_token(char *token_value, int n,t_tokentype type, t_shell *conten
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
 		return (NULL);
-	dup_token_value = ft_strndup(token_value, n);//need to add ft_strndup
+	dup_token_value = ft_substr(token_value, 0, n);
 	if (!dup_token_value)
 	{
 		free(new_token);

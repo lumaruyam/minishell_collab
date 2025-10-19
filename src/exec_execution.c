@@ -6,11 +6,14 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 17:45:42 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/12 20:31:19 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void	exec_args_create(t_exec *tmp, int args_nb, char **args);
+static int	handle_exec_error(char *path, char **env, char **args);
 
 char	**env_format(t_env *env)
 {
@@ -18,7 +21,7 @@ char	**env_format(t_env *env)
 	int		size;
 	int		i;
 
-	size = ft_lstsize(env);
+	size = ft_env_lstsize(env);
 	env_arr = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!env_arr)
 		return (NULL);
@@ -28,7 +31,7 @@ char	**env_format(t_env *env)
 		env_arr[i] = ft_strdup(env->env_line);
 		if (!env_arr[i])
 		{
-			arr_free(env_arr);
+			ft_free_all(env_arr);
 			return (NULL);
 		}
 		env = env->next;
@@ -106,7 +109,7 @@ int	ft_execution(t_shell *content, t_exec *temp)
 	env = env_format(content->env);
 	if (!env)
 		return (free(path), 127);
-	args_nb = ft_lstsize(temp->args) + 2;
+	args_nb = ft_arg_lstsize(temp->args) + 2;
 	args = malloc(sizeof(char *) * args_nb);
 	if (!args)
 		return (free(path), ft_free_all(env), 127);
@@ -117,4 +120,44 @@ int	ft_execution(t_shell *content, t_exec *temp)
 	ft_free_all(env);
 	free(args);
 	return (0);
+}
+
+static void	exec_args_create(t_exec *tmp, int args_nb, char **args)
+{
+	int	i;
+	t_arg	*cur;
+
+	i = 0;
+	args[i++] = ft_strdup(tmp->cmd);
+	cur = tmp->args;
+	while (cur && i < args_nb - 1)
+	{
+		args[i++] = ft_strdup(cur->value);
+		cur = cur->next;
+	}
+	args[i] = NULL;
+}
+
+static int	handle_exec_error(char *path, char **env, char **args)
+{
+	int i;
+	int rc;
+
+	err_execve(path, errno);
+	if (env)
+		ft_free_all(env);
+	if (args)
+	{
+		i = 0;
+		while (args[i])
+			free(args[i++]);
+		free(args);
+	}
+	if (errno == ENOENT)
+		rc = 127;
+	else if (errno == EACCES)
+		rc = 126;
+	else
+		rc = 1;
+	return (rc);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/28 18:23:33 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	read_loop(t_shell *content)
 	return (0);
 }*/
 
-int	main(int ac, char *av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	t_shell	*content;
 
@@ -82,7 +82,7 @@ int	main(int ac, char *av, char **env)
 		return (EXIT_FAILURE);
 	read_loop(content);
 	free_shell(content);
-	rl_clear_history();
+	clear_history();
 	ft_putendl_fd("exit", 2);
 	return (EXIT_SUCCESS);
 }

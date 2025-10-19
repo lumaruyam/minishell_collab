@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:06:59 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/09 16:15:00 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_token	*prs_get_quoted_str(char *input_str, char c, t_shell *content)
 	t_token			*new_token;
 	t_tokentype		type;
 
-	if (!input_str || quotes_len(input_str, c) <= 1)
+	if (!input_str || len_quotes(input_str, c) <= 1)
 		return (NULL);
-	len = quotes_len(input_str, c) - 1;
+	len = len_quotes(input_str, c) - 1;
 	new_token = NULL;
 	type = DBL_QUOTE;
-	if (c = '\'')
+	if (c == '\'')
 		type = SGL_QUOTE;
 	if (len > 0)
 		new_token = create_token(input_str + 1, len, type, content);
@@ -54,21 +54,6 @@ int	len_quotes(char *str, char sd_quote)
 	while (str[len] && str[len] != sd_quote)
 		len++;
 	return (len);
-}
-
-char	*chk_null_strjoin(char *s1, char *s2)
-{
-	char	*res;
-
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	else if (s2 == NULL)
-		return (s1);
-	else if (s1 == NULL)
-		return (ft_strdup(s2));
-	res = ft_strjoin(s1, s2);
-	free(s1);
-	return (res);
 }
 
 char	*prs_tokens_join(t_token *token)

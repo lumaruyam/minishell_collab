@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:54 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/12 20:07:55 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	open_pipes(int pipe_nb, int (*fd)[2])
 	i = 0;
 	while (i < pipe_nb)
 	{
-		if (pipe(fde[i] == -1))
+		if (pipe(fd[i]) == -1)
 		{
 			j = 0;
 			while (j < i)
@@ -30,7 +30,7 @@ int	open_pipes(int pipe_nb, int (*fd)[2])
 				exe_close(&fd[j][1]);
 				j++;
 			}
-			return (-1)
+			return (-1);
 		}
 		i++;
 	}
@@ -41,15 +41,15 @@ void	set_std(t_shell *content, int mode)
 {
 	if (!mode)
 	{
-		content->default_in = dup(STDIN_FILENO);
-		content->defailt_out = dup(STDOUT_FILENO);
+		content->std_in = dup(STDIN_FILENO);
+		content->std_out = dup(STDOUT_FILENO);
 	}
 	else
 	{
-		dup2(content->default_in, STDIN_FILENO);
-		exe_close(&(content->default_in));
-		dup2(content->default_out, STDOUT_FILENO);
-		exec_close(&(content->default_out));
+		dup2(content->std_in, STDIN_FILENO);
+		exe_close(&(content->std_in));
+		dup2(content->std_out, STDOUT_FILENO);
+		exe_close(&(content->std_out));
 	}
 }
 
@@ -97,15 +97,15 @@ void	wait_children(int ct_pid, t_shell *content)
 		{
 			if (WIFEXITED(status))
 			{
-				g_signal = 0;
+				g_signal.signal_code = 0;
 				content->exit_code = WEXITSTATUS(status);
 			}
 			else if (WIFSIGNALED(status))
 			{
 				if (WTERMSIG(status) == SIGQUIT)
 					exe_err_coredump(content->pids[i]);
-				g_signal = 128 + WTERSIG(status);
-				content->exit_code = g_signal;
+				g_signal.signal_code = 128 + WTERMSIG(status);
+				content->exit_code = g_signal.signal_code;
 			}
 		}
 		i++;

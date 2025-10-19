@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulimaruyama <lulimaruyama@student.42.f    +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 18:12:40 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/17 19:38:01 by lulimaruyam      ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ t_token	*lex_tokenize_wd(char *str, t_shell *content)
 	new = NULL;
 	type = lex_get_tokentype(str);
 	token_len = lex_token_len(str, type);
-	new = make_token(str, token_len, type, content);
+	new = create_token(str, token_len, type, content);
 	return (new);
 }
 
-t_token	*lexing(t_shell content, char *input_line)
+t_token	*lexing(t_shell *content, char *input_line)
 {
 	t_token	*token;
 	t_token *cur;

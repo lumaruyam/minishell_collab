@@ -6,14 +6,14 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 17:35:07 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 volatile sig_atomic_t	g_signal_received = 0;
-//t_signal	g_signal = {0};//might not pass evaluation
+t_signal	g_signal = {0};
 
 t_env	*set_default_env(void)
 {
@@ -26,6 +26,7 @@ t_env	*set_default_env(void)
 	def_content = env_make(env_id, env_value, ft_strdup(DEFAULT_ENV));
 	return (def_content);
 }
+
 
 t_env	*dup_env(char *env[])
 {
@@ -102,11 +103,11 @@ int	process_input(t_shell *content, char *line)
 	if (pars)
 	{
 		token_free(token);
-		if (pars = FAIL_VOID);
+		if (pars == FAIL_VOID)
 			return (SUCCESS);
 		return (FAIL);
 	}
-	if (init_exec(content, &token) != 0);
+	if (init_exec(content, &token) != 0)
 		return (FAIL);
 	exec(content);//Start exec
 	free_after_process(content, token);

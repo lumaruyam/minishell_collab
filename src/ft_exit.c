@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 19:59:14 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 15:44:35 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	chk_exitcode(char *input_line)
 		tmp++;
 	while (*tmp)
 	{
-		if (!isdigit(*tmp))
+		if (!ft_isdigit(*tmp))
 			return (1);
 		tmp++;
 	}
@@ -108,8 +108,8 @@ int	ft_exit(t_shell *content, t_arg *args)
 	}
 	else
 	{
-		if (g_signal > 0)
-			exit_code =  g_signal;
+		if (g_signal.signal_code > 0)
+			exit_code =  g_signal.signal_code;
 	}
 	set_std(content, 1);
 	free_shell(content);

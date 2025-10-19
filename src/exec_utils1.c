@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:00:59 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 20:07:50 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	ft_close(t_shell *content)
 {
 	if (content)
 	{
-		exe_close(&(content->default_in));
-		exe_close(&(content->default_out));
+	exe_close(&(content->std_in));
+	exe_close(&(content->std_out));
 	}
 }
 

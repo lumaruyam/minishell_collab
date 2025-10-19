@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:08:00 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/12 20:08:01 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	handle_single_builtin(t_shell *content, t_exec *tmp)
 		content->exit_code = 1;
 		return (content->exit_code);
 	}
-	if (chk_is_builtin(tmp->cmd) == 2)
-		ft_putstr_fd("exit\n, STDERR_FILENO");
+	if (check_is_builtin(tmp->cmd) == 2)
+		ft_putstr_fd("exit\n", STDERR_FILENO);
 	unlink_all(content);
 	content->exit_code = exec_builtin(content, tmp->cmd, tmp->args);
 	set_std(content, 1);
@@ -52,7 +52,7 @@ int	exec(t_shell *content)
 	{
 		if (tmp->cmd == NULL && tmp->redirs != NULL)
 			return (handle_single_redir(content, tmp));
-		if (chk_is_builtin(tmp->cmd))
+	if (check_is_builtin(tmp->cmd))
 			return (handle_single_builtin(content, tmp));
 	}
 	init_signal_exec();//added for signal

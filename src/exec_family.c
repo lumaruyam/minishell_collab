@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:36 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/12 20:07:37 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	handle_redir_and_bltins(t_shell *content, t_exec *tmp, int *exit_code
 		*exit_code = content->exit_code;
 		return (1);
 	}
-	if (chk_is_builtin(tmp->cmd))
+	if (check_is_builtin(tmp->cmd))
 	{
 		*exit_code = exec_builtin(content, tmp->cmd, tmp->args);
 		free_shell(content);
@@ -36,14 +36,24 @@ static void	setup_redir(t_shell *content, int (*fd)[2], int i)
 	signal(SIGQUIT, SIG_DFL);
 	if (content->ct_exec > 1)
 	{
+	// debug removed
+
 		if (i > 0)
 		{
-			dup2(fd[i - 1][0], STDIN_FILENO);
-			exe_close(&fd[i][1]);
+			if (dup2(fd[i - 1][0], STDIN_FILENO) == -1)
+			{
+				err_pipe(errno, content);
+				exit(1);
+			}
+			exe_close(&fd[i - 1][1]);
 		}
 		if (i < content->ct_exec - 1)
 		{
-			dup2(fd[i][1], STDOUT_FILENO);
+			if (dup2(fd[i][1], STDOUT_FILENO) == -1)
+			{
+				err_pipe(errno, content);
+				exit(1);
+			}
 			exe_close(&fd[i][1]);
 		}
 		close_fds(content->ct_exec - 1, fd, i, false);
@@ -78,11 +88,11 @@ int	exec_parent(t_shell *content)
 	pid_t	pid;
 
 	tmp = content->exec;
-	if (open_pipes(content->exec_count - 1, fd) == -1)
+	if (open_pipes(content->ct_exec - 1, fd) == -1)
 		return (err_pipe(errno, content));
 	while (tmp)
 	{
-		signal(SIGINT, sigint_exec);
+	signal(SIGINT, sigint_exec);
 		pid = fork();
 		if (pid == -1)
 			return (err_fork(errno, content, fd));//create this func Samira

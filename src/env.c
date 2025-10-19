@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:08:04 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/09/14 20:42:00 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 15:57:41 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_env_id(char *input_line)
 		return (ft_strdup(input_line));
 	else if (at_equal - input_line == 0)
 		return (NULL);
-	return (ft_strdup(input_line, at_equal - input_line));
+	return (ft_strdup(input_line + (at_equal - input_line))); // + instead of  + what i changed
 }
 
 char	*get_env_value(char *input_line)
@@ -32,7 +32,7 @@ char	*get_env_value(char *input_line)
 
 	if (!input_line)
 		return (NULL);
-	at_equal = ft_strchr(input_line, "=");
+	at_equal = ft_strchr(input_line, '=');
 	if (!at_equal)
 		return (NULL);
 	else if (at_equal - input_line == 0)
@@ -58,7 +58,7 @@ int	env_add_back(t_env **head, t_env *new)
 {
 	t_env	*cur;
 
-	if (*head = NULL)
+	if (*head == NULL)
 		*head = new;
 	else
 	{

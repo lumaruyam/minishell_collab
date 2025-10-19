@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:29:27 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/28 17:37:33 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	signal_child_process(void)//implemet this before exective
 {
-	rl_event_hook = sig_exit;
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGTSTP, SIG_IGN);
@@ -22,15 +21,13 @@ void	signal_child_process(void)//implemet this before exective
 
 static void	sigint_heredoc(int sig)
 {
-	g_signal_received = 128 + sig;
-	rl_done = 1;
+	g_signal.signal_code = 128 + sig;
 }
 
 void	init_signal_heredoc(void)
 {
 	struct sigaction	sa;
 
-	rl_event_hook = sig_exit;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = &sigint_heredoc;
@@ -44,7 +41,6 @@ void	init_ignore_signal(void)
 {
 	struct sigaction	sa;
 
-	rl_event_hook = sig_exit;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = SIG_IGN;
@@ -55,12 +51,12 @@ void	init_ignore_signal(void)
 
 void	signal_to_action(t_shell *data)
 {
-	if (g_signal == 128 + SIGINT && data->child_end_with_signal)
+	if (g_signal.signal_code == 128 + SIGINT && data->child_end_with_signal)
 		ft_putchar_fd('\n', STDERR_FILENO);
-	else if (g_signal == 128 + SIGQUIT && data->child_end_with_signal)
+	else if (g_signal.signal_code == 128 + SIGQUIT && data->child_end_with_signal)
 		ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
 	data->child_end_with_signal = false;
-	if (g_signal)
-		data->exit_code = g_signal;
-	g_signal = 0;
+	if (g_signal.signal_code)
+		data->exit_code = g_signal.signal_code;
+	g_signal.signal_code = 0;
 }

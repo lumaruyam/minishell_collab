@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 21:32:02 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:03:43 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,13 @@ typedef struct s_exec
 	int				fd_out;// output file descriptor for the command
 }	t_exec;
 
-extern volatile sig_atomic_t	g_signal;
-
-/*typedef struct s_signal//might not pass the evaluation
+typedef struct s_signal
 {
 	int	end_heredoc;
 	int	signal_code;
-}	t_signal;
+}	 t_signal;
 
-extern t_signal	g_signal;//might not pass the evaluation*/
+extern t_signal	g_signal;
 
 /* ------------------------------Main----------------------------------- */
 
@@ -138,6 +136,7 @@ int			process_input(t_shell *content, char *line);
 int			init_exec(t_shell *content, t_token **token);
 t_env		*dup_env(char *env[]);
 int			chk_empty_line(char *line);
+int		handle_eof(char *line);
 
 /*env*/
 t_env		*env_make(char *env_id, char *env_value, char *env_line);
@@ -148,7 +147,7 @@ char		*get_env_id(char *input_line);
 char		*get_env_value(char *input_line);
 int			env_add_back(t_env **head, t_env *new);
 void		env_free(t_env *env);
-void		env_delete_1node(t_env *env); //added later
+void		env_delete_1node(t_env *env);
 
 /*main free*/
 void		free_shell(t_shell *content);
@@ -158,7 +157,7 @@ void		free_after_process(t_shell *content, t_token *token);
 
 /*lexing*/
 t_token		*lex_tokenize_wd(char *str, t_shell *content);
-t_token		*lexing(t_shell content, char *input_line);
+t_token	*lexing(t_shell *content, char *input_line);
 
 /*lexing helper*/
 t_tokentype	lex_get_tokentype(char *input_str);
@@ -181,6 +180,7 @@ int			sig_exit(void);
 void		init_signal_exec(void);
 void		init_signal_exec(void);
 void		init_signal_interactive_mode(void);
+void		sigint_exec(int status);
 
 /* -----------------------------Parsing--------------------------------- */
 
@@ -205,13 +205,14 @@ int			prs_envvar_expand(t_token *token);
 /*expand env*/
 int			ft_envvar_len(char *envvar);
 char		*get_envvar_name(char *envvar);
-char		*get_str_before_envvar(char *full_str, char *envvar);
-char		*get_str_after_envvar(char *envvar);
-t_env		*get_env(char *env_id, t_env *env);
+char	*get_str_before_envvar(char *full_str, char *envvar);
+char	*get_str_after_envvar(char *envvar);
+char	*get_envvar_value(char *envvar, t_shell *content);
+t_env	*get_env(char *env_id, t_env *env);
 
 /*expand utils*/
 char		*handle_qmark_exit(t_shell *content);
-char		handle_dollar_pid(void);
+char		*handle_dollar_pid(void);
 int			prs_expand_env(t_token *token);
 
 /* -----------------------------heredoc------------------------------- */
@@ -322,10 +323,10 @@ char		*find_path(char *cmd, t_env *env);
 int			ft_execution(t_shell *content, t_exec *tmp);
 /* execs err */
 void		err_open(int err_no, char *file);
-int			err_pipe(int err_no, t_shell content);
+int			err_pipe(int err_no, t_shell *content);
 void		exe_err_coredump(int pid);
-int			err_fork(int err_no, t_shell *ctx, int fd[][2]);//add this
-void		err_execve(char *path, int err_no);//add this
+int			err_fork(int err_no, t_shell *ctx, int fd[][2]);
+void		err_execve(char *path, int err_no);
 void		ft_free_all(char **arr);
 
 /* execs utils1,2 */

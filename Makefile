@@ -12,12 +12,12 @@ INC_DIR = inc
 SRC_DIR = ./src/
 LIBFT_DIR = libft
 
-SRC = build_args.c build_filename.c build_to_exec.c build_utils.c builtins_env.c \
+	SRC = build_args.c build_filename.c build_to_exec.c build_utils.c builtins_env.c \
 		builtins_err.c builtins_handler.c env.c exec_err.c exec_execution.c \
 		exec_family.c exec_redirs.c exec_utils1.c exec_utils2.c exec.c \
 		expand_env.c expand_utils.c expand.c ft_arrys_utils.c ft_cd.c ft_echo.c \
 		ft_env_pwd.c ft_exit.c ft_export.c ft_unset.c heredoc.c lexing_utils.c \
-		lexing.c main_free.c main.c parsing.c quotes_utils.c quotes.c \
+		lexing.c main_init.c main_free.c main.c parsing.c quotes_utils.c quotes.c \
 		signal_to_delete.c signal_utils.c signal.c tokens.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))

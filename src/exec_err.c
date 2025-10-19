@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:24 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/12 20:25:53 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:09 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	err_open(int err_no, char *file)
 
 	tmp_fd = dup(STDOUT_FILENO);
 	dup2(STDERR_FILENO, STDOUT_FILENO);
-	printf("%s: %s: %s\n" PROMPT_NAME, file, strerror(err_no));
-	dup2(RMP_FD, stdout_fileno);
-	exec_close(&(tmp_fd));
+	printf("%s: %s: %s\n", PROMPT_NAME, file, strerror(err_no));
+	dup2(tmp_fd, STDOUT_FILENO);
+	exe_close(&(tmp_fd));
 }
 
-int	err_pipe(int err_no, t_shell content)
+int	err_pipe(int err_no, t_shell *content)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	printf("%s: %s\n", PROMPT_NAME, strerror(err_no));
@@ -69,14 +69,18 @@ void	err_execve(char *path, int err_no)
 	exe_close(&(fd_tmp));
 }
 
-void	ft_free_all(char **arr)
+int	err_fork(int err_no, t_shell *ctx, int fd[][2])
 {
-	int	i;
+	int	pipe_nb;
+	int	fork_success;
 
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	pipe_nb = ctx->ct_pid - 1;
+	fork_success = ctx->ct_pid;
+	dup2(STDERR_FILENO, STDOUT_FILENO);
+	printf("%s: %s\n", PROMPT_NAME, strerror(err_no));
+	close_all(pipe_nb, fd);
+	set_std(ctx, 1);
+	wait_children(fork_success, ctx);
+	ctx->exit_code = 2;
+	return (2);
 }

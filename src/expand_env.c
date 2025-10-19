@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:17:08 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 20:08:05 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	ft_envvar_len(char *envvar)
 	i = 0;
 	if (envvar[i] == '$')
 		i++;
-	if (ft_isdigit(envvar[i] == 1 || envvar[i] == '?' || envvar[i] == '$'))
+	if (envvar[i] == '?' || envvar[i] == '$' || envvar[i] == '\0')
 		return (2);
 	while (envvar[i])
 	{
-		if (envvar[i] != '_' && ft_isslnum(envvar[i]) == 0)
+		if (envvar[i] != '_' && ft_isalnum(envvar[i]) == 0)
 			break ;
 		i++;
 	}
@@ -35,8 +35,8 @@ char	*get_envvar_name(char *envvar)
 	int	len;
 	char *name;
 
-	len = envvar_len(envvar);
-	name = ft_strndup(envvar, len);
+	len = ft_envvar_len(envvar);
+	name = ft_substr(envvar, 0, len);
 	return (name);
 }
 
@@ -48,7 +48,7 @@ char	*get_str_before_envvar(char *full_str, char *envvar)
 	head_strlen = envvar - full_str;
 	if (head_strlen == 0)
 		return (ft_strdup(""));
-	head_str = ft_strdup(full_str, head_strlen);
+	head_str = ft_substr(full_str, 0, head_strlen);
 	return (head_str);
 }
 
@@ -57,7 +57,7 @@ char	*get_str_after_envvar(char *envvar)
 	int		len;
 	char	*new;
 
-	len = envvar_len(envvar);
+	len = ft_envvar_len(envvar);
 	new = ft_strdup(envvar + len);
 	return (new);
 }

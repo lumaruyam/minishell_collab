@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:42:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/08/28 20:21:39 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	prs_ct_dollars(char *input_str)
 	ct = 0;
 	while (input_str[i])
 	{
-		if (input_str == '$')
+		if (input_str[i] == '$')
 			ct++;
 		i++;
 	}
@@ -34,8 +34,7 @@ char	*prs_expand_1envver(char *str, char *envvar_found, t_shell *content)
 	char	*envvar_value;
 	char	*after_envvar;
 	char	*new;
-
-	*before_envvar = get_str_before_envvar(str, envvar_found);
+	before_envvar = get_str_before_envvar(str, envvar_found);
 	if (!before_envvar)
 		return (NULL);
 	envvar_value = get_envvar_value((envvar_found + 1), content);
@@ -67,7 +66,7 @@ int	prs_envvar_expand(t_token *token)
 		if (ft_strcmp(envvar_found, "$") == 0)
 			break ;
 		current = token->value;
-		new = prs_expand_1envvar(token->value, envvar_found, token->content);
+		new = prs_expand_1envver(token->value, envvar_found, token->content);
 		if (new && new[0] == '\0')
 		{
 			free(new);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:41:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/28 17:06:16 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	prs_init_heredoc(int fd, char *eof_delimiter)
 			ft_putstr_fd("here_doc: called end-of-line (ctrl-d)\n", 2);
 			break ;
 		}
-		if (ft_strcmp(line, eof_delimiter) == 0 || rl_done)
+	if (ft_strcmp(line, eof_delimiter) == 0 || g_signal.end_heredoc == 1)
 		{
 			free(line);
 			break ;
@@ -83,7 +83,13 @@ int	prs_init_heredoc(int fd, char *eof_delimiter)
 		write(fd, "\n", 1);
 		free(line);
 	}
-	return (init_signal_heredoc());
+	init_signal_heredoc();
+	if (g_signal.end_heredoc == 1)
+	{
+		g_signal.end_heredoc = 0;
+		return (FAIL);
+	}
+	return (SUCCESS);
 }
 
 /* signals not modified

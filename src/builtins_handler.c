@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 20:41:26 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 21:32:29 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 15:13:14 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	chk_is_builtin(char *input_cmd)
+int	check_is_builtin(char *input_cmd)
 {
 	if (!input_cmd)
 		return (0);

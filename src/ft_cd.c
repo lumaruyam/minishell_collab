@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 21:17:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 15:44:42 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	update_pwd(t_shell *content, char *oldpwd_value)
 		free(oldpwd_path);
 	}
 	free(current_cwd);
-	return (SUCCESSS);
+	return (SUCCESS);
 }
 
 int	ft_cd(t_shell *content, t_arg *args)

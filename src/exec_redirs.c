@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:44 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/12 20:07:45 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ int	redirs_type(t_filename *file)
 
 int	err_redirs(t_exec *exec, t_shell *content)
 {
-	t_filename	redirs;
+	t_filename	*redirs;
 
 	redirs = exec->redirs;
 	while (redirs)
 	{
 		if (redirs_type(redirs))
 		{
-			if (STDIN_FILENO != content->default_in)
-				dup2(content->default_in, STDIN_FILENO);
-			if (STDOUT_FILENO != content->default_out)
-				dup2(content->default_out, STDOUT_FILENO);
+			if (STDIN_FILENO != content->std_in)
+				dup2(content->std_in, STDIN_FILENO);
+			if (STDOUT_FILENO != content->std_out)
+				dup2(content->std_out, STDOUT_FILENO);
 			ft_close(content);
 			return (1);
 		}
-		if (exec->fd_in == -1 || exec->ds_out == -1)
+		if (exec->fd_in == -1 || exec->fd_out == -1)
 			return (1);
 		redirs = redirs->next;
 	}
