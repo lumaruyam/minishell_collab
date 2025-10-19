@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/19 20:38:08 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	read_loop(t_shell *content)
 			}
 			line = NULL;
 		}
-		signal_to_action(content);//added
+		signal_to_action(content);
 		if (line)
 			free(line);
 	}
@@ -83,6 +83,5 @@ int	main(int ac, char **av, char **env)
 	read_loop(content);
 	free_shell(content);
 	clear_history();
-	ft_putendl_fd("exit", 2);
 	return (EXIT_SUCCESS);
 }
