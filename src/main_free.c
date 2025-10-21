@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 17:27:51 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/19 20:38:13 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:01:50 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int	handle_eof(char *line)
 {
 	if (!line)
-	{
-		printf("exit\n");
 		return (1);
-	}
 	return (0);
 }
 
