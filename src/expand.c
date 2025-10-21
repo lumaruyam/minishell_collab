@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:42:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/21 16:59:03 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:36:57 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*prs_expand_1envvar(char *str, char *envvar_found, t_shell *content)
 		return (free(before_envvar), free(envvar_value), NULL);
 	new = chk_null_strjoin(before_envvar, envvar_value);
 	if (!new)
-		return (free(before_envvar), NULL);
+		return (free(after_envvar), NULL);
 	new = chk_null_strjoin(new, after_envvar);
 	if (envvar_value)
 		free(envvar_value);

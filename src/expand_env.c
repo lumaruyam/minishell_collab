@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:17:08 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/21 16:54:01 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 20:32:53 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_envvar_len(char *envvar)
 	if (envvar[i] == '$')
 		i++;
 	if (ft_isdigit(envvar[i] == 1 || envvar[i] == '?' || envvar[i] == '$'))
-		return (2);
+		return (i + 1);//changed from return (2);
 	while (envvar[i])
 	{
 		if (envvar[i] != '_' && ft_isalnum(envvar[i]) == 0)

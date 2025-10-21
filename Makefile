@@ -18,7 +18,7 @@ LIBFT_DIR = libft
 		expand_env.c expand_utils.c expand.c ft_arrys_utils.c ft_cd.c ft_echo.c \
 		ft_env_pwd.c ft_exit.c ft_export.c ft_unset.c heredoc.c lexing_utils.c \
 		lexing.c main_init.c main_free.c main.c parsing.c quotes_utils.c quotes.c \
-		signal_utils.c signal.c tokens.c signal_utils2.c
+		signal_utils.c signal.c tokens.c signal_utils2.c exec_utils3.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(SRCS:.c=.o)

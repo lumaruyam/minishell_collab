@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/21 09:25:04 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 19:48:18 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	read_loop(t_shell *content)
 	return (0);
 }*/
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char *av[], char **env)
 {
 	t_shell	*content;
 

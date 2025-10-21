@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/21 16:58:16 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 20:44:07 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,7 +336,7 @@ int			err_fork(int err_no, t_shell *ctx, int fd[][2]);
 void		err_execve(char *path, int err_no);
 void		ft_free_all(char **arr);
 
-/* execs utils1,2 */
+/* execs utils1,2,3 */
 void		exe_close(int *fd);
 void		ft_close(t_shell *content);
 void		close_fds(int pipe_nb, int (*fd)[2], int cur_cmd,
@@ -348,5 +348,12 @@ void		set_std(t_shell *content, int mode);
 void		close_all(int pipe_nb, int (*fd)[2]);
 void		unlink_all(t_shell *content);
 void		wait_children(int ct_pid, t_shell *content);
+
+int			ft_args_lstsize(t_arg *args);
+void		exec_args_create(t_exec *temp, int args_nb,
+				char *args[args_nb]);
+int			ft_char_count(char *str, char c);
+void		ft_free_all(char **arr);
+int			check_is_alr_path(char *cmd);
 
 #endif

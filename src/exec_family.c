@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:36 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/21 09:58:23 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 19:58:41 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,50 @@ static void	setup_redir(t_shell *content, int (*fd)[2], int i)
 	signal(SIGQUIT, SIG_DFL);
 	if (content->ct_exec > 1)
 	{
-	// debug removed
 		if (i > 0)
 		{
-			if (dup2(fd[i - 1][0], STDIN_FILENO) == -1)
-			{
-				err_pipe(errno, content);
-				exit(1);
-			}
+			dup2(fd[i - 1][0], STDIN_FILENO);
 			exe_close(&fd[i - 1][1]);
 		}
 		if (i < content->ct_exec - 1)
 		{
-			if (dup2(fd[i][1], STDOUT_FILENO) == -1)
-			{
-				err_pipe(errno, content);
-				exit(1);
-			}
+			dup2(fd[i][1], STDOUT_FILENO);
 			exe_close(&fd[i][1]);
 		}
 		close_fds(content->ct_exec - 1, fd, i, false);
 	}
 	ft_close(content);
 }
+
+// will change for test
+// static void	setup_redir(t_shell *content, int (*fd)[2], int i)
+// {
+// 	signal(SIGQUIT, SIG_DFL);
+// 	if (content->ct_exec > 1)
+// 	{
+// 	// debug removed
+// 		if (i > 0)
+// 		{
+// 			if (dup2(fd[i - 1][0], STDIN_FILENO) == -1)
+// 			{
+// 				err_pipe(errno, content);
+// 				exit(1);
+// 			}
+// 			exe_close(&fd[i - 1][1]);
+// 		}
+// 		if (i < content->ct_exec - 1)
+// 		{
+// 			if (dup2(fd[i][1], STDOUT_FILENO) == -1)
+// 			{
+// 				err_pipe(errno, content);
+// 				exit(1);
+// 			}
+// 			exe_close(&fd[i][1]);
+// 		}
+// 		close_fds(content->ct_exec - 1, fd, i, false);
+// 	}
+// 	ft_close(content);
+// }
 
 void	child_process(t_shell *content, int (*fd)[2], int i, t_exec *tmp)
 {

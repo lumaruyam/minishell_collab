@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:46:21 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/19 19:42:27 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/21 21:21:40 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_token	*process_single_token(char *str, t_shell *content, int *i)
 			*i += 1;
 		}
 		else
-			*i += ft_strlen(new_token->value);
+			*i += ft_strlen(new_token->value) + 1;
 	}
 	else
 	{
