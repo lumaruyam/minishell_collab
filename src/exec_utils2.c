@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:54 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/21 09:22:17 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/minishell.h"
 
@@ -97,15 +96,15 @@ void	wait_children(int ct_pid, t_shell *content)
 		{
 			if (WIFEXITED(status))
 			{
-				g_signal.signal_code = 0;
+				g_signal = 0;
 				content->exit_code = WEXITSTATUS(status);
 			}
 			else if (WIFSIGNALED(status))
 			{
 				if (WTERMSIG(status) == SIGQUIT)
 					exe_err_coredump(content->pids[i]);
-				g_signal.signal_code = 128 + WTERMSIG(status);
-				content->exit_code = g_signal.signal_code;
+				g_signal = 128 + WTERMSIG(status);
+				content->exit_code = g_signal;
 			}
 		}
 		i++;

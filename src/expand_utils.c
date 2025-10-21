@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:27:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/20 21:26:50 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char	*handle_qmark_exit(t_shell *content)
 {
 	int	status_code;
 
-	if (g_signal.signal_code != 0)
+	if (g_signal != 0)
 	{
-		status_code = g_signal.signal_code;
-		g_signal.signal_code = 0;
+		status_code = g_signal;
+		g_signal = 0;
 		return (ft_itoa(status_code));
 	}
 	return (ft_itoa(content->exit_code));

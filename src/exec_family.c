@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   exec_family.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:36 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/21 09:58:23 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/minishell.h"
 
@@ -37,7 +36,6 @@ static void	setup_redir(t_shell *content, int (*fd)[2], int i)
 	if (content->ct_exec > 1)
 	{
 	// debug removed
-
 		if (i > 0)
 		{
 			if (dup2(fd[i - 1][0], STDIN_FILENO) == -1)

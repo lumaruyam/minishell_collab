@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 19:23:39 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/20 22:02:14 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,15 @@ typedef struct s_exec
 	int				fd_out;// output file descriptor for the command
 }	t_exec;
 
-typedef struct s_signal
-{
-	int	end_heredoc;
-	int	signal_code;
-}	t_signal;
+extern volatile sig_atomic_t	g_signal;
 
-extern t_signal		g_signal;
+// typedef struct s_signal DONT USE THISS!!!!!
+// {
+// 	int	end_heredoc;
+// 	int	signal_code;
+// }	t_signal;
+
+// extern t_signal		g_signal;
 
 /* ------------------------------Main----------------------------------- */
 
@@ -302,6 +304,11 @@ void		error_pwd(char *option);
 void		error_exit(char *input_line);
 void		error_cd(int err_n, char *pathname);
 void		error_export(char *input_line);
+
+/* ft_arrys_utils*/
+char		**ft_arrsdup(char **src_arrs);
+void		arrs_free(char **arrs);
+int			ft_arrslen(char **arrs);
 
 /* -----------------------------execs--------------------------- */
 

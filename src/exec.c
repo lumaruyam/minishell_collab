@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:08:00 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/19 19:30:38 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/21 10:02:17 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	exec(t_shell *content)
 		if (check_is_builtin(tmp->cmd))
 			return (handle_single_builtin(content, tmp));
 	}
-	init_signal_exec();//added for signal
-	exec_parent(content);// create this func
+	init_signal_exec();
+	exec_parent(content);
 	return (0);
 }

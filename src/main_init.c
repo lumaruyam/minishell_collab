@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 19:27:34 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/20 21:22:29 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-volatile sig_atomic_t	g_signal_received = 0;
-t_signal				g_signal = {0};
+volatile sig_atomic_t	g_signal = 0;
 
 t_env	*set_default_env(void)
 {

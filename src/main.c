@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 20:38:08 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 09:25:04 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	main(int ac, char **av, char **env)
 		return (EXIT_FAILURE);
 	read_loop(content);
 	free_shell(content);
-	clear_history();
+	rl_clear_history();
+	ft_putendl_fd("exit", 2);
 	return (EXIT_SUCCESS);
 }
