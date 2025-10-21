@@ -6,13 +6,13 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 18:44:20 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/09/25 18:37:58 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:28:56 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/get_next_line.h"
 
-int	ft_strlen(const char *str)
+/*int	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -20,7 +20,7 @@ int	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
+}*/
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -46,7 +46,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+/*char	*ft_strchr(const char *s, int c)
 {
 	unsigned int	i;
 	char			cc;
@@ -111,4 +111,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i] = '\0';
 	return (str);
-}
+}*/

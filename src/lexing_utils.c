@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:42:45 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/21 17:09:29 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,11 @@ int	lex_token_str_len(char *str)
 	while (len < total_len)
 	{
 		if (str[len] == '\'')
-		{
 			len += len_quotes(&(str[len]), '\'');
-		}
-		else if (str[len] == '"')
-		{
-			len += len_quotes(&(str[len]), '"');
-		}
+		if (str[len] == '\"')
+			len += len_quotes(&(str[len]), '\"');
 		else if (chk_meta_char(str[len]) || str[len] == '\t' || str[len] == ' ')
-		{
 			break ;
-		}
 		len++;
 	}
 	return (len);

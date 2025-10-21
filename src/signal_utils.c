@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:29:27 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/20 22:19:31 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:21:19 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	signal_child_process(void)//implemet this before exective
 static void	sigint_heredoc(int sig)
 {
 	g_signal = 128 + sig;
+	rl_done = 1;
 }
 
 void	init_signal_heredoc(void)

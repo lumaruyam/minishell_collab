@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:17:08 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 19:35:18 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/21 16:54:01 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_envvar_len(char *envvar)
 	i = 0;
 	if (envvar[i] == '$')
 		i++;
-	if (envvar[i] == '?' || envvar[i] == '$' || envvar[i] == '\0')
+	if (ft_isdigit(envvar[i] == 1 || envvar[i] == '?' || envvar[i] == '$'))
 		return (2);
 	while (envvar[i])
 	{
@@ -32,11 +32,11 @@ int	ft_envvar_len(char *envvar)
 
 char	*get_envvar_name(char *envvar)
 {
-	int		len;
-	char	*name;
+	int	len;
+	char *name;
 
 	len = ft_envvar_len(envvar);
-	name = ft_substr(envvar, 0, len);
+	name = ft_strndup(envvar, len);
 	return (name);
 }
 
@@ -48,7 +48,7 @@ char	*get_str_before_envvar(char *full_str, char *envvar)
 	head_strlen = envvar - full_str;
 	if (head_strlen == 0)
 		return (ft_strdup(""));
-	head_str = ft_substr(full_str, 0, head_strlen);
+	head_str = ft_strndup(full_str, head_strlen);
 	return (head_str);
 }
 

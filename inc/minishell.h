@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/20 22:02:14 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:58:16 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ char		*chk_null_strjoin(char *s1, char *s2);
 
 /*expand*/
 int			prs_ct_dollars(char *input_str);
-char		*prs_expand_1envver(char *str, char *envvar_found,
+char		*prs_expand_1envvar(char *str, char *envvar_found,
 				t_shell *content);
 int			prs_envvar_expand(t_token *token);
 

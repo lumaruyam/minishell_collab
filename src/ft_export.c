@@ -6,13 +6,13 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:19:57 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/20 22:02:40 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:04:19 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void	ft_swap_ptr(char **a, char **b)
+static	void ft_swap_ptr(char **a, char **b)
 {
 	char	*tmp;
 
@@ -29,7 +29,7 @@ char	**sort_env_arrs(char **env_arrs)
 
 	res = ft_arrsdup(env_arrs);
 	if (!res)
-		return (NULL);
+		return (arrs_free(res), NULL);
 	i = 0;
 	while (res[i])
 	{
@@ -45,7 +45,7 @@ char	**sort_env_arrs(char **env_arrs)
 	return (res);
 }
 
-static void	print_export_all(char **sorted)
+static void print_export_all(char **sorted)
 {
 	int		i;
 	char	*tmp_value;
@@ -79,10 +79,10 @@ int	export_print_sorted_env(t_env *env)
 		return (FAIL);
 	sorted = sort_env_arrs(env_arrs);
 	if (!sorted)
-		return (ft_free_all(env_arrs), FAIL);
+		return (arrs_free(env_arrs), FAIL);
 	print_export_all(sorted);
-	ft_free_all(sorted);
-	ft_free_all(env_arrs);
+	arrs_free(sorted);
+	arrs_free(env_arrs);
 	return (SUCCESS);
 }
 
@@ -90,12 +90,12 @@ int	ft_export(t_shell *content, t_arg *args)
 {
 	if (!args)
 	{
-		if (export_print_sorted_env(content->env) != 0)
-			return (SUCCESS);
+	 if (export_print_sorted_env(content->env) != 0)
+		return (SUCCESS);
 	}
 	else
 	{
-		while (args)
+		while(args)
 		{
 			if (add_envvar(args->value, &(content->env)) != 0)
 				return (FAIL);
@@ -104,4 +104,3 @@ int	ft_export(t_shell *content, t_arg *args)
 	}
 	return (SUCCESS);
 }
-

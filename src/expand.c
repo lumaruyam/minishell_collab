@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:42:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/21 16:59:03 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	prs_ct_dollars(char *input_str)
 	return (ct);
 }
 
-char	*prs_expand_1envver(char *str, char *envvar_found, t_shell *content)
+char	*prs_expand_1envvar(char *str, char *envvar_found, t_shell *content)
 {
 	char	*before_envvar;
 	char	*envvar_value;
@@ -66,7 +66,7 @@ int	prs_envvar_expand(t_token *token)
 		if (ft_strcmp(envvar_found, "$") == 0)
 			break ;
 		current = token->value;
-		new = prs_expand_1envver(token->value, envvar_found, token->content);
+		new = prs_expand_1envvar(token->value, envvar_found, token->content);
 		if (new && new[0] == '\0')
 		{
 			free(new);

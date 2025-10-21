@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+         #
+#    By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/09 16:04:43 by lulmaruy          #+#    #+#              #
-#    Updated: 2025/10/19 17:02:12 by skoudad          ###   ########.fr        #
+#    Updated: 2025/10/21 16:50:26 by lulmaruy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 	printf/ft_printf.c printf/ft_print_char.c printf/ft_print_str.c \
 	printf/ft_print_nbr.c printf/ft_print_hex.c printf/ft_print_ptr.c \
-	gnl/get_next_line.c gnl/get_next_line_utils.c ft_strcmp.c ft_free_all.c
+	gnl/get_next_line.c gnl/get_next_line_utils.c ft_strcmp.c ft_free_all.c \
+	ft_strndup.c
 
 OBJ = $(SRC:.c=.o)
 
