@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:27:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/21 18:11:12 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/22 22:08:14 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,6 @@ char	*handle_qmark_exit(t_shell *content)
 	}
 	return (ft_itoa(content->exit_code));
 }
-
-/* Old signal
-char	*handle_qmark_exit(t_shell *content)//signal used, check later
-{
-	int	status_code;
-
-	if (g_signal.signal_code != 0)
-	{
-		status_code = g_signal.signal_code;
-		g_signal.signal_code = 0;
-		return (ft_itoa(status_code));
-	}
-	return (ft_itoa(content->exit_code));
-}*/
 
 char	*handle_dollar_pid(void)
 {
@@ -85,3 +71,17 @@ t_env	*get_env(char *env_id, t_env *env)
 	}
 	return (NULL);
 }
+
+/* Old signal
+char	*handle_qmark_exit(t_shell *content)//signal used, check later
+{
+	int	status_code;
+
+	if (g_signal.signal_code != 0)
+	{
+		status_code = g_signal.signal_code;
+		g_signal.signal_code = 0;
+		return (ft_itoa(status_code));
+	}
+	return (ft_itoa(content->exit_code));
+}*/

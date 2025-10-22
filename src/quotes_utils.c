@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:06:59 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/21 17:27:26 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:56:33 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_token	*prs_get_quoted_str(char *input_str, char c, t_shell *content)
 
 	if (!input_str || len_quotes(input_str, c) <= 1)
 		return (NULL);
-	len = len_quotes(input_str, c) - 1;
+	len = len_quotes(input_str, c) - 2;
 	new_token = NULL;
 	type = DBL_QUOTE;
 	if (c == '\'')
@@ -53,8 +53,21 @@ int	len_quotes(char *str, char sd_quote)
 	len = 1;
 	while (str[len] && str[len] != sd_quote)
 		len++;
-	return (len);
+	if (str[len] == sd_quote)
+		return (len + 1);
+	else
+		return (-1);
 }
+
+// int	len_quotes(char *str, char sd_quote)
+// {
+// 	int	len;
+
+// 	len = 1;
+// 	while (str[len] && str[len] != sd_quote)
+// 		len++;
+// 	return (len);
+// }
 
 char	*prs_tokens_join(t_token *token)
 {

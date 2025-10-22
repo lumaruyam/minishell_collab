@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/21 19:48:18 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:33:47 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ int	read_loop(t_shell *content)
 	return (0);
 }
 
+int	main(int ac, char *av[], char **env)
+{
+	t_shell	*content;
+
+	content = NULL;
+	(void)ac;
+	(void)av;
+	content = init_shell(env);
+	if (!content)
+		return (EXIT_FAILURE);
+	read_loop(content);
+	free_shell(content);
+	rl_clear_history();
+	ft_putendl_fd("exit", 2);
+	return (EXIT_SUCCESS);
+}
+
 /*signal before modified
 int	read_loop(t_shell *content)
 {
@@ -69,20 +86,3 @@ int	read_loop(t_shell *content)
 	}
 	return (0);
 }*/
-
-int	main(int ac, char *av[], char **env)
-{
-	t_shell	*content;
-
-	content = NULL;
-	(void)ac;
-	(void)av;
-	content = init_shell(env);
-	if (!content)
-		return (EXIT_FAILURE);
-	read_loop(content);
-	free_shell(content);
-	rl_clear_history();
-	ft_putendl_fd("exit", 2);
-	return (EXIT_SUCCESS);
-}

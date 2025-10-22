@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 21:09:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 21:26:39 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:30:36 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	arg_add_back(t_arg **head, t_arg *new)
 	else
 	{
 		cur = *head;
-		while(cur->next != NULL)
+		while (cur->next != NULL)
 			cur = cur->next;
 		cur->next = new;
 	}

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:42:45 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/22 11:15:02 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:47:30 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,50 @@ int	chk_meta_char(char c)
 	return (found);
 }
 
+// int	lex_token_str_len(char *str)
+// {
+// 	int	len;
+// 	int	total_len;
+
+// 	len = 0;
+// 	total_len = ft_strlen(str);
+// 	while (len < total_len)
+// 	{
+// 		if (str[len] == '\'')
+// 			len += len_quotes(&(str[len]), '\'');
+// 		if (str[len] == '\"')
+// 			len += len_quotes(&(str[len]), '\"');
+// 		else if (chk_meta_char(str[len]) || str[len] == '\t' || str[len] == ' ')
+// 			break ;
+// 		len++;
+// 	}
+// 	return (len);
+// }
+
 int	lex_token_str_len(char *str)
 {
 	int	len;
 	int	total_len;
+	int	quote_len;
 
 	len = 0;
 	total_len = ft_strlen(str);
 	while (len < total_len)
 	{
-		if (str[len] == '\'')
-			len += len_quotes(&(str[len]), '\'');
-		if (str[len] == '\"')
-			len += len_quotes(&(str[len]), '\"');
+		if (str[len] == '\'' || str[len] == '\"')
+		{
+			quote_len = len_quotes(&(str[len]), str[len]);
+			if (quote_len == -1)
+			{
+				len = total_len;
+				break ;
+			}
+			len += quote_len;
+		}
 		else if (chk_meta_char(str[len]) || str[len] == '\t' || str[len] == ' ')
 			break ;
-		len++;
+		else
+			len++;
 	}
 	return (len);
 }

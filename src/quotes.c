@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:46:21 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/21 21:21:40 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/22 22:07:10 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@ int	prs_chk_quotes(t_token *token)
 {
 	int		i;
 	char	*str;
+	int		quote_len;
 
-	while (token != NULL)
+	while (token && token->type == STR)
 	{
-		if (token->type == STR)
+		i = 0;
+		str = token->value;
+		while (str[i])
 		{
-			i = 0;
-			str = token->value;
-			while (str[i])
+			if (str[i] == '\'' || str[i] == '\"')
 			{
-				if (str[i] == '\'' || str[i] == '\"')
-					i += len_quotes(&(str[i]), str[i]);
-				if (str[i] == '\0')
+				quote_len = len_quotes(&str[i], str[i]);
+				if (quote_len == -1)
 					return (FAIL);
-				i++;
+				i += quote_len;
 			}
+			else
+				i++;
 		}
 		token = token->next;
 	}
@@ -98,3 +100,28 @@ int	prs_quotes_n_expand_env(t_token *token)
 	}
 	return (SUCCESS);
 }
+
+// int	prs_chk_quotes(t_token *token)
+// {
+// 	int		i;
+// 	char	*str;
+
+// 	while (token != NULL)
+// 	{
+// 		if (token->type == STR)
+// 		{
+// 			i = 0;
+// 			str = token->value;
+// 			while (str[i])
+// 			{
+// 				if (str[i] == '\'' || str[i] == '\"')
+// 					i += len_quotes(&(str[i]), str[i]);
+// 				if (str[i] == '\0')
+// 					return (FAIL);
+// 				i++;
+// 			}
+// 		}
+// 		token = token->next;
+// 	}
+// 	return (SUCCESS);
+// }
