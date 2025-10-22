@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:42:45 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/21 17:09:29 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/22 11:15:02 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ int	lex_token_len(char *str, t_tokentype type)
 	len = 0;
 	if (type == INFILE || type == OUTFILE || type == PIPE)
 		len = 1;
-	if (type == APPEND || type == HEREDOC)
+	else if (type == HEREDOC || type == APPEND)
 		len = 2;
-	if (type == STR)
+	else if (type == STR)
 		len = lex_token_str_len(str);
 	return (len);
 }

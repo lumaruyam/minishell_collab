@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:19:57 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/21 17:04:19 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/22 11:29:42 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	**sort_env_arrs(char **env_arrs)
 
 	res = ft_arrsdup(env_arrs);
 	if (!res)
-		return (arrs_free(res), NULL);
+		return (NULL);
+		//return (arrs_free(res), NULL);
 	i = 0;
 	while (res[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:41:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/20 22:10:45 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:28:07 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*create_random_filename(char *str)
 	i = 0;
 	while (i < 8)
 	{
-		new[i] = "/tmp/hd-"[i];
+		new[i] = "/tmp/hd_"[i];
 		i++;
 	}
 	rand = (unsigned long)str;
@@ -61,30 +61,74 @@ static char	*create_random_filename(char *str)
 	return (new);
 }
 
-int	prs_init_heredoc(int fd, char *eof_delimiter)
+static int	process_heredoc_input(int fd, char *eof_delimiter)
 {
 	char	*line;
 
-	init_signal_heredoc();
 	while (1)
 	{
-		line = readline("heredoc>");
+		line = readline("heredoc> ");
+		rl_done = 0;
 		if (!line)
 		{
-			ft_putstr_fd("here_doc: called end-of-line (ctrl-d)\n", 2);
+			ft_putstr_fd("here_doc: delimited by end-of-file\n", 2);
 			break ;
 		}
-	if (ft_strcmp(line, eof_delimiter) == 0 || rl_done)
+		if (g_signal != 0)
+		{
+			free(line);
+			return (1);
+		}
+		if (ft_strcmp(line, eof_delimiter) == 0)
 		{
 			free(line);
 			break ;
 		}
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
+		ft_putendl_fd(line, fd);
 		free(line);
 	}
-	init_signal_heredoc();
 	return (0);
+}
+
+int	prs_init_heredoc(int fd, char *eof_delimiter)
+{
+	int	signal_received;
+
+	init_signal_heredoc();
+	signal_received = process_heredoc_input(fd, eof_delimiter);
+	if (signal_received)
+	{
+		g_signal = 0;
+		return (1);
+	}
+	return (0);
+}
+
+int	prs_handle_heredoc(t_token *token)
+{
+	char	*filename;
+	int		fd;
+	int		end;
+
+	end = 0;
+	while (token != NULL && end == 0)
+	{
+		if (token->type == HEREDOC)
+		{
+			filename = create_random_filename(token->next->value);
+			fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (fd == -1)
+				return (FAIL);
+			if (prs_init_heredoc(fd,token->next->value) != 0)
+				end = 1;
+			close(fd);
+			free(token->next->value);
+			token->next->value = filename;
+			token->type = NON_HEREDOC;
+		}
+		token = token->next;
+	}
+	return (end);
 }
 
 /* signals not modified
@@ -123,29 +167,55 @@ static int init_heredoc_signal(void)
 	return (SUCCESS);
 }*/
 
-int	prs_handle_heredoc(t_token *token)
-{
-	char	*filename;
-	int		fd;
-	int		end;
+// int	prs_handle_heredoc(t_token *token)
+// {
+// 	char	*filename;
+// 	int		fd;
+// 	int		end;
 
-	end = 0;
-	while (token != NULL && end == 0)
-	{
-		if (token->type == HEREDOC)
-		{
-			filename = create_random_filename(token->next->value);
-			fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			if (fd == -1)
-				return (FAIL);
-			if (prs_init_heredoc(fd,token->next->value) != 0)
-				end = 1;
-			close(fd);
-			free(token->next->value);
-			token->next->value = filename;
-			token->type = NON_HEREDOC;
-		}
-		token = token->next;
-	}
-	return (end);
-}
+// 	end = 0;
+// 	while (token != NULL && end == 0)
+// 	{
+// 		if (token->type == HEREDOC)
+// 		{
+// 			filename = create_random_filename(token->next->value);
+// 			fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 			if (fd == -1)
+// 				return (FAIL);
+// 			if (prs_init_heredoc(fd,token->next->value) != 0)
+// 				end = 1;
+// 			close(fd);
+// 			free(token->next->value);
+// 			token->next->value = filename;
+// 			token->type = NON_HEREDOC;
+// 		}
+// 		token = token->next;
+// 	}
+// 	return (end);
+// }
+
+// int	prs_init_heredoc(int fd, char *eof_delimiter)
+// {
+// 	char	*line;
+
+// 	init_signal_heredoc();
+// 	while (1)
+// 	{
+// 		line = readline("heredoc>");
+// 		if (!line)
+// 		{
+// 			ft_putstr_fd("here_doc: called end-of-line (ctrl-d)\n", 2);
+// 			break ;
+// 		}
+// 	if (ft_strcmp(line, eof_delimiter) == 0 || rl_done)
+// 		{
+// 			free(line);
+// 			break ;
+// 		}
+// 		write(fd, line, ft_strlen(line));
+// 		write(fd, "\n", 1);
+// 		free(line);
+// 	}
+// 	init_signal_heredoc();
+// 	return (0);
+// }
