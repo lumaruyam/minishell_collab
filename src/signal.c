@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:28:55 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/21 18:44:24 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/23 20:57:32 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_signal_exec(void)
 {
 	struct sigaction	sa;
 
-	rl_event_hook = sig_exit;
+	// rl_event_hook = sig_exit;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = &handle_signal_exec;
@@ -38,18 +38,21 @@ void	init_signal_exec(void)
 
 static void	sigint_interactive_mode(int sig)
 {
-	g_signal = 128 + sig;
-	write(STDERR_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (tcgetpgrp(STDIN_FILENO) == getpgrp())
+	{
+		g_signal = 128 + sig;
+		write(STDERR_FILENO, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 void	init_signal_interactive_mode(void)
 {
 	struct sigaction	sa;
 
-	rl_event_hook = sig_exit;
+	// rl_event_hook = sig_exit;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = &sigint_interactive_mode;

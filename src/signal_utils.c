@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:29:27 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/22 21:52:19 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/23 20:59:09 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,50 @@ void	signal_child_process(void)//implemet this before exective
 static void	sigint_heredoc(int sig)
 {
 	g_signal = 128 + sig;
-	rl_done = 1;
+	write(STDERR_FILENO, "\n", 1);
+	close(STDIN_FILENO);
 }
+
+// static void	sigint_heredoc(int sig)
+// {
+// 	g_signal = 128 + sig;
+// 	rl_done = 1;
+// }
 
 void	init_signal_heredoc(void)
 {
-	struct sigaction	sa;
+	struct sigaction	sa_int;
+	struct sigaction	sa_quit;
 
-	rl_event_hook = sig_exit;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	sa.sa_handler = &sigint_heredoc;
-	sigaction(SIGINT, &sa, NULL);
-	sa.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &sa, NULL);
-	sigaction(SIGTSTP, &sa, NULL);
+	sigemptyset(&sa_int.sa_mask);
+	sigemptyset(&sa_quit.sa_mask);
+	sa_int.sa_flags = 0;
+	sa_quit.sa_flags = 0;
+	sa_int.sa_handler = &sigint_heredoc;
+	sa_quit.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &sa_int, NULL);
+	sigaction(SIGQUIT, &sa_quit, NULL);
 }
+
+// void	init_signal_heredoc(void)
+// {
+// 	struct sigaction	sa;
+
+// 	// rl_event_hook = sig_exit;
+// 	sigemptyset(&sa.sa_mask);
+// 	sa.sa_flags = SA_RESTART;
+// 	sa.sa_handler = &sigint_heredoc;
+// 	sigaction(SIGINT, &sa, NULL);
+// 	sa.sa_handler = SIG_IGN;
+// 	sigaction(SIGQUIT, &sa, NULL);
+// 	sigaction(SIGTSTP, &sa, NULL);
+// }
 
 void	init_ignore_signal(void)
 {
 	struct sigaction	sa;
 
-	rl_event_hook = sig_exit;
+	// rl_event_hook = sig_exit;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = SIG_IGN;

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:59:02 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 21:28:55 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/23 21:48:53 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,17 @@ int	add_envvar(char *input_line, t_env **env_head)
 	char	*dup_inputline;
 	t_env	*env;
 
-	env_id = get_env_id(input_line);
-	env = get_env(env_id, *env_head);
+	env_id = get_env_id(input_line);// Check if this is a valid identifier
 	if (!env_id || !chk_envid_valid(env_id))
-		return (free(env_id), error_export(input_line), FAIL);
+	{
+		free(env_id);
+		error_export(input_line);
+		return (FAIL);
+	}
 	dup_inputline = ft_strdup(input_line);
 	if (!dup_inputline)
 		return(free(env_id), FAIL);
+	env = get_env(env_id, *env_head);
 	if (!env)
 	{
 		if (make_add_env(env_id, input_line, dup_inputline, env_head) == FAIL)
@@ -94,3 +98,28 @@ int	add_envvar(char *input_line, t_env **env_head)
 	}
 	return (SUCCESS);
 }
+// int	add_envvar(char *input_line, t_env **env_head)
+// {
+// 	char	*env_id;
+// 	char	*dup_inputline;
+// 	t_env	*env;
+
+// 	env_id = get_env_id(input_line);
+// 	env = get_env(env_id, *env_head);
+// 	if (!env_id || !chk_envid_valid(env_id))
+// 		return (free(env_id), error_export(input_line), FAIL);
+// 	dup_inputline = ft_strdup(input_line);
+// 	if (!dup_inputline)
+// 		return(free(env_id), FAIL);
+// 	if (!env)
+// 	{
+// 		if (make_add_env(env_id, input_line, dup_inputline, env_head) == FAIL)
+// 			return (FAIL);
+// 	}
+// 	else
+// 	{
+// 		free(env_id);
+// 		update_envvar(env, dup_inputline);
+// 	}
+// 	return (SUCCESS);
+// }

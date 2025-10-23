@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:08:04 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/19 19:40:59 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/23 21:47:39 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,39 @@
 char	*get_env_id(char *input_line)
 {
 	char	*at_equal;
+	int		len;
 
 	if (!input_line)
 		return (NULL);
+
 	at_equal = ft_strchr(input_line, '=');
+
+	// If no '=' found, return the whole string
 	if (!at_equal)
 		return (ft_strdup(input_line));
-	else if (at_equal - input_line == 0)
+
+	// If '=' is at position 0, it's invalid (like "=value")
+	if (at_equal == input_line)
 		return (NULL);
-	return (ft_strdup(input_line + (at_equal - input_line)));
+
+	// Extract the part before '='
+	len = at_equal - input_line;
+	return (ft_substr(input_line, 0, len));
 }
+
+// char	*get_env_id(char *input_line)
+// {
+// 	char	*at_equal;
+
+// 	if (!input_line)
+// 		return (NULL);
+// 	at_equal = ft_strchr(input_line, '=');
+// 	if (!at_equal)
+// 		return (ft_strdup(input_line));
+// 	else if (at_equal - input_line == 0)
+// 		return (NULL);
+// 	return (ft_strdup(input_line + (at_equal - input_line)));
+// }
 
 char	*get_env_value(char *input_line)
 {
