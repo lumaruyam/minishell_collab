@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 17:15:35 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/25 17:25:18 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 20:29:26 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*read_multiline_input(char *first_line)
 	input = ft_strdup(first_line);
 	if (!input)
 		return (NULL);
-
 	while (has_unclosed_quotes(input))
 	{
 		temp = input;

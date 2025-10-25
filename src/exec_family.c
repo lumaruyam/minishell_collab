@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:36 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/25 19:26:41 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 21:04:06 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	handle_redir_and_bltins(t_shell *content, t_exec *tmp, int *exit_code
 {
 	if (err_redirs(tmp, content))
 	{
-		free_shell(content);
+		// free_shell(content); handle double free 1025
 		content->exit_code = 1;
 		*exit_code = content->exit_code;
 		return (1);
@@ -24,7 +24,7 @@ static int	handle_redir_and_bltins(t_shell *content, t_exec *tmp, int *exit_code
 	if (check_is_builtin(tmp->cmd))
 	{
 		*exit_code = exec_builtin(content, tmp->cmd, tmp->args);
-		free_shell(content);
+		// free_shell(content); handle double free 1025
 		return (1);
 	}
 	return (0);

@@ -6,21 +6,36 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:08:00 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/21 10:02:17 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 20:53:15 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+//removed to habdle leak 1025
+// static int	handle_single_redir(t_shell *content, t_exec *tmp)
+// {
+// 	if (err_redirs(tmp, content))
+// 	{
+// 		content->exit_code = 1;
+// 		return (content->exit_code);
+// 	}
+// 	unlink_all(content);
+// 	set_std(content, 1);
+// 	return (0);
+// }
 
 static int	handle_single_redir(t_shell *content, t_exec *tmp)
 {
 	if (err_redirs(tmp, content))
 	{
 		content->exit_code = 1;
+		free_after_process(content, NULL);
 		return (content->exit_code);
 	}
 	unlink_all(content);
 	set_std(content, 1);
+	free_after_process(content, NULL);
 	return (0);
 }
 
@@ -29,6 +44,7 @@ static int	handle_single_builtin(t_shell *content, t_exec *tmp)
 	if (err_redirs(tmp, content))
 	{
 		content->exit_code = 1;
+		free_after_process(content, NULL);
 		return (content->exit_code);
 	}
 	if (check_is_builtin(tmp->cmd) == 2)
@@ -36,8 +52,26 @@ static int	handle_single_builtin(t_shell *content, t_exec *tmp)
 	unlink_all(content);
 	content->exit_code = exec_builtin(content, tmp->cmd, tmp->args);
 	set_std(content, 1);
+	free_after_process(content, NULL);
 	return (content->exit_code);
 }
+
+
+// removed to handle leak 1025
+// static int	handle_single_builtin(t_shell *content, t_exec *tmp)
+// {
+// 	if (err_redirs(tmp, content))
+// 	{
+// 		content->exit_code = 1;
+// 		return (content->exit_code);
+// 	}
+// 	if (check_is_builtin(tmp->cmd) == 2)
+// 		ft_putstr_fd("exit\n", STDERR_FILENO);
+// 	unlink_all(content);
+// 	content->exit_code = exec_builtin(content, tmp->cmd, tmp->args);
+// 	set_std(content, 1);
+// 	return (content->exit_code);
+// }
 
 int	exec(t_shell *content)
 {

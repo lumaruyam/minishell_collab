@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:28:55 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/25 14:48:12 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 20:44:15 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 int	sig_exit(void)
 {
 	if (g_signal != 0)
-		return (1);  // readlineに終了を伝える
+		return (1);
 	return (0);
 }
 

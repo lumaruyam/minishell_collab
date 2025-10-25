@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:29:27 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/25 15:06:30 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 20:44:21 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_signal_heredoc(void)
 	rl_event_hook = sig_exit;
 	sigemptyset(&sa_int.sa_mask);
 	sigemptyset(&sa_quit.sa_mask);
-	sa_int.sa_flags = SA_RESTART;  // 重要なフラグ
+	sa_int.sa_flags = SA_RESTART;
 	sa_quit.sa_flags = 0;
 	sa_int.sa_handler = &sigint_heredoc;
 	sa_quit.sa_handler = SIG_IGN;
