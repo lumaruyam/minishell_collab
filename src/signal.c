@@ -6,15 +6,22 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:28:55 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/23 20:57:32 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 14:48:12 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+// int	sig_exit(void)
+// {
+// 	return (EXIT_SUCCESS);
+// }
+
 int	sig_exit(void)
 {
-	return (EXIT_SUCCESS);
+	if (g_signal != 0)
+		return (1);  // readlineに終了を伝える
+	return (0);
 }
 
 static void	handle_signal_exec(int sig)
