@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:32:23 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/19 19:25:51 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/24 18:41:36 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,33 @@ void	prs_unlink_error(t_token *token)
 	}
 }
 
+// int	parsing(t_token **token)
+// {
+// 	int	return_code;
+
+// 	return_code = 0;
+// 	if (prs_chk_quotes(*token) != 0)
+// 		return_code = FAIL;
+// 	else if (prs_quotes_n_expand_env(*token) != 0)
+// 		return_code = FAIL;
+// 	if (return_code == 0)
+// 		*token = remove_empty_tokens(*token);
+// 	else if (prs_remove_node_null(token) != 0)
+// 		return_code = FAIL;
+// 	else if (prs_chk_allnodes_null(*token) != 0)
+// 		return_code = FAIL_VOID;
+// 	else if (prs_handle_redir(*token) != 0)
+// 		return_code = FAIL;
+// 	else if (prs_handle_cmd(*token) != 0)
+// 		return_code = FAIL;
+// 	else if (prs_handle_heredoc(*token) != 0)
+// 	{
+// 		prs_unlink_error(*token);
+// 		return_code = FAIL_VOID;
+// 	}
+// 	return (return_code);
+// }
+
 int	parsing(t_token **token)
 {
 	int	return_code;
@@ -89,15 +116,17 @@ int	parsing(t_token **token)
 		return_code = FAIL;
 	else if (prs_quotes_n_expand_env(*token) != 0)
 		return_code = FAIL;
-	else if (prs_remove_node_null(token) != 0)
+	else
+		*token = remove_empty_tokens(*token);
+	if (return_code == 0 && prs_remove_node_null(token) != 0)
 		return_code = FAIL;
-	else if (prs_chk_allnodes_null(*token) != 0)
+	if (return_code == 0 && prs_chk_allnodes_null(*token) != 0)
 		return_code = FAIL_VOID;
-	else if (prs_handle_redir(*token) != 0)
+	if (return_code == 0 && prs_handle_redir(*token) != 0)
 		return_code = FAIL;
-	else if (prs_handle_cmd(*token) != 0)
+	if (return_code == 0 && prs_handle_cmd(*token) != 0)
 		return_code = FAIL;
-	else if (prs_handle_heredoc(*token) != 0)
+	if (return_code == 0 && prs_handle_heredoc(*token) != 0)
 	{
 		prs_unlink_error(*token);
 		return_code = FAIL_VOID;

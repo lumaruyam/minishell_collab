@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:06:59 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/22 21:56:33 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:36:39 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,32 @@ char	*prs_tokens_join(t_token *token)
 		token = token->next;
 	}
 	return (res);
+}
+
+t_token	*remove_empty_tokens(t_token *head)
+{
+	t_token	*current;
+	t_token	*prev;
+	t_token	*next;
+
+	current = head;
+	prev = NULL;
+	while (current != NULL)
+	{
+		next = current->next;
+		if (current->value == NULL || current->value[0] == '\0')
+		{
+			if (prev == NULL)
+				head = next;
+			else
+				prev->next = next;
+			if (current->value)
+				free(current->value);
+			free(current);
+		}
+		else
+			prev = current;
+		current = next;
+	}
+	return (head);
 }

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:01:47 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/12 15:44:37 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/24 21:12:07 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,45 @@
 int	ft_env(t_shell *content, t_arg *args)
 {
 	t_env	*env;
-
 	env = content->env;
+
 	if (args)
 	{
 		error_env(args->value);
 		content->exit_code = CMD_NOT_FOUND;
+		return (FAIL);
 	}
 	if (!env)
 		return (SUCCESS);
 	while (env)
 	{
-		if (env->value)
+		if (env->env_line)
 			printf("%s\n", env->env_line);
 		env = env->next;
 	}
 	return (SUCCESS);
 }
+
+// int	ft_env(t_shell *content, t_arg *args)
+// {
+// 	t_env	*env;
+
+// 	env = content->env;
+// 	if (args)
+// 	{
+// 		error_env(args->value);
+// 		content->exit_code = CMD_NOT_FOUND;
+// 	}
+// 	if (!env)
+// 		return (SUCCESS);
+// 	while (env)
+// 	{
+// 		if (env->value)
+// 			printf("%s\n", env->env_line);
+// 		env = env->next;
+// 	}
+// 	return (SUCCESS);
+// }
 
 int	ft_pwd(t_arg *args)
 {

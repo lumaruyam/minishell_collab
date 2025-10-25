@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:08:04 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/23 21:47:39 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:32:32 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ char	*get_env_value(char *input_line)
 
 	if (!input_line)
 		return (NULL);
+
 	at_equal = ft_strchr(input_line, '=');
 	if (!at_equal)
 		return (NULL);
-	else if (at_equal - input_line == 0)
-		return (NULL);
-	return (ft_strdup(input_line + (at_equal - input_line + 1)));
+
+	// Return empty string if value is empty (like "hello=")
+	return (ft_strdup(at_equal + 1));
 }
 
 t_env	*env_make(char *env_id, char *env_value, char *env_line)

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/22 12:35:15 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:37:55 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ t_token		*create_token(char *token_value, int n, t_tokentype type,
 				t_shell *content);
 int			token_add_back(t_token **head, t_token *new_token);
 void		token_free(t_token *head);
+t_token		*remove_empty_tokens(t_token *head);
 
 /* -----------------------------Signals--------------------------------- */
 void		signal_child_process(void);

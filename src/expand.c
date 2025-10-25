@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:42:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/22 12:23:45 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:44:50 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,65 @@ int	prs_ct_dollars(char *input_str)
 	return (ct);
 }
 
+//norminette make it 25 lines
 char	*prs_expand_1envvar(char *str, char *envvar_found, t_shell *content)
 {
 	char	*before_envvar;
 	char	*envvar_value;
 	char	*after_envvar;
 	char	*new;
+
 	before_envvar = get_str_before_envvar(str, envvar_found);
 	if (!before_envvar)
 		return (NULL);
-	envvar_value = get_envvar_value((envvar_found + 1), content);
-	after_envvar = get_str_after_envvar(envvar_found);
+	if (envvar_found[0] == '$' && envvar_found[1] == '$')
+	{
+		envvar_value = handle_dollar_pid();
+		after_envvar = ft_strdup(envvar_found + 2);
+	}
+	else
+	{
+		envvar_value = get_envvar_value((envvar_found + 1), content);
+		after_envvar = get_str_after_envvar(envvar_found);
+	}
 	if (!after_envvar)
 		return (free(before_envvar), free(envvar_value), NULL);
-	new = chk_null_strjoin(before_envvar, envvar_value);
-	if (!new)
-		return (free(after_envvar), NULL);
-	new = chk_null_strjoin(new, after_envvar);
+	if (envvar_value && envvar_value[0] == '\0')
+		new = chk_null_strjoin(before_envvar, after_envvar);
+	else
+	{
+		new = chk_null_strjoin(before_envvar, envvar_value);
+		if (new)
+			new = chk_null_strjoin(new, after_envvar);
+	}
 	if (envvar_value)
 		free(envvar_value);
-	return (free(after_envvar), new);
+	free(after_envvar);
+	return (new);
 }
+
+// char	*prs_expand_1envvar(char *str, char *envvar_found, t_shell *content)
+// {
+// 	char	*before_envvar;
+// 	char	*envvar_value;
+// 	char	*after_envvar;
+// 	char	*new;
+
+// 	before_envvar = get_str_before_envvar(str, envvar_found);
+// 	if (!before_envvar)
+// 		return (NULL);
+// 	envvar_value = get_envvar_value((envvar_found + 1), content);
+// 	after_envvar = get_str_after_envvar(envvar_found);
+// 	if (!after_envvar)
+// 		return (free(before_envvar), free(envvar_value), NULL);
+// 	new = chk_null_strjoin(before_envvar, envvar_value);
+// 	if (!new)
+// 		return (free(after_envvar), NULL);
+// 	new = chk_null_strjoin(new, after_envvar);
+// 	if (envvar_value)
+// 		free(envvar_value);
+// 	return (free(after_envvar), new);
+// }
 
 int	prs_envvar_expand(t_token *token)
 {
