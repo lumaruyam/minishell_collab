@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:36 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/25 12:13:48 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 19:26:41 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,14 @@ void	child_process(t_shell *content, int (*fd)[2], int i, t_exec *tmp)
 	{
 		close_all(content->ct_exec - 1, fd);
 		ft_close(content);
+		free_after_process(content, NULL);
 		exit(exit_code);
 	}
 	exit_code = ft_execution(content, tmp);
 	close_all(content->ct_exec - 1, fd);
 	ft_close(content);
-	free_shell(content);
+	free_after_process(content, NULL);
+	// free_shell(content);
 	if (exit_code == 127)
 		exit(127);
 	else if (exit_code == 126)

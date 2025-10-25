@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 17:45:42 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/21 20:00:21 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 19:27:59 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,10 @@ int	ft_execution(t_shell *ctx, t_exec *temp)
 		return (free(path), ft_free_all(env), 127);
 	exec_args_create(temp, args_nb, args);
 	if (execve(path, args, env) == -1)
+	{
+		free_after_process(ctx, NULL);
 		return (handle_exec_error(path, env, args));
+	}
 	free(path);
 	ft_free_all(env);
 	free(args);

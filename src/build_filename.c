@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_filename.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:46:11 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 19:28:50 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/25 19:49:04 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_filename	*bd_make_filenames(char *pathname, t_tokentype type)
 	if (!filename)
 		return (NULL);
 	dup_path = ft_strdup(pathname);
+	if (!dup_path)
+		return (free(filename), NULL);
 	filename->path = dup_path;
 	filename->type = type;
 	filename->next = NULL;

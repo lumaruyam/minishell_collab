@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/25 17:28:21 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 19:56:18 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_env	*dup_env(char *env[])
 		env_value = get_env_value(env[i]);
 		tmp = env_make(env_id, env_value, ft_strdup(env[i]));
 		if (!tmp)
-			return (NULL);
+			return (env_free(res_env), NULL);
 		env_add_back(&res_env, tmp);
 		i++;
 	}
@@ -82,10 +82,30 @@ int	init_exec(t_shell *content, t_token **token)
 	content->ct_exec = ft_build_lstsize(content->exec);
 	content->pids = malloc(sizeof(pid_t) * (content->ct_exec + 1));
 	if (!content->pids)
+	{
+		build_free_all(content->exec);
+		content->exec = NULL;
 		return (FAIL);
+	}
 	content->ct_pid = 0;
 	return (SUCCESS);
 }
+
+//removed to handle memory leak 1025
+// int	init_exec(t_shell *content, t_token **token)
+// {
+// 	content->exec = build_to_exec(*token);
+// 	token_free(*token);
+// 	*token = NULL;
+// 	if (!content->exec)
+// 		return (FAIL);
+// 	content->ct_exec = ft_build_lstsize(content->exec);
+// 	content->pids = malloc(sizeof(pid_t) * (content->ct_exec + 1));
+// 	if (!content->pids)
+// 		return (FAIL);
+// 	content->ct_pid = 0;
+// 	return (SUCCESS);
+// }
 
 int	process_input(t_shell *content, char *line)
 {
@@ -110,7 +130,7 @@ int	process_input(t_shell *content, char *line)
 		return (FAIL);
 	}
 	if (init_exec(content, &token) != 0)
-		return (FAIL);
+		return (token_free(token), FAIL);
 	exec(content);
 	free_after_process(content, token);
 	return (SUCCESS);

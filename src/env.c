@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:08:04 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/24 20:32:32 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:30:54 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,11 @@ char	*get_env_id(char *input_line)
 
 	if (!input_line)
 		return (NULL);
-
 	at_equal = ft_strchr(input_line, '=');
-
-	// If no '=' found, return the whole string
 	if (!at_equal)
 		return (ft_strdup(input_line));
-
-	// If '=' is at position 0, it's invalid (like "=value")
 	if (at_equal == input_line)
 		return (NULL);
-
-	// Extract the part before '='
 	len = at_equal - input_line;
 	return (ft_substr(input_line, 0, len));
 }
@@ -55,12 +48,9 @@ char	*get_env_value(char *input_line)
 
 	if (!input_line)
 		return (NULL);
-
 	at_equal = ft_strchr(input_line, '=');
 	if (!at_equal)
 		return (NULL);
-
-	// Return empty string if value is empty (like "hello=")
 	return (ft_strdup(at_equal + 1));
 }
 
@@ -70,7 +60,7 @@ t_env	*env_make(char *env_id, char *env_value, char *env_line)
 
 	new = malloc(sizeof(t_env));
 	if (!new)
-		return (free(env_id), free(env_value), NULL);
+		return (free(env_id), free(env_value), free(env_line), NULL);
 	new->id = env_id;
 	new->value = env_value;
 	new->env_line = env_line;

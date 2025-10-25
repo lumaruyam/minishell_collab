@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_to_exec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 19:32:01 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/19 19:33:08 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/25 19:53:00 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,34 @@ t_exec	*build_to_exec(t_token *token)
 		if (bd_handle_pipe(exec, token) == FAIL)
 			break ;
 		if (bd_handle_cmd(exec, token) == FAIL)
+		{
+			build_free_all(exec);
 			return (NULL);
+		}
 		bd_handle_redirs(exec, token);
 		bd_handle_args(exec, token);
 		token = token->next;
 	}
 	return (exec);
 }
+
+// removed to handle leaks 1025
+// t_exec	*build_to_exec(t_token *token)
+// {
+// 	t_exec	*exec;
+
+// 	exec = init_build();
+// 	if (!exec)
+// 		return (NULL);
+// 	while (token != NULL)
+// 	{
+// 		if (bd_handle_pipe(exec, token) == FAIL)
+// 			break ;
+// 		if (bd_handle_cmd(exec, token) == FAIL)
+// 			return (NULL);
+// 		bd_handle_redirs(exec, token);
+// 		bd_handle_args(exec, token);
+// 		token = token->next;
+// 	}
+// 	return (exec);
+// }
