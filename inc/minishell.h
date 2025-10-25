@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/24 18:37:55 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:25:48 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,10 @@ t_token		*prs_get_quoted_str(char *input_str, char c,
 				t_shell *content);
 int			len_quotes(char *str, char sd_quote);
 int			rogue_len(char *str);
+
+/*readline utils*/
+char	*read_multiline_input(char *first_line);
+int		has_unclosed_quotes(char *str);
 
 /* -----------------------------build to exec------------------------- */
 

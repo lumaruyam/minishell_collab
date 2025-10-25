@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/24 19:15:56 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:28:21 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,14 @@ int	process_input(t_shell *content, char *line)
 {
 	t_token	*token;
 	int		pars;
+	char	*complete_line;
 
 	init_ignore_signal();
-	token = lexing(content, line);
-	free(line);
+	complete_line = read_multiline_input(line);
+	if (!complete_line)
+		return (SUCCESS);
+	token = lexing(content, complete_line);
+	free(complete_line);
 	if (!token)
 		return (SUCCESS);
 	pars = parsing(&token);
@@ -111,6 +115,31 @@ int	process_input(t_shell *content, char *line)
 	free_after_process(content, token);
 	return (SUCCESS);
 }
+
+// int	process_input(t_shell *content, char *line)
+// {
+// 	t_token	*token;
+// 	int		pars;
+
+// 	init_ignore_signal();
+// 	token = lexing(content, line);
+// 	free(line);
+// 	if (!token)
+// 		return (SUCCESS);
+// 	pars = parsing(&token);
+// 	if (pars)
+// 	{
+// 		token_free(token);
+// 		if (pars == FAIL_VOID)
+// 			return (SUCCESS);
+// 		return (FAIL);
+// 	}
+// 	if (init_exec(content, &token) != 0)
+// 		return (FAIL);
+// 	exec(content);
+// 	free_after_process(content, token);
+// 	return (SUCCESS);
+// }
 
 /* before modified signal
 int	process_input(t_shell *content, char *line)
