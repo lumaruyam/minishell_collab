@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:00:59 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/19 19:35:01 by skoudad          ###   ########.fr       */
+/*   Updated: 2025/10/25 12:19:27 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-// original document name: exec_toolbox1
 
 void	exe_close(int *fd)
 {
@@ -25,10 +23,18 @@ void	exe_close(int *fd)
 
 void	ft_close(t_shell *content)
 {
+	int	i;
+
 	if (content)
 	{
 		exe_close(&(content->std_in));
 		exe_close(&(content->std_out));
+		i = 3;
+		while (i < 1024)
+		{
+			close(i);
+			i++;
+		}
 	}
 }
 

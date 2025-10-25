@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:54 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/21 09:22:17 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/25 11:22:30 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,32 @@ void	close_all(int pipe_nb, int (*fd)[2])
 	i = 0;
 	while (i < pipe_nb)
 	{
-		exe_close(&fd[i][0]);
-		exe_close(&fd[i][1]);
+		if (fd[i][0] != -1)
+		{
+			close(fd[i][0]);
+			fd[i][0] = -1;
+		}
+		if (fd[i][1] != -1)
+		{
+			close(fd[i][1]);
+			fd[i][1] = -1;
+		}
 		i++;
 	}
 }
+
+// void	close_all(int pipe_nb, int (*fd)[2])
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < pipe_nb)
+// 	{
+// 		exe_close(&fd[i][0]);
+// 		exe_close(&fd[i][1]);
+// 		i++;
+// 	}
+// }
 
 void	unlink_all(t_shell *content)
 {
