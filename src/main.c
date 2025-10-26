@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/22 21:33:47 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/26 11:09:50 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,51 @@ int	read_loop(t_shell *content)
 		line = readline("minishell> ");
 		if (handle_eof(line))
 			break ;
-		else if (chk_empty_line(line) == 0)
+		if (chk_empty_line(line) == 0)
 		{
 			add_history(line);
 			if (process_input(content, line) != 0)
-			{
-				ft_putendl_fd("Syntax Error", 2);
-				content->exit_code = 2;
-			}
-			line = NULL;
+				ft_putendl_fd("Syntax Error", 2), content->exit_code = 2;
 		}
 		signal_to_action(content);
 		if (line)
 			free(line);
+		line = NULL;
 	}
+	if (line)
+		free(line);
 	return (0);
 }
+
+// removed to debug leak 1026
+// int	read_loop(t_shell *content)
+// {
+// 	char	*line;
+
+// 	(void)content;
+// 	line = NULL;
+// 	while (1)
+// 	{
+// 		init_signal_interactive_mode();
+// 		line = readline("minishell> ");
+// 		if (handle_eof(line))
+// 			break ;
+// 		else if (chk_empty_line(line) == 0)
+// 		{
+// 			add_history(line);
+// 			if (process_input(content, line) != 0)
+// 			{
+// 				ft_putendl_fd("Syntax Error", 2);
+// 				content->exit_code = 2;
+// 			}
+// 			line = NULL;
+// 		}
+// 		signal_to_action(content);
+// 		if (line)
+// 			free(line);
+// 	}
+// 	return (0);
+// }
 
 int	main(int ac, char *av[], char **env)
 {
