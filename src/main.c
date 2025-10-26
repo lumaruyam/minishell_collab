@@ -6,11 +6,30 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:33:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/26 11:09:50 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/26 16:41:49 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+char	*get_input(void)
+{
+	char	*line;
+
+	if (isatty(STDIN_FILENO))
+	{
+		line = readline("minishell> ");
+		if (line && *line)
+			add_history(line);
+	}
+	else
+	{
+		line = get_next_line(STDIN_FILENO);
+		if (line && line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
+	}
+	return (line);
+}
 
 int	read_loop(t_shell *content)
 {
@@ -21,7 +40,7 @@ int	read_loop(t_shell *content)
 	while (1)
 	{
 		init_signal_interactive_mode();
-		line = readline("minishell> ");
+		line = get_input();
 		if (handle_eof(line))
 			break ;
 		if (chk_empty_line(line) == 0)
@@ -39,6 +58,35 @@ int	read_loop(t_shell *content)
 		free(line);
 	return (0);
 }
+
+//removed to debug ./minishell | ./minishell
+// int	read_loop(t_shell *content)
+// {
+// 	char	*line;
+
+// 	(void)content;
+// 	line = NULL;
+// 	while (1)
+// 	{
+// 		init_signal_interactive_mode();
+// 		line = readline("minishell> ");
+// 		if (handle_eof(line))
+// 			break ;
+// 		if (chk_empty_line(line) == 0)
+// 		{
+// 			add_history(line);
+// 			if (process_input(content, line) != 0)
+// 				ft_putendl_fd("Syntax Error", 2), content->exit_code = 2;
+// 		}
+// 		signal_to_action(content);
+// 		if (line)
+// 			free(line);
+// 		line = NULL;
+// 	}
+// 	if (line)
+// 		free(line);
+// 	return (0);
+// }
 
 // removed to debug leak 1026
 // int	read_loop(t_shell *content)
