@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/25 17:25:48 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:58:11 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void		token_free(t_token *head);
 t_token		*remove_empty_tokens(t_token *head);
 
 /* -----------------------------Signals--------------------------------- */
+
 void		signal_child_process(void);
 void		init_signal_heredoc(void);
 void		init_ignore_signal(void);
@@ -184,6 +185,9 @@ void		init_signal_exec(void);
 void		init_signal_exec(void);
 void		init_signal_interactive_mode(void);
 void		sigint_exec(int status);
+void		sig_heredoc(void);
+void		sig_stop(void);
+
 
 /* -----------------------------Parsing--------------------------------- */
 

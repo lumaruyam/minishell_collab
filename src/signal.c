@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:28:55 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/25 20:44:15 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/28 18:39:58 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@
 // 	return (EXIT_SUCCESS);
 // }
 
-int	sig_exit(void)
+void	sig_stop(void)
 {
-	if (g_signal != 0)
-		return (1);
-	return (0);
+	struct sigaction	stop_sa;
+
+	stop_sa.sa_handler = SIG_IGN;
+	sigemptyset(&stop_sa.sa_mask);
+	sigaddset(&stop_sa.sa_mask, SIGINT);
+	stop_sa.sa_flags = 0;
+	sigaction(SIGINT, &stop_sa, NULL);
 }
 
 static void	handle_signal_exec(int sig)

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:41:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/26 13:19:59 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/28 17:10:13 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,16 +180,40 @@ static int	process_heredoc_input(int fd, char *eof_delimiter)
 int	prs_init_heredoc(int fd, char *eof_delimiter)
 {
 	int	signal_received;
+	int status = 0;
+	pid_t	pid;
 
-	init_signal_heredoc();
-	signal_received = process_heredoc_input(fd, eof_delimiter);
-	if (signal_received)
+	// init_signal_heredoc();
+	sig_stop();
+	pid = fork();
+	if (pid == -1)
+		write(STDERR_FILENO, "Fork error\n", 11);
+	if (pid == 0)
 	{
-		g_signal = 0;
-		return (1);
+		sig_heredoc();
+		signal_received = process_heredoc_input(fd, eof_delimiter);
 	}
-	return (0);
+	else
+	{
+		waitpid(pid, &status, 0);
+		init_signal_interactive_mode();
+	}
+	return (status);
 }
+
+// int	prs_init_heredoc(int fd, char *eof_delimiter)
+// {
+// 	int	signal_received;
+
+// 	init_signal_heredoc();
+// 	signal_received = process_heredoc_input(fd, eof_delimiter);
+// 	if (signal_received)
+// 	{
+// 		g_signal = 0;
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 int	prs_handle_heredoc(t_token *token)
 {
@@ -217,7 +241,6 @@ int	prs_handle_heredoc(t_token *token)
 	}
 	return (end);
 }
-
 
 /* signals not modified
 int	prs_init_heredoc(int fd, char *eof_delimiter)

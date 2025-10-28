@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:36 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/25 21:04:06 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/28 17:40:36 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,25 @@ int	exec_parent(t_shell *content)
 // 	if (open_pipes(content->ct_exec - 1, fd) == -1)
 // 		return (err_pipe(errno, content));
 // 	while (tmp)
+// 	{int	prs_handle_cmd(t_token *token)
+// {
+// 	while (token != NULL)
 // 	{
+// 		if (token->type == STR)
+// 		{
+// 			token->type = CMD;
+// 			while (token != NULL && token->type != PIPE)
+// 			{
+// 				if (token->type == STR)
+// 					token->type = ARG;
+// 				token = token->next;
+// 			}
+// 		}
+// 		if (token != NULL)
+// 			token = token->next;
+// 	}
+// 	return (SUCCESS);
+// }
 // 	signal(SIGINT, sigint_exec);
 // 		pid = fork();
 // 		if (pid == -1)
