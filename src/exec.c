@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:08:00 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/28 22:07:15 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:27:48 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	handle_single_builtin(t_shell *content, t_exec *tmp)
 	free_after_process(content, NULL);
 	return (content->exit_code);
 }
-
 
 // removed to handle leak 1025
 // static int	handle_single_builtin(t_shell *content, t_exec *tmp)

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 17:45:42 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/28 17:45:32 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:27:55 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,7 @@ char	**env_format(t_env *env)
 	return (env_arr);
 }
 
-// 126 : Command found but cannot be executed(due to permission issues)
-// 127 : Command not found(the file does not exist or is not in the PATH)
-// int execve(const char *fichier, char *const argv[], char *const envp[])
-// char	*args[] = {"/bin/ls", "-l", "/home", NULL};
-// +2 for path and NULL
-// ENOENT (Error NO ENTry)
-// EACCES (Error ACCESS)
-static int	handle_exec_error(char *path, char **env, char **args)
+static int	handle_exec_err(char *path, char **env, char **args)
 {
 	int	ret;
 
@@ -105,7 +98,7 @@ int	ft_execution(t_shell *ctx, t_exec *temp)
 {
 	int		args_nb;
 	char	*path;
-	char	**args;
+	char	**arg;
 	char	**env;
 
 	if (!temp->cmd)
@@ -117,18 +110,15 @@ int	ft_execution(t_shell *ctx, t_exec *temp)
 	if (!env)
 		return (free(path), 127);
 	args_nb = ft_args_lstsize(temp->args) + 2;
-	args = malloc(sizeof(char *) * args_nb);
-	if (!args)
+	arg = malloc(sizeof(char *) * args_nb);
+	if (!arg)
 		return (free(path), ft_free_all(env), 127);
-	exec_args_create(temp, args_nb, args);
-	if (execve(path, args, env) == -1)
-	{
-		free_after_process(ctx, NULL);
-		return (handle_exec_error(path, env, args));
-	}
+	exec_args_create(temp, args_nb, arg);
+	if (execve(path, arg, env) == -1)
+		return (free_after_process(ctx, NULL), handle_exec_err(path, env, arg));
 	free(path);
 	ft_free_all(env);
-	free(args);
+	free(arg);
 	return (0);
 }
 

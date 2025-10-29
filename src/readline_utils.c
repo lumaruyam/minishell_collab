@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 17:15:35 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/25 20:29:26 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:36:20 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*read_multiline_input(char *first_line)
 		line = readline("> ");
 		if (!line)
 		{
-			ft_putstr_fd("minishell: unexpected EOF while looking for matching quote\n", 2);
+			ft_putstr_fd("minishell: unexpected EOF\n", 2);
 			free(input);
 			return (NULL);
 		}
@@ -57,7 +57,8 @@ char	*read_multiline_input(char *first_line)
 // 		line = readline("> ");
 // 		if (!line)
 // 		{
-// 			ft_putstr_fd("minishell: unexpected EOF while looking for matching quote\n", 2);
+// 			ft_putstr_fd("minishell: unexpected EOF while
+// looking for matching quote\n", 2);
 // 			free(input);
 // 			return (NULL);
 // 		}

@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:36:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/29 18:50:11 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 21:34:49 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_shell	*init_shell(char *env[])
 	content->ct_pid = 0;
 	content->ct_exec = 0;
 	content->exit_code = 0;
+	content->child_end_with_signal = false;
 	return (content);
 }
 

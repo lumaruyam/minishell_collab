@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:01:47 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/24 21:12:07 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 21:26:06 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	ft_env(t_shell *content, t_arg *args)
 {
 	t_env	*env;
-	env = content->env;
 
+	env = content->env;
 	if (args)
 	{
 		error_env(args->value);

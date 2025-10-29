@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:28:55 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/29 15:33:34 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:37:39 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	init_signal_exec(void)
 {
 	struct sigaction	sa;
 
-	// rl_event_hook = sig_exit;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = &handle_signal_exec;
@@ -63,7 +62,6 @@ void	init_signal_interactive_mode(void)
 {
 	struct sigaction	sa;
 
-	// rl_event_hook = sig_exit;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = &sigint_interactive_mode;

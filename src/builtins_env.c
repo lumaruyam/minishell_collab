@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:59:02 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/24 20:18:48 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:39:28 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	update_envvar(t_env *update_env, char *env_line)
 	update_env->env_line = env_line;
 }
 
-static int make_add_env(char *env_id, char *input_line,
+static int	make_add_env(char *env_id, char *input_line,
 			char *dup_inputline, t_env **env_head)
 {
 	char	*env_value;
@@ -69,22 +69,29 @@ static int make_add_env(char *env_id, char *input_line,
 	return (SUCCESS);
 }
 
+static int	chk_dup_envvar(char *input_line, char **env_id, char **dup_input)
+{
+	*env_id = get_env_id(input_line);
+	if (!*env_id || !chk_envid_valid(*env_id))
+	{
+		free(*env_id);
+		error_export(input_line);
+		return (FAIL);
+	}
+	*dup_input = ft_strdup(input_line);
+	if (!dup_input)
+		return (free(*env_id), FAIL);
+	return (SUCCESS);
+}
+
 int	add_envvar(char *input_line, t_env **env_head)
 {
 	char	*env_id;
 	char	*dup_inputline;
 	t_env	*env;
 
-	env_id = get_env_id(input_line);// Check if this is a valid identifier
-	if (!env_id || !chk_envid_valid(env_id))
-	{
-		free(env_id);
-		error_export(input_line);
+	if (chk_dup_envvar(input_line, &env_id, &dup_inputline) == FAIL)
 		return (FAIL);
-	}
-	dup_inputline = ft_strdup(input_line);
-	if (!dup_inputline)
-		return(free(env_id), FAIL);
 	env = get_env(env_id, *env_head);
 	if (!env)
 	{
@@ -98,6 +105,37 @@ int	add_envvar(char *input_line, t_env **env_head)
 	}
 	return (SUCCESS);
 }
+
+// 26 lines removed 1029
+// int	add_envvar(char *input_line, t_env **env_head)
+// {
+// 	char	*env_id;
+// 	char	*dup_inputline;
+// 	t_env	*env;
+
+// 	env_id = get_env_id(input_line);
+// 	if (!env_id || !chk_envid_valid(env_id))
+// 	{
+// 		free(env_id);
+// 		error_export(input_line);
+// 		return (FAIL);
+// 	}
+// 	dup_inputline = ft_strdup(input_line);
+// 	if (!dup_inputline)
+// 		return (free(env_id), FAIL);
+// 	env = get_env(env_id, *env_head);
+// 	if (!env)
+// 	{
+// 		if (make_add_env(env_id, input_line, dup_inputline, env_head) == FAIL)
+// 			return (FAIL);
+// 	}
+// 	else
+// 	{
+// 		free(env_id);
+// 		update_envvar(env, dup_inputline);
+// 	}
+// 	return (SUCCESS);
+// }
 // int	add_envvar(char *input_line, t_env **env_head)
 // {
 // 	char	*env_id;

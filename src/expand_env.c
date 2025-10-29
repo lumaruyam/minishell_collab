@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:17:08 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/24 20:43:17 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:27:44 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,39 @@ int	ft_envvar_len(char *envvar)
 	if (!envvar[i])
 		return (i);
 	if (ft_isdigit((unsigned char)envvar[i]) || envvar[i] == '?'
-			 || envvar[i] == '$')
-		return (i + 1);//changed from return (2)
+		|| envvar[i] == '$')
+		return (i + 1);
 	while (envvar[i])
 	{
 		if (envvar[i] != '_' && ft_isalnum((unsigned char)envvar[i]) == 0)
-			break;
+			break ;
 		i++;
 	}
 	return (i);
 }
+
+// int	ft_envvar_len(char *envvar)
+// {
+// 	int	i;
+
+// 	if (!envvar || !*envvar)
+// 		return (0);
+// 	i = 0;
+// 	if (envvar[i] == '$')
+// 		i++;
+// 	if (!envvar[i])
+// 		return (i);
+// 	if (ft_isdigit((unsigned char)envvar[i]) || envvar[i] == '?'
+// 		|| envvar[i] == '$')
+// 		return (i + 1);//changed from return (2)
+// 	while (envvar[i])
+// 	{
+// 		if (envvar[i] != '_' && ft_isalnum((unsigned char)envvar[i]) == 0)
+// 			break ;
+// 		i++;
+// 	}
+// 	return (i);
+// }
 
 char	*get_envvar_name(char *envvar)
 {

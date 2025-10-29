@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 21:09:34 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/28 18:04:53 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:27:59 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	bd_handle_args(t_exec *exec, t_token *token)
 	{
 		new = bd_make_args(token->value);
 		if (!new)
-			return(FAIL_BUILD);
+			return (FAIL_BUILD);
 		arg_add_back(&(exec->args), new);
 	}
 	return (SUCCESS);

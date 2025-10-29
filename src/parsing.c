@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:32:23 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/28 19:41:14 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:34:46 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int	parsing(t_token **token)
 		return_code = FAIL;
 	else
 		*token = remove_empty_tokens(*token);
-
 	if (return_code == 0 && prs_remove_node_null(token) != 0)
 		return_code = FAIL;
 	if (return_code == 0 && prs_chk_allnodes_null(*token) != 0)

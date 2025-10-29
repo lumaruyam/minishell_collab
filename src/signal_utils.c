@@ -6,13 +6,13 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 21:29:27 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/29 18:50:39 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:37:07 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	signal_child_process(void)//implemet this before exective
+void	signal_child_process(void)
 {
 	rl_event_hook = sig_exit;
 	signal(SIGINT, SIG_DFL);
@@ -91,7 +91,6 @@ void	init_ignore_signal(void)
 {
 	struct sigaction	sa;
 
-	// rl_event_hook = sig_exit;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = SIG_IGN;

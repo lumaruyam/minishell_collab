@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:54 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/28 22:06:51 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:27:50 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ void	close_all(int pipe_nb, int (*fd)[2])
 
 void	unlink_all(t_shell *content)
 {
-	t_exec	*exec;
+	t_exec		*exec;
 	t_filename	*redir;
 
 	exec = content->exec;
 	while (exec)
 	{
-		redir =exec->redirs;
+		redir = exec->redirs;
 		while (redir)
 		{
 			if (redir->type == NON_HEREDOC)

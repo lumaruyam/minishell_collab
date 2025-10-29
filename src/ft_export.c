@@ -6,13 +6,13 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:19:57 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/28 20:35:18 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:30:21 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static	void ft_swap_ptr(char **a, char **b)
+static void	ft_swap_ptr(char **a, char **b)
 {
 	char	*tmp;
 
@@ -30,7 +30,6 @@ char	**sort_env_arrs(char **env_arrs)
 	res = ft_arrsdup(env_arrs);
 	if (!res)
 		return (NULL);
-		//return (arrs_free(res), NULL);
 	i = 0;
 	while (res[i])
 	{
@@ -46,7 +45,7 @@ char	**sort_env_arrs(char **env_arrs)
 	return (res);
 }
 
-static void print_export_all(char **sorted)
+static void	print_export_all(char **sorted)
 {
 	int		i;
 	char	*tmp_value;
@@ -96,7 +95,7 @@ int	ft_export(t_shell *content, t_arg *args)
 	}
 	else
 	{
-		while(args)
+		while (args)
 		{
 			if (ft_strchr(args->value, '=') != NULL)
 			{

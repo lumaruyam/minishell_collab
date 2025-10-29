@@ -6,29 +6,45 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:36 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/28 17:40:36 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 22:04:37 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	handle_redir_and_bltins(t_shell *content, t_exec *tmp, int *exit_code)
+static int	handle_redir_and_bltins(t_shell *ctx, t_exec *tmp, int *exit_code)
 {
-	if (err_redirs(tmp, content))
+	if (err_redirs(tmp, ctx))
 	{
-		// free_shell(content); handle double free 1025
-		content->exit_code = 1;
-		*exit_code = content->exit_code;
+		ctx->exit_code = 1;
+		*exit_code = ctx->exit_code;
 		return (1);
 	}
 	if (check_is_builtin(tmp->cmd))
 	{
-		*exit_code = exec_builtin(content, tmp->cmd, tmp->args);
-		// free_shell(content); handle double free 1025
+		*exit_code = exec_builtin(ctx, tmp->cmd, tmp->args);
 		return (1);
 	}
 	return (0);
 }
+
+// static int	handle_redir_bltins(t_shell *ctx, t_exec *tmp, int *exit_code)
+// {
+// 	if (err_redirs(tmp, ctx))
+// 	{
+// 		// free_shell(content); handle double free 1025
+// 		ctx->exit_code = 1;
+// 		*exit_code = ctx->exit_code;
+// 		return (1);
+// 	}
+// 	if (check_is_builtin(tmp->cmd))
+// 	{
+// 		*exit_code = exec_builtin(ctx, tmp->cmd, tmp->args);
+// 		// free_shell(content); handle double free 1025
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 static void	setup_redir(t_shell *content, int (*fd)[2], int i)
 {
@@ -38,17 +54,37 @@ static void	setup_redir(t_shell *content, int (*fd)[2], int i)
 		if (i > 0)
 		{
 			dup2(fd[i - 1][0], STDIN_FILENO);
-			exe_close(&fd[i - 1][1]);
+			exe_close(&fd[i - 1][0]);
 		}
 		if (i < content->ct_exec - 1)
 		{
-			dup2(fd[i][1], STDOUT_FILENO);
-			exe_close(&fd[i][1]);
+			dup2(fd[i - 1][1], STDOUT_FILENO);
+			exe_close(&fd[i - 1][1]);
 		}
 		close_fds(content->ct_exec - 1, fd, i, false);
 	}
 	ft_close(content);
 }
+
+// static void	setup_redir(t_shell *content, int (*fd)[2], int i)
+// {
+// 	signal(SIGQUIT, SIG_DFL);
+// 	if (content->ct_exec > 1)
+// 	{
+// 		if (i > 0)
+// 		{
+// 			dup2(fd[i - 1][0], STDIN_FILENO);
+// 			exe_close(&fd[i - 1][0]);
+// 		}
+// 		if (i < content->ct_exec - 1)
+// 		{
+// 			dup2(fd[i][1], STDOUT_FILENO);
+// 			exe_close(&fd[i][1]);
+// 		}
+// 		close_fds(content->ct_exec - 1, fd, i, false);
+// 	}
+// 	ft_close(content);
+// }
 
 // will change for test
 // static void	setup_redir(t_shell *content, int (*fd)[2], int i)
@@ -98,7 +134,6 @@ void	child_process(t_shell *content, int (*fd)[2], int i, t_exec *tmp)
 	close_all(content->ct_exec - 1, fd);
 	ft_close(content);
 	free_after_process(content, NULL);
-	// free_shell(content);
 	if (exit_code == 127)
 		exit(127);
 	else if (exit_code == 126)

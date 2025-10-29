@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 19:59:14 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/20 21:27:47 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:27:36 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	ft_exit(t_shell *content, t_arg *args)
 	else
 	{
 		if (g_signal > 0)
-			exit_code =  g_signal;
+			exit_code = g_signal;
 	}
 	set_std(content, 1);
 	free_shell(content);

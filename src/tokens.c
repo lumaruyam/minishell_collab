@@ -6,13 +6,13 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 18:15:18 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/28 21:44:39 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:38:36 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_token	*create_token(char *token_value, int n,t_tokentype type, t_shell *content)
+t_token	*create_token(char *token_value, int n, t_tokentype type, t_shell *ctx)
 {
 	t_token	*new_token;
 	char	*dup_token_value;
@@ -28,7 +28,7 @@ t_token	*create_token(char *token_value, int n,t_tokentype type, t_shell *conten
 	}
 	new_token->value = dup_token_value;
 	new_token->type = type;
-	new_token->content = content;
+	new_token->content = ctx;
 	new_token->next = NULL;
 	return (new_token);
 }

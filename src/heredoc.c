@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:41:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/29 15:34:45 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:31:02 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,7 @@ static int	process_heredoc_input(int fd, char *eof_delimiter)
 			break ;
 		}
 		if (line[0] != '\0')
-		{
 			ft_putendl_fd(line, fd);
-		}
 		free(line);
 	}
 	return (g_signal != 0);
