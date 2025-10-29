@@ -6,22 +6,35 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 18:27:11 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/28 17:27:28 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/28 22:07:11 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	prs_expand_env(t_token *token)
+int prs_expand_env(t_token *token)
 {
 	while (token)
 	{
-		if (token->type == STR || token->type == DBL_QUOTE)
+		if ((token->type == STR || token->type == DBL_QUOTE) &&
+			token->type != DELIMITTER)
 			prs_envvar_expand(token);
 		token = token->next;
 	}
 	return (SUCCESS);
 }
+
+// debugged delimiter 1028
+// int	prs_expand_env(t_token *token)
+// {
+// 	while (token)
+// 	{
+// 		if (token->type == STR || token->type == DBL_QUOTE)
+// 			prs_envvar_expand(token);
+// 		token = token->next;
+// 	}
+// 	return (SUCCESS);
+// }
 
 char	*handle_qmark_exit(t_shell *content)
 {

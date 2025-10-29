@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:32:23 by lulimaruyam       #+#    #+#             */
-/*   Updated: 2025/10/28 17:45:50 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/28 19:41:14 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,17 @@ int	parsing(t_token **token)
 	return_code = 0;
 	if (prs_chk_quotes(*token) != 0)
 		return_code = FAIL;
+	if (return_code == 0 && prs_handle_redir(*token) != 0)
+		return_code = FAIL;
 	else if (prs_quotes_n_expand_env(*token) != 0)
 		return_code = FAIL;
 	else
 		*token = remove_empty_tokens(*token);
+
 	if (return_code == 0 && prs_remove_node_null(token) != 0)
 		return_code = FAIL;
 	if (return_code == 0 && prs_chk_allnodes_null(*token) != 0)
 		return_code = FAIL_VOID;
-	if (return_code == 0 && prs_handle_redir(*token) != 0)
-		return_code = FAIL;
 	if (return_code == 0 && prs_handle_cmd(*token) != 0)
 		return_code = FAIL;
 	if (return_code == 0 && prs_handle_heredoc(*token) != 0)
@@ -133,3 +134,31 @@ int	parsing(t_token **token)
 	}
 	return (return_code);
 }
+
+// 1028
+// int	parsing(t_token **token)
+// {
+// 	int	return_code;
+
+// 	return_code = 0;
+// 	if (prs_chk_quotes(*token) != 0)
+// 		return_code = FAIL;
+// 	else if (prs_quotes_n_expand_env(*token) != 0)
+// 		return_code = FAIL;
+// 	else
+// 		*token = remove_empty_tokens(*token);
+// 	if (return_code == 0 && prs_remove_node_null(token) != 0)
+// 		return_code = FAIL;
+// 	if (return_code == 0 && prs_chk_allnodes_null(*token) != 0)
+// 		return_code = FAIL_VOID;
+// 	if (return_code == 0 && prs_handle_redir(*token) != 0)
+// 		return_code = FAIL;
+// 	if (return_code == 0 && prs_handle_cmd(*token) != 0)
+// 		return_code = FAIL;
+// 	if (return_code == 0 && prs_handle_heredoc(*token) != 0)
+// 	{
+// 		prs_unlink_error(*token);
+// 		return_code = FAIL_VOID;
+// 	}
+// 	return (return_code);
+// }

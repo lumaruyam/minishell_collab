@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:19:57 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/22 11:29:42 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/28 20:35:18 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,40 @@ int	ft_export(t_shell *content, t_arg *args)
 {
 	if (!args)
 	{
-	 if (export_print_sorted_env(content->env) != 0)
-		return (SUCCESS);
+		if (export_print_sorted_env(content->env) != 0)
+			return (SUCCESS);
 	}
 	else
 	{
 		while(args)
 		{
-			if (add_envvar(args->value, &(content->env)) != 0)
-				return (FAIL);
+			if (ft_strchr(args->value, '=') != NULL)
+			{
+				if (add_envvar(args->value, &(content->env)) != 0)
+					return (FAIL);
+			}
 			args = args->next;
 		}
 	}
 	return (SUCCESS);
 }
+
+// 1028 fixed export A
+// int	ft_export(t_shell *content, t_arg *args)
+// {
+// 	if (!args)
+// 	{
+// 	 if (export_print_sorted_env(content->env) != 0)
+// 		return (SUCCESS);
+// 	}
+// 	else
+// 	{
+// 		while(args)
+// 		{
+// 			if (add_envvar(args->value, &(content->env)) != 0)
+// 				return (FAIL);
+// 			args = args->next;
+// 		}
+// 	}
+// 	return (SUCCESS);
+// }

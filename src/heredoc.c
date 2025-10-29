@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:41:10 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/28 17:10:13 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:34:45 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	prs_handle_redir(t_token *token)
 		{
 			if (token->next == NULL || token->next->type != STR)
 				return (FAIL);
-			token->next->type = FILENAME;
+			if (token->type == HEREDOC)
+				token->next->type = DELIMITTER;
+			else
+				token->next->type = FILENAME;
 		}
 		else if (token->type == PIPE && token->next == NULL)
 			return (FAIL);
@@ -31,6 +34,27 @@ int	prs_handle_redir(t_token *token)
 	}
 	return (SUCCESS);
 }
+
+// $USER debug 1028
+// int	prs_handle_redir(t_token *token)
+// {
+// 	if (token && token->type == PIPE)
+// 		return (FAIL);
+// 	while (token)
+// 	{
+// 		if (token->type == INFILE || token->type == OUTFILE
+// 			|| token->type == HEREDOC || token->type == APPEND)
+// 		{
+// 			if (token->next == NULL || token->next->type != STR)
+// 				return (FAIL);
+// 			token->next->type = FILENAME;
+// 		}
+// 		else if (token->type == PIPE && token->next == NULL)
+// 			return (FAIL);
+// 		token = token->next;
+// 	}
+// 	return (SUCCESS);
+// }
 
 static char	*create_random_filename(char *str)
 {
@@ -107,18 +131,51 @@ static int	process_heredoc_input(int fd, char *eof_delimiter)
 		if (!line)
 		{
 			if (g_signal == 0)
-			break ;
+				break ;
 		}
 		if (ft_strcmp(line, eof_delimiter) == 0)
 		{
 			free(line);
 			break ;
 		}
-		ft_putendl_fd(line, fd);
+		if (line[0] != '\0')
+		{
+			ft_putendl_fd(line, fd);
+		}
 		free(line);
 	}
 	return (g_signal != 0);
 }
+
+// debug 1028
+// static int	process_heredoc_input(int fd, char *eof_delimiter)
+// {
+// 	char	*line;
+
+// 	while (1)
+// 	{
+// 		line = readline("heredoc> ");
+// 		if (g_signal != 0 || (line && line[0] == '\0' && g_signal != 0))
+// 		{
+// 			if (line)
+// 				free(line);
+// 			return (1);
+// 		}
+// 		if (!line)
+// 		{
+// 			if (g_signal == 0)
+// 			break ;
+// 		}
+// 		if (ft_strcmp(line, eof_delimiter) == 0)
+// 		{
+// 			free(line);
+// 			break ;
+// 		}
+// 		ft_putendl_fd(line, fd);
+// 		free(line);
+// 	}
+// 	return (g_signal != 0);
+// }
 
 // static int	process_heredoc_input(int fd, char *eof_delimiter)
 // {
@@ -177,43 +234,43 @@ static int	process_heredoc_input(int fd, char *eof_delimiter)
 // 	return (0);
 // }
 
-int	prs_init_heredoc(int fd, char *eof_delimiter)
-{
-	int	signal_received;
-	int status = 0;
-	pid_t	pid;
-
-	// init_signal_heredoc();
-	sig_stop();
-	pid = fork();
-	if (pid == -1)
-		write(STDERR_FILENO, "Fork error\n", 11);
-	if (pid == 0)
-	{
-		sig_heredoc();
-		signal_received = process_heredoc_input(fd, eof_delimiter);
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-		init_signal_interactive_mode();
-	}
-	return (status);
-}
-
 // int	prs_init_heredoc(int fd, char *eof_delimiter)
 // {
 // 	int	signal_received;
+// 	int status = 0;
+// 	pid_t	pid;
 
-// 	init_signal_heredoc();
-// 	signal_received = process_heredoc_input(fd, eof_delimiter);
-// 	if (signal_received)
+// 	// init_signal_heredoc();
+// 	sig_stop();
+// 	pid = fork();
+// 	if (pid == -1)
+// 		write(STDERR_FILENO, "Fork error\n", 11);
+// 	if (pid == 0)
 // 	{
-// 		g_signal = 0;
-// 		return (1);
+// 		sig_heredoc();
+// 		signal_received = process_heredoc_input(fd, eof_delimiter);
 // 	}
-// 	return (0);
+// 	else
+// 	{
+// 		waitpid(pid, &status, 0);
+// 		init_signal_interactive_mode();
+// 	}
+// 	return (status);
 // }
+
+int	prs_init_heredoc(int fd, char *eof_delimiter)
+{
+	int	signal_received;
+
+	init_signal_heredoc();
+	signal_received = process_heredoc_input(fd, eof_delimiter);
+	if (signal_received)
+	{
+		g_signal = 0;
+		return (1);
+	}
+	return (0);
+}
 
 int	prs_handle_heredoc(t_token *token)
 {
@@ -241,6 +298,34 @@ int	prs_handle_heredoc(t_token *token)
 	}
 	return (end);
 }
+
+// debughed delimiter case << $USER 1028
+// int	prs_handle_heredoc(t_token *token)
+// {
+// 	char	*filename;
+// 	int		fd;
+// 	int		end;
+
+// 	end = 0;
+// 	while (token != NULL && end == 0)
+// 	{
+// 		if (token->type == HEREDOC)
+// 		{
+// 			filename = create_random_filename(token->next->value);
+// 			fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 			if (fd == -1)
+// 				return (FAIL);
+// 			if (prs_init_heredoc(fd, token->next->value) != 0)
+// 				end = 1;
+// 			close(fd);
+// 			free(token->next->value);
+// 			token->next->value = filename;
+// 			token->type = NON_HEREDOC;
+// 		}
+// 		token = token->next;
+// 	}
+// 	return (end);
+// }
 
 /* signals not modified
 int	prs_init_heredoc(int fd, char *eof_delimiter)

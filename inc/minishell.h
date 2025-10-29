@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/28 15:58:11 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/28 19:22:40 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef enum e_tokentype
 	OUTFILE,// ">" — output redirection (overwrite)
 	HEREDOC, // "<<" — here-document input
 	NON_HEREDOC,// non-heredoc input (used internally)
+	DELIMITTER, // word that marks the end of the heredoc input
 	APPEND,// ">>" — output redirection (append)
 	PIPE,// "|" — pipe to next command
 	STR,// regular string
