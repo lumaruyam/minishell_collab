@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:07:36 by skoudad           #+#    #+#             */
-/*   Updated: 2025/10/29 22:04:37 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/30 18:01:54 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,6 @@ static int	handle_redir_and_bltins(t_shell *ctx, t_exec *tmp, int *exit_code)
 // 	return (0);
 // }
 
-static void	setup_redir(t_shell *content, int (*fd)[2], int i)
-{
-	signal(SIGQUIT, SIG_DFL);
-	if (content->ct_exec > 1)
-	{
-		if (i > 0)
-		{
-			dup2(fd[i - 1][0], STDIN_FILENO);
-			exe_close(&fd[i - 1][0]);
-		}
-		if (i < content->ct_exec - 1)
-		{
-			dup2(fd[i - 1][1], STDOUT_FILENO);
-			exe_close(&fd[i - 1][1]);
-		}
-		close_fds(content->ct_exec - 1, fd, i, false);
-	}
-	ft_close(content);
-}
-
 // static void	setup_redir(t_shell *content, int (*fd)[2], int i)
 // {
 // 	signal(SIGQUIT, SIG_DFL);
@@ -78,13 +58,33 @@ static void	setup_redir(t_shell *content, int (*fd)[2], int i)
 // 		}
 // 		if (i < content->ct_exec - 1)
 // 		{
-// 			dup2(fd[i][1], STDOUT_FILENO);
-// 			exe_close(&fd[i][1]);
+// 			dup2(fd[i - 1][1], STDOUT_FILENO);
+// 			exe_close(&fd[i - 1][1]);
 // 		}
 // 		close_fds(content->ct_exec - 1, fd, i, false);
 // 	}
 // 	ft_close(content);
 // }
+
+static void	setup_redir(t_shell *content, int (*fd)[2], int i)
+{
+	signal(SIGQUIT, SIG_DFL);
+	if (content->ct_exec > 1)
+	{
+		if (i > 0)
+		{
+			dup2(fd[i - 1][0], STDIN_FILENO);
+			exe_close(&fd[i - 1][0]);
+		}
+		if (i < content->ct_exec - 1)
+		{
+			dup2(fd[i][1], STDOUT_FILENO);
+			exe_close(&fd[i][1]);
+		}
+		close_fds(content->ct_exec - 1, fd, i, false);
+	}
+	ft_close(content);
+}
 
 // will change for test
 // static void	setup_redir(t_shell *content, int (*fd)[2], int i)
@@ -163,16 +163,12 @@ void	child_process(t_shell *content, int (*fd)[2], int i, t_exec *tmp)
 // 	exit(0);
 // }
 
-int	exec_parent(t_shell *content)
+static int	set_fork_process(t_shell *content, int fd[MAX_FDS][2])
 {
 	t_exec	*tmp;
-	int		fd[MAX_FDS][2];
 	pid_t	pid;
 
-	ft_memset(fd, -1, sizeof(fd));
 	tmp = content->exec;
-	if (open_pipes(content->ct_exec - 1, fd) == -1)
-		return (err_pipe(errno, content));
 	while (tmp)
 	{
 		signal(SIGINT, sigint_exec);
@@ -188,12 +184,59 @@ int	exec_parent(t_shell *content)
 		content->ct_pid++;
 		tmp = tmp->next;
 	}
+	return (0);
+}
+
+int	exec_parent(t_shell *content)
+{
+	int		res;
+	int		fd[MAX_FDS][2];
+
+	ft_memset(fd, -1, sizeof(fd));
+	if (open_pipes(content->ct_exec - 1, fd) == -1)
+		return (err_pipe(errno, content));
+	res = set_fork_process(content, fd);
+	if (res != 0)
+		return (res);
 	close_all(content->ct_exec - 1, fd);
 	set_std(content, 1);
 	wait_children(content->ct_pid, content);
 	signal_to_action(content);
 	return (0);
 }
+
+//within 25lines for norminette
+// int	exec_parent(t_shell *content)
+// {
+// 	t_exec	*tmp;
+// 	int		fd[MAX_FDS][2];
+// 	pid_t	pid;
+
+// 	ft_memset(fd, -1, sizeof(fd));
+// 	tmp = content->exec;
+// 	if (open_pipes(content->ct_exec - 1, fd) == -1)
+// 		return (err_pipe(errno, content));
+// 	while (tmp)
+// 	{
+// 		signal(SIGINT, sigint_exec);
+// 		pid = fork();
+// 		if (pid == -1)
+// 		{
+// 			close_all(content->ct_exec - 1, fd);
+// 			return (err_fork(errno, content, fd));
+// 		}
+// 		else if (pid == 0)
+// 			child_process(content, fd, content->ct_pid, tmp);
+// 		content->pids[content->ct_pid] = pid;
+// 		content->ct_pid++;
+// 		tmp = tmp->next;
+// 	}
+// 	close_all(content->ct_exec - 1, fd);
+// 	set_std(content, 1);
+// 	wait_children(content->ct_pid, content);
+// 	signal_to_action(content);
+// 	return (0);
+// }
 
 // int	exec_parent(t_shell *content)
 // {

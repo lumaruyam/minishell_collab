@@ -6,7 +6,7 @@
 /*   By: lulmaruy <lulmaruy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:07:25 by lulmaruy          #+#    #+#             */
-/*   Updated: 2025/10/28 19:22:40 by lulmaruy         ###   ########.fr       */
+/*   Updated: 2025/10/30 17:50:46 by lulmaruy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define SUCCESS 0
 # define FAIL 1
-# define FAIL_VOID 2 //put in enum
+# define FAIL_VOID 2
 # define FAIL_BUILD -1
 
 # define PROMPT_NAME "minishell"
@@ -42,22 +42,24 @@
 
 # define DEFAULT_ENV "MINISHELL=minishell"
 
-typedef struct s_exec		t_exec;
-typedef struct s_env		t_env;
-typedef struct s_token		t_token;
-typedef struct s_arg		t_arg;
-typedef struct s_filename	t_filename;
-typedef enum e_tokentype	t_tokentype;
+typedef struct s_exec			t_exec;
+typedef struct s_env			t_env;
+typedef struct s_token			t_token;
+typedef struct s_arg			t_arg;
+typedef struct s_filename		t_filename;
+typedef enum e_tokentype		t_tokentype;
+
+extern volatile sig_atomic_t	g_signal;
 
 typedef struct s_shell
 {
-	int				std_in; //Stores the default input file descriptor
-	int				std_out; //Stores the default output file descriptor
-	unsigned char	exit_code; // stores the shell’s last exit status
-	pid_t			*pids;// array of process IDs for child processes
-	t_exec			*exec; // linked list of commands to be executed
-	int				ct_pid;// count of currently active pids
-	int				ct_exec;// count of exec blocks (commands)
+	int				std_in;
+	int				std_out;
+	unsigned char	exit_code;
+	pid_t			*pids;
+	t_exec			*exec;
+	int				ct_pid;
+	int				ct_exec;
 	t_env			*env;
 	int				last_exit_status;
 	bool			is_child_process;
@@ -66,69 +68,63 @@ typedef struct s_shell
 
 typedef struct s_env
 {
-	char	*id; //name or key of the environment variable (e.g., "PATH")
-	char	*value; //value of the environment variable
-	char	*env_line; //The full string representation "NAME=value"
-	t_env	*next; //pointer to the next environment variable in the list
+	char	*id;
+	char	*value;
+	char	*env_line;
+	t_env	*next;
 }	t_env;
 
 typedef struct s_arg
 {
-	char	*value;// argument value (e.g., "ls", "-l", "file.txt")
-	t_arg	*next;// pointer to next argument in the list
+	char	*value;
+	t_arg	*next;
 }	t_arg;
 
 typedef enum e_tokentype
 {
-	INFILE,// "<" — input redirection
-	OUTFILE,// ">" — output redirection (overwrite)
-	HEREDOC, // "<<" — here-document input
-	NON_HEREDOC,// non-heredoc input (used internally)
-	DELIMITTER, // word that marks the end of the heredoc input
-	APPEND,// ">>" — output redirection (append)
-	PIPE,// "|" — pipe to next command
-	STR,// regular string
-	SGL_QUOTE,// single-quoted string
-	DBL_QUOTE,// double-quoted string
-	CMD,// command keyword
-	FILENAME, // file name in redirection
-	ARG,// argument to a command
+	INFILE,
+	OUTFILE,
+	HEREDOC,
+	NON_HEREDOC,
+	DELIMITTER,
+	APPEND,
+	PIPE,
+	STR,
+	SGL_QUOTE,
+	DBL_QUOTE,
+	CMD,
+	FILENAME,
+	ARG,
 }	t_tokentype;
 
 typedef struct s_token
 {
-	char		*value;// token string (e.g., "ls", "|", "file.txt")
-	t_shell		*content;// reference to the shell context
-	t_tokentype	type;// type of token (e.g., CMD, ARG, PIPE)
-	t_token		*next;// pointer to next token in the list
+	char		*value;
+	t_shell		*content;
+	t_tokentype	type;
+	t_token		*next;
 }	t_token;
 
 typedef struct s_filename
 {
-	char		*path;// file path or name (e.g., "output.txt")
-	t_tokentype	type;// type of redirection (INFILE, OUTFILE, etc.)
-	t_filename	*next;// pointer to next file in the redirection list
+	char		*path;
+	t_tokentype	type;
+	t_filename	*next;
 }	t_filename;
 
 typedef struct s_exec
 {
-	char			*cmd;// command name (e.g., "ls")
-	t_arg			*args;// linked list of arguments for the command
-	t_filename		*redirs;// linked list of redirection files
-	struct s_exec	*next;// pointer to next command in pipeline
-	int				fd_in;// input file descriptor for the command
-	int				fd_out;// output file descriptor for the command
+	char			*cmd;
+	t_arg			*args;
+	t_filename		*redirs;
+	struct s_exec	*next;
+	int				fd_in;
+	int				fd_out;
 }	t_exec;
 
-extern volatile sig_atomic_t	g_signal;
+/* -------------------------Extern Variable----------------------------- */
 
-// typedef struct s_signal DONT USE THISS!!!!!
-// {
-// 	int	end_heredoc;
-// 	int	signal_code;
-// }	t_signal;
-
-// extern t_signal		g_signal;
+//extern volatilesig_atomic_t	g_signal;
 
 /* ------------------------------Main----------------------------------- */
 
@@ -189,7 +185,6 @@ void		sigint_exec(int status);
 void		sig_heredoc(void);
 void		sig_stop(void);
 
-
 /* -----------------------------Parsing--------------------------------- */
 
 /*parsing*/
@@ -243,8 +238,8 @@ int			len_quotes(char *str, char sd_quote);
 int			rogue_len(char *str);
 
 /*readline utils*/
-char	*read_multiline_input(char *first_line);
-int		has_unclosed_quotes(char *str);
+char		*read_multiline_input(char *first_line);
+int			has_unclosed_quotes(char *str);
 
 /* -----------------------------build to exec------------------------- */
 
