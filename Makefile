@@ -10,6 +10,7 @@ NAME = minishell
 
 INC_DIR = inc
 SRC_DIR = ./src/
+OBJ_DIR = ./obj/
 LIBFT_DIR = libft
 
 	SRC = build_args.c build_filename.c build_to_exec.c build_utils.c builtins_env.c \
@@ -22,7 +23,8 @@ LIBFT_DIR = libft
 		readline_utils.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
-OBJS = $(SRCS:.c=.o)
+# OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 LIBFT_A = $(LIBFT_DIR)/libft.a
 
 # **************************************************************************** #
@@ -44,16 +46,20 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_A)
 	@$(CC) $(FLAGS) $(OBJS) $(LFLAGS) -o $(NAME) $(LDFLAGS)
+	@echo "$(ROSEB) 🐣 $(NAME) Compiled! 🐣 $(COLOR_RESET)"
 
-$(SRC_DIR)%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
-	@echo "$(GREENB)--- ⛑️ Compiling $< to $@ ⛑️---$(COLOR_RESET)"
+	@echo "$(GREENB)- ⛑️ Compiling $< to $@ ⛑️-$(COLOR_RESET)"
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 $(LIBFT_A):
 	@make -C $(LIBFT_DIR)
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJ_DIR)
 	@make clean -C $(LIBFT_DIR)
 
 fclean: clean
